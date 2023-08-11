@@ -18,11 +18,13 @@ public class Main extends QApplication {
 //        qbutton.setDimensions(30, 50);
 //        qstage.setParent(qbutton);
 
-//        QProgressBar qProgressBar = new QProgressBar();
-//        qProgressBar.setDimensions(50,300);
-//        qProgressBar.setProgressValue(0.5); // 0.5 = 50%
-//        System.out.println(qProgressBar.getProgressValue());
-//        qstage.setParent(qProgressBar);
+    //    VBox vBox = new VBox();   TODO: Replace with own QVBox
+    //    QProgressBar qProgressBar = new QProgressBar();
+    //    qProgressBar.setDimensions(2,3);
+    //    qProgressBar.setProgressValue(0.5); // 0.5 = 50%
+    //    System.out.println(qProgressBar.getProgressValue());
+    //    vBox.getChildren().add(qProgressBar);
+    //    qstage.setParent(vBox);
 
 //        QProgressIndicator qProgressIndicator = new QProgressIndicator();
 //        qProgressIndicator.setDimensions(10,10);

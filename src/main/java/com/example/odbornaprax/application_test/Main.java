@@ -12,11 +12,29 @@ public class Main extends QApplication {
     }
 
     @Override
-    public void start(QStage qstage) {
-        qstage.setHeadline("HBox Experiment 1");
+    public void start(QStage qstage)  {
+        /*qstage.setHeadline("HBox Experiment 1");
         QButton qbutton = new QButton();
         qbutton.setHeadline("test");
-        qbutton.setDimensions(50, 50);
+        qbutton.setDimensions(30, 50);
+        qstage.setParent(qbutton);*/
+
+        QTextField qtextfield = new QTextField();
+        qtextfield.setDimensions(30,50);
+        qtextfield.promptText("Enter Text");
+        qtextfield.getTextFromTextField();
+        qstage.setParent(qtextfield);
+
+        //TODO ImageView
+        /*QImageView qimageView = new QImageView();
+        qimageView.setNewImage("C:\\Users\\Erik\\Desktop\\Projects-Prax\\odbornaPrax-master-Kulka\\src\\main\\java\\com\\example\\odbornaprax\\pictures\\test.png");
+        qstage.setParent(qimageView);*/
+
+        /*QHyperlink qhyperlink = new QHyperlink();
+        qhyperlink.setFontStyle("-fx-underline: true; -fx-font-size:20px;-fx-font-family:'Roboto Regular';");
+        qhyperlink.setHyperlinkText("Click!");
+        qhyperlink.setAction("Clicked!");
+        qstage.setParent(qhyperlink);*/
 
         /*
         QCheckBox qCheckBox = new QCheckBox();
@@ -35,5 +53,6 @@ public class Main extends QApplication {
         qLabel.setTitle("Test Label");
         qstage.setParent(qLabel);
         */
+
     }
 }

@@ -4,6 +4,7 @@ import com.example.odbornaprax.framework.components.*;
 import javafx.application.Application;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class Main extends QApplication {
 
@@ -54,5 +55,32 @@ public class Main extends QApplication {
         qstage.setParent(qLabel);
         */
 
+        // VBox vBox = new VBox(); TODO: Replace with own QVBox
+        // QProgressBar qProgressBar = new QProgressBar();
+        // qProgressBar.setDimensions(2,3);
+        // qProgressBar.setProgressValue(0.5); // 0.5 = 50%
+        // System.out.println(qProgressBar.getProgressValue());
+        // vBox.getChildren().add(qProgressBar);
+        // qstage.setParent(vBox);
+
+        // QProgressIndicator qProgressIndicator = new QProgressIndicator();
+        // qProgressIndicator.setDimensions(10,10);
+        // qProgressIndicator.setProgressValue(0.14);
+        // System.out.println(qProgressIndicator.getProgressValue());
+        // qstage.setParent(qProgressIndicator);
+
+        // VBox vBox = new VBox(); // TODO: Replace with own QVBox
+        // QText qText = new QText();
+        // qText.setContent("lalala");
+        // qText.setWrapperWidth(10.0); // 10 pixels
+        // vBox.getChildren().add(qText); // TODO: Replace with own QVBox
+        // qstage.setParent(vBox);
+
+        // QTextArea qTextArea = new QTextArea();
+        // qTextArea.setTextValue("haluska");
+        // System.out.println(qTextArea.getTextValue());
+        // qTextArea.appendText("lol");
+        // System.out.println(qTextArea.getTextValue());
+        // qstage.setParent(qTextArea);
     }
 }

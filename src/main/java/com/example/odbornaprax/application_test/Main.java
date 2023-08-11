@@ -2,6 +2,8 @@ package com.example.odbornaprax.application_test;
 
 import com.example.odbornaprax.framework.components.*;
 import javafx.application.Application;
+import javafx.scene.control.CheckBox;
+import javafx.scene.layout.HBox;
 
 public class Main extends QApplication {
 
@@ -33,6 +35,24 @@ public class Main extends QApplication {
         qhyperlink.setHyperlinkText("Click!");
         qhyperlink.setAction("Clicked!");
         qstage.setParent(qhyperlink);*/
+
+        /*
+        QCheckBox qCheckBox = new QCheckBox();
+        qCheckBox.setTitle("Test");
+        System.out.println(qCheckBox.isChecked());
+        qstage.setParent(qCheckBox);
+        */
+        /*
+        QRadioButton qRadioButton = new QRadioButton();
+        qRadioButton.setTitle("Testing");
+        System.out.println(qRadioButton.isChecked());
+        qstage.setParent(qRadioButton);
+        */
+        /*
+        QLabel qLabel = new QLabel();
+        qLabel.setTitle("Test Label");
+        qstage.setParent(qLabel);
+        */
 
     }
 }

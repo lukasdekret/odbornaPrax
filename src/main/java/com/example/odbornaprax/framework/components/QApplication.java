@@ -17,9 +17,9 @@ public abstract class QApplication extends Application {
 
         primaryStage.setTitle(qstage.getHeadline());
 
-        Scene scene = new Scene(qstage.getParent(), 800, 600);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        /*QScene qScene = new QScene(qstage.getParent(), 800, 600);
+        primaryStage.setScene(qScene);
+        primaryStage.show();*/
     }
 
     public static void main(String[] args) {

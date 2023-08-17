@@ -14,7 +14,9 @@ public class QButton extends Button {
     }
 
     public void setHeadline(String s) {
+
         super.setText(s);
     }
+
 
 }

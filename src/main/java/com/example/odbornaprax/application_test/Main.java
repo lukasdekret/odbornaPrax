@@ -2,7 +2,11 @@ package com.example.odbornaprax.application_test;
 
 import com.example.odbornaprax.framework.components.*;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -20,11 +24,13 @@ public class Main extends QApplication {
         qbutton.setDimensions(30, 50);
         qstage.setParent(qbutton);*/
 
-        QTextField qtextfield = new QTextField();
-        qtextfield.setDimensions(30,50);
-        qtextfield.promptText("Enter Text");
-        qtextfield.getTextFromTextField();
-        qstage.setParent(qtextfield);
+//        QTextField qtextfield = new QTextField();
+//        qtextfield.setDimensions(30,50);
+//        qtextfield.promptText("Enter Text");
+//        qtextfield.getTextFromTextField();
+//        qstage.setParent(qtextfield);
+
+
 
         //TODO ImageView
         /*QImageView qimageView = new QImageView();
@@ -82,5 +88,46 @@ public class Main extends QApplication {
         // qTextArea.appendText("lol");
         // System.out.println(qTextArea.getTextValue());
         // qstage.setParent(qTextArea);
+
+        VBox vBox = new VBox();
+        QMenuBar qMenuBar = new QMenuBar();
+        QMenu menu1 = new QMenu("Test");
+        qMenuBar.addMenu(menu1);
+
+        QMenu menuA = new QMenu("Tlacidlo A");
+        QMenu menuB = new QMenu("Tlacidlo B");
+        qMenuBar.addMenus(menuA, menuB);
+        vBox.getChildren().add(qMenuBar);
+        qstage.setParent(vBox);
+
+        QMenuItem menuItem = new QMenuItem("TestMenuItem");
+        menuItem.setAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.out.println(actionEvent);
+            }
+        });
+        System.out.println(menuB.getItems());
+        menuB.getItems().add(menuItem);
+        System.out.println(menuB.getItems());
+
+        QMenuButton qMenuButton = new QMenuButton("Test2");
+        qMenuButton.getItems().add(menuItem);
+        vBox.getChildren().add(qMenuButton);
+
+        QMenuButton qMenuButton2 = new QMenuButton("Test3", null,  new QMenuItem("Test3A"),  new QMenuItem("Test3B"),  new QMenuItem("Test3C"));
+        vBox.getChildren().add(qMenuButton2);
+
+        QPagination qPagination = new QPagination();
+        qPagination.setPageNumber(10);
+        qPagination.setCurrentPage(0); // -1, ako pole
+        qPagination.setMaxPageIndicatorValue(5);
+        qPagination.setContentFactory((index) -> {
+            QLabel label = new QLabel("Strana " + (index + 1));
+
+            return new VBox(label);
+        });
+        vBox.getChildren().add(qPagination);
+        System.out.println(qPagination.getPageNumber());
     }
 }

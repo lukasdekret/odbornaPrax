@@ -5,7 +5,12 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class Main extends QApplication {
 
@@ -31,11 +36,6 @@ public class Main extends QApplication {
          * qtextfield.getTextFromTextField();
          * //qstage.setParent(qtextfield);
          */
-
-        // TODO ImageView
-        // QImageView qimageView = new QImageView();
-        // qimageView.setNewImage("C:\\Users\\Erik\\Desktop\\Projects-Prax\\odbornaPrax-master-Kulka\\src\\main\\java\\com\\example\\odbornaprax\\pictures\\test.png");
-        // qstage.setParent(qimageView);
 
         // QHyperlink qhyperlink = new QHyperlink();
         // qhyperlink.setFontStyle("-fx-underline: true; -fx-font-size:20px;-fx-font-family:'Roboto Regular';");
@@ -147,8 +147,8 @@ public class Main extends QApplication {
         QMenu menuA = new QMenu("Tlacidlo A");
         QMenu menuB = new QMenu("Tlacidlo B");
         qMenuBar.addMenus(menuA, menuB);
-        test.getChildren().add(qMenuBar);
-        qstage.setParent(test);
+        test.addComponents(qMenuBar);
+        //qstage.setParent(test);
 
         QMenuItem menuItem = new QMenuItem("TestMenuItem");
         menuItem.setAction(new EventHandler<ActionEvent>() {
@@ -163,11 +163,11 @@ public class Main extends QApplication {
 
         QMenuButton qMenuButton = new QMenuButton("Test2");
         qMenuButton.getItems().add(menuItem);
-        test.getChildren().add(qMenuButton);
+        test.addComponents(qMenuButton);
 
         QMenuButton qMenuButton2 = new QMenuButton("Test3", null, new QMenuItem("Test3A"), new QMenuItem("Test3B"),
                 new QMenuItem("Test3C"));
-        test.getChildren().add(qMenuButton2);
+        test.addComponents(qMenuButton2);
 
         QPagination qPagination = new QPagination();
         qPagination.setPageNumber(10);
@@ -178,11 +178,43 @@ public class Main extends QApplication {
 
             return new VBox(label);
         });
-        test.getChildren().add(qPagination);
+        test.addComponents(qPagination);
         System.out.println(qPagination.getPageNumber());
 
-        qstage.setScene(intro3);
-        qstage.show();
+        QSeparator qSeparator = new QSeparator();
+
+        test.addComponents(qSeparator);
+
+        QImageView imageView = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("E:\\Projects\\odbornaPrax\\src\\main\\resources\\images\\tree.jpg");
+            imageView.setNewImage(input);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        QScrollPane scrollPane = new QScrollPane();
+        scrollPane.setBody(imageView);
+        test.addComponents(scrollPane);
+
+        QTreeView treeView = new QTreeView();
+        QTreeItem treeItem1 = new QTreeItem("Item 1");
+        QTreeItem treeItem2 = new QTreeItem("Item 2");
+        QTreeItem rootItem = new QTreeItem("Root item");
+        rootItem.addItems(treeItem1,treeItem2);
+        treeView.setRootItem(rootItem);
+        test.addComponents(treeView);
+
+        QRadioButton button1 = new QRadioButton();
+        button1.setTitle("test1");
+        QRadioButton button2 = new QRadioButton();
+        button2.setTitle("test2");
+        QToggleGroup toggleGroup = new QToggleGroup();
+        toggleGroup.addToggles(button1,button2);
+        test.addComponents(button1,button2);
+
+        qstage.setQScene(intro3);
+        qstage.showScene();
 
         // changeScene(qButtonNextStage, qstage, intro2);
         // changeScene(qButtonNextStage2, qstage, intro);
@@ -190,9 +222,9 @@ public class Main extends QApplication {
 
     public void changeScene(QButton button, QStage qStage, QScene qScene) {
         button.setOnAction((e) -> {
-            qStage.close();
-            qStage.setScene(qScene);
-            qStage.show();
+            qStage.closeScene();
+            qStage.setQScene(qScene);
+            qStage.showScene();
         });
     }
 }

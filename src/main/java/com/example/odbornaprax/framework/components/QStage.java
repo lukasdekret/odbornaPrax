@@ -19,7 +19,19 @@ public class QStage extends Stage {
         return parent;
     }
 
+    public void setQScene(QScene scene) {
+        super.setScene(scene);
+    }
+
+    public void closeScene() {
+        super.close();
+    }
+
+    public void showScene() {
+        super.show();
+    }
+
     public void setParent(Object parent) {
-        this.parent = (Parent)parent;
+        this.parent = (Parent) parent;
     }
 }

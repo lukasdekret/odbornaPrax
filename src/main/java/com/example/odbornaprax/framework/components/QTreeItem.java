@@ -1,9 +1,14 @@
 package com.example.odbornaprax.framework.components;
 
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.MouseEvent;
 
-public class QTreeItem extends TreeItem {
+public class QTreeItem extends TreeItem{
+
+
     public QTreeItem(Object value) {
         super(value);
     }
@@ -14,5 +19,8 @@ public class QTreeItem extends TreeItem {
     }
     public void setImage(Node graphic){
         super.setGraphic(graphic);
+
     }
+
+
 }

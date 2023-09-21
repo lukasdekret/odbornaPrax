@@ -20,5 +20,9 @@ public class QText extends Text {
         super.setX(x);
         super.setY(y);
     }
+    public void setSize(double height, double width){
+        super.setScaleX(height);
+        super.setScaleY(width);
+    }
 
 }

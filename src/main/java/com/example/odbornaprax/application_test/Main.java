@@ -4,12 +4,19 @@ import com.example.odbornaprax.framework.components.*;
 import javafx.application.Application;
 
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
+import javafx.scene.control.TreeItem;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main extends QApplication {
 
@@ -57,7 +64,7 @@ public class Main extends QApplication {
         /** LOGO */
         QImageView logo = new QImageView();
         try {
-            FileInputStream input = new FileInputStream("C:\\Users\\Erik\\Desktop\\Projects-Prax\\odbornaPrax\\src\\main\\java\\Pictures\\logo.png");
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/logo.png");
             logo.setNewImage(input);
             logo.setDimensions(250,250);
         } catch (
@@ -117,11 +124,12 @@ public class Main extends QApplication {
         buttonHeader.addComponents(buttonTitle);
         buttonHeader.setMinWidthHeight(800,50);
         buttonHeader.setMaxWidthHeight(800,100);
-        buttonHeader.setPositionOfChildNodes("CENTER");;
+        buttonHeader.setPositionOfChildNodes("CENTER");
 
         /** MAIN BACKGROUND WITH COMPONENTS */
         QBorderPane buttonBackground = new QBorderPane();
-        buttonBackground.setPosition("TOP",buttonHeader);
+        buttonBackground.setPosition("TOP", buttonHeader);
+
 
         /**----------------------RADIOBUTTON SCENE--------------------**/
 
@@ -139,7 +147,7 @@ public class Main extends QApplication {
 
         /** RADIOBUTTON BACKGROUND WITH COMPONENTS */
         QBorderPane radioButtonBackground = new QBorderPane();
-        radioButtonBackground.setPosition("TOP",buttonHeader);
+        radioButtonBackground.setPosition("TOP",radioButtonHeader);
 
         /**----------------------CHECKBOX SCENE--------------------**/
 
@@ -157,7 +165,7 @@ public class Main extends QApplication {
 
         /** CHECKBOX BACKGROUND WITH COMPONENTS */
         QBorderPane checkboxBackground = new QBorderPane();
-        checkboxBackground.setPosition("TOP",buttonHeader);
+        checkboxBackground.setPosition("TOP", checkboxHeader);
 
         /**----------------------COMBOBOX SCENE--------------------**/
 
@@ -176,7 +184,7 @@ public class Main extends QApplication {
 
         /** COMBOBOX BACKGROUND WITH COMPONENTS */
         QBorderPane comboboxBackground = new QBorderPane();
-        comboboxBackground.setPosition("TOP",buttonHeader);
+        comboboxBackground.setPosition("TOP", comboboxHeader);
 
         /**----------------------TOGGLEGROUP SCENE--------------------**/
 
@@ -194,7 +202,7 @@ public class Main extends QApplication {
 
         /** TOGGLEGROUP BACKGROUND WITH COMPONENTS */
         QBorderPane toggleGroupBackground = new QBorderPane();
-        toggleGroupBackground.setPosition("TOP",buttonHeader);
+        toggleGroupBackground.setPosition("TOP", toggleGroupHeader);
 
         /**----------------------SCENE MANAGEMENT--------------------**/
 
@@ -207,8 +215,9 @@ public class Main extends QApplication {
         /** BUTTON SCENE */
         QScene buttonScene = new QScene(buttonBackground,800,600);
 
+
         /** RADIOBUTTON SCENE */
-        QScene radioButtonScene = new QScene(radioButtonBackground,800,600);
+        QScene radioButtonScene = new QScene(radioButtonBackground, 800, 600);
 
 
         /** CHECKBOX SCENE */
@@ -220,6 +229,33 @@ public class Main extends QApplication {
 
         /** TOGGLEGROUP SCENE */
         QScene toggleGroupScene = new QScene(toggleGroupBackground,800,600);
+
+
+        /** SCENE SWITCHER */
+        // 1. Vytvorit dvojice nazov-tlacidla <-> scena.
+        // 2. Zobrazit scenu podla stlaceneho tlacidla.
+        // 3. Aktualizovat QStage.
+        Map<String, QScene> scenes = new HashMap<>();
+        scenes.put("QButton", buttonScene);
+        scenes.put("QRadioButton", radioButtonScene);
+        scenes.put("QCheckBox", checkboxScene);
+        scenes.put("QComboBox", comboboxScene);
+        scenes.put("QToggleGroup", toggleGroupScene);
+
+        qMainMenu.setOnMouseClicked(event -> {
+            QTreeItem selected = (QTreeItem) qMainMenu.getSelectionModel().getSelectedItem();
+
+            //TODO: Prerobit!
+            if(selected != null) {
+
+                String value = selected.getValue().toString();
+                if(scenes.get(value) != null) {
+                    qstage.setQScene(scenes.get(value));
+                    qstage.show();
+                }
+
+            }
+        });
 
     }
 

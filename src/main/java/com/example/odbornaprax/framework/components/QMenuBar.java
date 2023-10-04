@@ -17,4 +17,8 @@ public class QMenuBar extends MenuBar {
         super.getMenus().addAll(menuItems);
     }
 
+    public void setUseSystem(boolean t){
+        super.setUseSystemMenuBar(t);
+    }
+
 }

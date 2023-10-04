@@ -1,5 +1,7 @@
 package com.example.odbornaprax.framework.components;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 
 public class QMenu extends Menu {
@@ -8,8 +10,8 @@ public class QMenu extends Menu {
         super();
     }
 
-    public QMenu(String text) {
-        super(text);
+    public void QMenu(String text) {
+        super.setText(text);
     }
 
     public void addItems(QMenuItem ...menuItems) {
@@ -19,4 +21,6 @@ public class QMenu extends Menu {
     public void addItem(QMenuItem menuItem) {
         super.getItems().add(menuItem);
     }
+
+
 }

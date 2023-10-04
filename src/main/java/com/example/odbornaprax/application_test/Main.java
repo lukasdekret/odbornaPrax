@@ -3,16 +3,6 @@ package com.example.odbornaprax.application_test;
 import com.example.odbornaprax.framework.components.*;
 import javafx.application.Application;
 
-
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
-import javafx.scene.control.TreeItem;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Color;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -38,9 +28,6 @@ public class Main extends QApplication {
         mainHeader.addComponents(mainTitle);
         mainHeader.setPrefWidthHeight(800,65);
         mainHeader.setPositionOfChildNodes("CENTER");
-        //TODO Zaobalit funkciu na background
-        mainHeader.setBackground(new Background(new BackgroundFill(Color.BLUE,null,null)));
-
 
         /** MAIN MENU */
         QTreeView qMainMenu = new QTreeView();
@@ -53,13 +40,11 @@ public class Main extends QApplication {
         rootItem.addItems(qButton,qRadioButton,qCheckBox,qComboBox,qToggleGroup);
         qMainMenu.setRootItem(rootItem);
 
-
-
         /** MENUBOX */
-        QHBox menuBox = new QHBox();
-        menuBox.addComponents(qMainMenu);
-        menuBox.setPositionOfChildNodes("LEFT");
-        menuBox.setMarginOfNode(qMainMenu,20,20,0,20);
+        QHBox buttonMenuBox = new QHBox();
+        buttonMenuBox.addComponents(qMainMenu);
+        buttonMenuBox.setPositionOfChildNodes("LEFT");
+        buttonMenuBox.setMarginOfNode(qMainMenu,20,20,0,20);
 
         /** LOGO */
         QImageView logo = new QImageView();
@@ -106,156 +91,234 @@ public class Main extends QApplication {
         /** MAIN BACKGROUND WITH COMPONENTS */
         QBorderPane mainBackground = new QBorderPane();
         mainBackground.setPosition("TOP",mainHeader);
-        mainBackground.setPosition("LEFT",menuBox);
+        mainBackground.setPosition("LEFT",buttonMenuBox);
         mainBackground.setPosition("CENTER",logoBox);
         mainBackground.setPosition("RIGHT",sideBox);
         mainBackground.setPosition("BOTTOM",bottomBox);
 
 
+        /**---------------------------------------BUTTONS AND BOXES SECTION-------------------------------------------------------**/
+
         /**----------------------BUTTON SCENE--------------------**/
 
-        /**BUTTON TITLE*/
-        QText buttonTitle = new QText();
-        buttonTitle.setContent("Button");
-        buttonTitle.setSize(3,3);
+        /**BUTTON TEXT**/
+        QText buttonText = new QText();
+        buttonText.setContent("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " );
+        buttonText.setWrapperWidth(225);
+        buttonText.setSize(1.5,1.5);
 
-        /** BUTTON TITLE COMPONENT */
-        QHBox buttonHeader = new QHBox();
-        buttonHeader.addComponents(buttonTitle);
-        buttonHeader.setMinWidthHeight(800,50);
-        buttonHeader.setMaxWidthHeight(800,100);
-        buttonHeader.setPositionOfChildNodes("CENTER");
+        QVBox buttonTextBox = new QVBox();
+        buttonTextBox.addComponents(buttonText);
+        buttonTextBox.setMarginOfNode(buttonText,150,0,80,140);
+        buttonTextBox.setPrefWidthHeight(500,150);
+
+        /**BUTTON**/
+        QButton buttonShow = new QButton();
+        buttonShow.setHeadline("Button");
+        buttonShow.setDimensions(50,50);
+        buttonShow.setPrefSize(100,50);
+
+        /**BUTTON ALERT**/
+        QText buttonAlert = new QText();
+        QLabel pressButton = new QLabel();
+        buttonAlert.font("Verdana");
+        pressButton.setTitle("Press Button!");
+
+        /**BUTTON CODE TITLE**/
+        QText buttonCodeTitle = new QText();
+        buttonCodeTitle.setContent("Usage of Button in JavaFX");
+        buttonCodeTitle.setSize(1.5,1.5);
+        buttonCodeTitle.font("Verdana");
+
+        /**BUTTON CODE**/
+        QText buttonCode = new QText();
+        buttonCode.setContent("QButton buttonShow = new QButton();\nbuttonShow.setHeadline(\"Button\");\nbuttonShow.setDimensions(50,50);\nbuttonShow.setPrefSize(100,50);");
+        buttonCode.setSize(1.3,1.3);
+        buttonCode.setWrapperWidth(200);
+
+        /**BUTTON ALERT**/
+        buttonShow.setAction(buttonAlert);
+
+        /**BUTTON IMAGE**/
+        QImageView buttonImage = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("C:\\Users\\Erik\\Desktop\\Projects-Prax\\odbornaPrax\\src\\main\\java\\Pictures\\buttonLogo.png");
+            buttonImage.setNewImage(input);
+        } catch (
+                FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        buttonImage.setDimensions(100,300);
+
+        /**BUTTON IMAGE DEF**/
+        QText buttonImageDef = new QText();
+        buttonImageDef.setContent("Definition of Image");
+        buttonImageDef.setSize(1.2,1.2);
+
+        /**BUTTON IMAGE BOX**/
+        QVBox buttonImageBox = new QVBox();
+        buttonImageBox.addComponents(buttonImage,buttonImageDef,buttonCodeTitle,buttonCode,pressButton,buttonShow,buttonAlert);
+        buttonImageBox.setPositionOfChildNodes("CENTER");
+        buttonImageBox.setMarginOfNode(buttonImage,0,0,20,25);
+        buttonImageBox.setMarginOfNode(buttonCodeTitle,100,0,30,0);
+        buttonImageBox.setMarginOfNode(buttonShow,20,0,0,0);
+        buttonImageBox.setMarginOfNode(pressButton,40,0,0,0);
+        buttonImageBox.setMarginOfNode(buttonAlert,10,0,0,0);
+        buttonImageBox.setPrefWidthHeight(500,20);
+
 
         /** MAIN BACKGROUND WITH COMPONENTS */
         QBorderPane buttonBackground = new QBorderPane();
-        buttonBackground.setPosition("TOP", buttonHeader);
+        buttonBackground.setPosition("LEFT",buttonTextBox);
+        buttonBackground.setPosition("RIGHT",buttonImageBox);
 
 
         /**----------------------RADIOBUTTON SCENE--------------------**/
 
-        /**RADIOBUTTON TITLE*/
-        QText radioButtonTitle = new QText();
-        radioButtonTitle.setContent("Radio Button");
-        radioButtonTitle.setSize(3,3);
-
-        /** RADIOBUTTON TITLE COMPONENT */
-        QHBox radioButtonHeader = new QHBox();
-        radioButtonHeader.addComponents(radioButtonTitle);
-        radioButtonHeader.setMinWidthHeight(800,50);
-        radioButtonHeader.setMaxWidthHeight(800,100);
-        radioButtonHeader.setPositionOfChildNodes("CENTER");
-
-        /** RADIOBUTTON BACKGROUND WITH COMPONENTS */
         QBorderPane radioButtonBackground = new QBorderPane();
-        radioButtonBackground.setPosition("TOP",radioButtonHeader);
 
         /**----------------------CHECKBOX SCENE--------------------**/
 
-        /**CHECKBOX TITLE*/
-        QText checkboxTitle = new QText();
-        checkboxTitle.setContent("Checkbox");
-        checkboxTitle.setSize(3,3);
-
-        /** CHECKBOX TITLE COMPONENT */
-        QHBox checkboxHeader = new QHBox();
-        checkboxHeader.addComponents(checkboxTitle);
-        checkboxHeader.setMinWidthHeight(800,50);
-        checkboxHeader.setMaxWidthHeight(800,100);
-        checkboxHeader.setPositionOfChildNodes("CENTER");
-
-        /** CHECKBOX BACKGROUND WITH COMPONENTS */
         QBorderPane checkboxBackground = new QBorderPane();
-        checkboxBackground.setPosition("TOP", checkboxHeader);
 
         /**----------------------COMBOBOX SCENE--------------------**/
 
-        /**COMBOBOX TITLE*/
-        QText comboboxTitle = new QText();
-        comboboxTitle.setContent("Combobox");
-        comboboxTitle.setSize(3,3);
-
-        /** COMBOBOX TITLE COMPONENT */
-        QHBox comboboxHeader = new QHBox();
-        comboboxHeader.addComponents(comboboxTitle);
-        comboboxHeader.setMinWidthHeight(800,50);
-        comboboxHeader.setMaxWidthHeight(800,100);
-        comboboxHeader.setPositionOfChildNodes("CENTER");
-
-
-        /** COMBOBOX BACKGROUND WITH COMPONENTS */
         QBorderPane comboboxBackground = new QBorderPane();
-        comboboxBackground.setPosition("TOP", comboboxHeader);
 
         /**----------------------TOGGLEGROUP SCENE--------------------**/
 
-        /**TOGGLEGROUP TITLE*/
-        QText toggleGroupTitle = new QText();
-        toggleGroupTitle.setContent("Togglegroup");
-        toggleGroupTitle.setSize(3,3);
-
-        /** TOGGLEGROUP TITLE COMPONENT */
-        QHBox toggleGroupHeader = new QHBox();
-        toggleGroupHeader.addComponents(toggleGroupTitle);
-        toggleGroupHeader.setMinWidthHeight(800,50);
-        toggleGroupHeader.setMaxWidthHeight(800,100);
-        toggleGroupHeader.setPositionOfChildNodes("CENTER");
-
         /** TOGGLEGROUP BACKGROUND WITH COMPONENTS */
         QBorderPane toggleGroupBackground = new QBorderPane();
-        toggleGroupBackground.setPosition("TOP", toggleGroupHeader);
 
-        /**----------------------SCENE MANAGEMENT--------------------**/
+        /**---------------------------------------MENU SECTION-------------------------------------------------------**/
+
+        /**------------------------------------SCENE MANAGEMENT AND DYNAMIC COMPONENT HANDLING--------------------------------------**/
+
+        /**TOP MENU**/
+        QComponentMenu topMenu = new QComponentMenu();
+        QHBox menuQBox = new QHBox();
+        QMenuBar menuBar = new QMenuBar();
+        QButton mainPage = new QButton();
+        QMenu buttonsAndBoxes = new QMenu();
+        QMenuItem buttonItem = new QMenuItem("QButton");
+        QMenuItem radioButtonItem = new QMenuItem("QRadioButton");
+        QMenuItem checkBoxItem = new QMenuItem("QCheckBox");
+        QMenuItem comboBoxItem = new QMenuItem("QComboBox");
+        QMenuItem toggleGroupItem = new QMenuItem("QToggleGroup");
+
+        /**---SCENE TITLES---**/
+
+            /**BUTTON TITLE*/
+        QText title = new QText();
+
+        topMenu.createMenu(menuQBox,menuBar,mainPage,buttonsAndBoxes,buttonItem,radioButtonItem,checkBoxItem,comboBoxItem,toggleGroupItem,title);
 
         /** MAIN SCENE */
         QScene mainScene = new QScene(mainBackground,1000,800);
         qstage.setQScene(mainScene);
         qstage.showScene();
 
-
         /** BUTTON SCENE */
-        QScene buttonScene = new QScene(buttonBackground,800,600);
-
+        QScene buttonScene = new QScene(buttonBackground,1000,800);
 
         /** RADIOBUTTON SCENE */
-        QScene radioButtonScene = new QScene(radioButtonBackground, 800, 600);
-
+        QScene radioButtonScene = new QScene(radioButtonBackground, 1000,800);
 
         /** CHECKBOX SCENE */
-        QScene checkboxScene = new QScene(checkboxBackground,800,600);
-
+        QScene checkboxScene = new QScene(checkboxBackground,1000,800);
 
         /** COMBOBOX SCENE */
-        QScene comboboxScene = new QScene(comboboxBackground,800,600);
+        QScene comboboxScene = new QScene(comboboxBackground,1000,800);
 
         /** TOGGLEGROUP SCENE */
-        QScene toggleGroupScene = new QScene(toggleGroupBackground,800,600);
+        QScene toggleGroupScene = new QScene(toggleGroupBackground,1000,800);
 
-
-        /** SCENE SWITCHER */
-        // 1. Vytvorit dvojice nazov-tlacidla <-> scena.
-        // 2. Zobrazit scenu podla stlaceneho tlacidla.
-        // 3. Aktualizovat QStage.
+        /** HASH MAPS AND ARRAYS FOR INDIVIDUAL SCENES AND PANES */
+            /** SCENE MAP */
         Map<String, QScene> scenes = new HashMap<>();
+        scenes.put("QMainPage", mainScene);
         scenes.put("QButton", buttonScene);
         scenes.put("QRadioButton", radioButtonScene);
         scenes.put("QCheckBox", checkboxScene);
         scenes.put("QComboBox", comboboxScene);
         scenes.put("QToggleGroup", toggleGroupScene);
 
+            /** SCENE ARRAY */
+        QScene[] sceneIndexes = {buttonScene, radioButtonScene, checkboxScene, comboboxScene, toggleGroupScene};
+
+            /** PANE MAP */
+        Map<String, QBorderPane> panes = new HashMap<>();
+        panes.put("QButton", buttonBackground);
+        panes.put("QRadioButton", radioButtonBackground);
+        panes.put("QCheckBox", checkboxBackground);
+        panes.put("QComboBox", comboboxBackground);
+        panes.put("QToggleGroup", toggleGroupBackground);
+
+            /** PANE ARRAY */
+        QBorderPane[] paneIndexes = {buttonBackground, radioButtonBackground, checkboxBackground, comboboxBackground, toggleGroupBackground};
+
+            /** TITLE MAP */
+        Map<Integer, String> titles = new HashMap<>();
+        titles.put(0, "QButton");
+        titles.put(1, "QRadioButton");
+        titles.put(2, "QCheckBox");
+        titles.put(3, "QComboBox");
+        titles.put(4, "QToggleGroup");
+
+
+        /**IN COMPONENT PAGINATION NAVIGATION**/
+        QPaginationSceneSwitcher buttonsAndBoxesSceneSwitcher = new QPaginationSceneSwitcher();
+        buttonsAndBoxesSceneSwitcher.sceneSwitcher(qstage,sceneIndexes, paneIndexes,menuQBox, 4,title, titles);
+
+        /**SWITCH MENU SCENES**/
+        topMenu.sceneSwitcher(scenes,qstage,buttonsAndBoxesSceneSwitcher, sceneIndexes, paneIndexes,buttonsAndBoxes,mainPage,menuQBox,title);
+
+        /**TREE MENU**/
+
         qMainMenu.setOnMouseClicked(event -> {
             QTreeItem selected = (QTreeItem) qMainMenu.getSelectionModel().getSelectedItem();
 
-            //TODO: Prerobit!
+            /**CODE FOR ADDING PAGINATION WHEN LAUNCHING COMPONENTS FROM TREE MENU**/
             if(selected != null) {
 
                 String value = selected.getValue().toString();
                 if(scenes.get(value) != null) {
+                    switch (value){
+                        /**ADD MORE MAIN TREE MENU OPTIONS HERE**/
+                        case "QButton":
+                            buttonsAndBoxesSceneSwitcher.getNode().setCurrentPage(0);
+                            panes.get(value).setPosition("BOTTOM", buttonsAndBoxesSceneSwitcher.getNode());
+                            title.setContent(value);
+                            panes.get(value).setPosition("TOP",menuQBox);
+                            break;
+                        case "QRadioButton":
+                            buttonsAndBoxesSceneSwitcher.getNode().setCurrentPage(1);
+                            panes.get(value).setPosition("BOTTOM", buttonsAndBoxesSceneSwitcher.getNode());
+                            title.setContent(value);
+                            panes.get(value).setPosition("TOP",menuQBox);
+                            break;
+                        case "QCheckBox":
+                            buttonsAndBoxesSceneSwitcher.getNode().setCurrentPage(2);
+                            panes.get(value).setPosition("BOTTOM", buttonsAndBoxesSceneSwitcher.getNode());
+                            title.setContent(value);
+                            panes.get(value).setPosition("TOP",menuQBox);
+                            break;
+                        case "QComboBox":
+                            buttonsAndBoxesSceneSwitcher.getNode().setCurrentPage(3);
+                            panes.get(value).setPosition("BOTTOM", buttonsAndBoxesSceneSwitcher.getNode());
+                            title.setContent(value);
+                            panes.get(value).setPosition("TOP",menuQBox);
+                            break;
+                    }
                     qstage.setQScene(scenes.get(value));
-                    qstage.show();
+                    qstage.showScene();
                 }
 
             }
         });
+
+
 
     }
 

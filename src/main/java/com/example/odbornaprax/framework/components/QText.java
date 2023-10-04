@@ -1,5 +1,6 @@
 package com.example.odbornaprax.framework.components;
 
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class QText extends Text {
@@ -16,6 +17,7 @@ public class QText extends Text {
         super.setWrappingWidth(width);
     }
 
+
     public void setPosition(double x, double y) {
         super.setX(x);
         super.setY(y);
@@ -24,5 +26,8 @@ public class QText extends Text {
         super.setScaleX(height);
         super.setScaleY(width);
     }
-
+    public void font(String font){
+        Font setfont = Font.font(font);
+        super.setFont(setfont);
+    }
 }

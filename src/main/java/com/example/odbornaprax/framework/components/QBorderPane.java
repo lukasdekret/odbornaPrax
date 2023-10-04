@@ -27,6 +27,7 @@ public class QBorderPane extends BorderPane {
             case "":
                 System.out.println("Wrong Input!");
                 break;
+
         }
     }
 

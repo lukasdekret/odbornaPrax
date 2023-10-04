@@ -18,10 +18,12 @@ public class QHBox extends HBox {
         super.setPrefWidth(width);
         super.setPrefHeight(height);
     }
+
     public void setMinWidthHeight(double width, double height){
         super.setMinWidth(width);
         super.setMinHeight(height);
     }
+
     public void setMaxWidthHeight(double width, double height){
         super.setMaxWidth(width);
         super.setMaxHeight(height);

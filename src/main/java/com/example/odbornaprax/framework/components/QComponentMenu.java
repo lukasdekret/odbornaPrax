@@ -63,7 +63,7 @@ public class QComponentMenu {
        title.setSize(3,3);
 
        qhBox.addComponents(mainPageButton, menuBar, title);
-       qhBox.setMarginOfNode(title,20,0,10,170);
+       qhBox.setMarginOfNode(title,20,0,10,100);
        qhBox.setPositionOfChildNodes("TOP");
        qhBox.setPositionOfChildNodes("LEFT");
 

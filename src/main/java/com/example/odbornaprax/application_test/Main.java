@@ -56,6 +56,13 @@ public class Main extends QApplication {
         QTreeItem menuRootItem = new QTreeItem("Menus");
         menuRootItem.addItems(qMenu, qMenuBar, qMenuButton, qMenuItem);
         rootItem.addItems(menuRootItem);
+        /** Section: Others */
+        QTreeItem qProgressBar = new QTreeItem("QProgressBar");
+        QTreeItem qProgressIndicator = new QTreeItem("QProgressIndicator");
+        QTreeItem qPagination = new QTreeItem("QPagination");
+        QTreeItem othersRootItem = new QTreeItem("Others");
+        othersRootItem.addItems(qProgressBar, qProgressIndicator, qPagination);
+        rootItem.addItems(othersRootItem);
 
         /** MENUBOX */
         QHBox buttonMenuBox = new QHBox();
@@ -476,7 +483,7 @@ public class Main extends QApplication {
         QVBox toggleGroupImageBox = new QVBox();
         toggleGroupImageBox.addComponents(toggleGroupImage,toggleGroupImageDef,toggleGroupCodeTitle,toggleGroupCode,pressToggleGroup,example1,example2,example3);
         toggleGroupImageBox.setPositionOfChildNodes("CENTER");
-        toggleGroupImageBox.setMarginOfNode(toggleGroupImage,0,0,10,25);
+        toggleGroupImageBox.setMarginOfNode(toggleGroupImage,50,0,10,25);
         toggleGroupImageBox.setMarginOfNode(toggleGroupCodeTitle,50,0,50,0);
         toggleGroupImageBox.setMarginOfNode(pressToggleGroup,40,0,10,0);
         toggleGroupImageBox.setMarginOfNode(example1,20,0,0,0);
@@ -810,11 +817,218 @@ public class Main extends QApplication {
         menuItemBackground.setPosition("LEFT",menuItemTextBox);
         menuItemBackground.setPosition("RIGHT",menuItemImageBox);
 
+        /**---------------------------------------OTHERS SECTION-------------------------------------------------------**/
+
+        /**----------------------PROGRESSBAR SCENE--------------------**/
+
+        /**QPROGRESSBAR TEXT**/
+        QText progressBarText = new QText();
+        progressBarText.setContent("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " );
+        progressBarText.setWrapperWidth(225);
+        progressBarText.setSize(1.5,1.5);
+
+        QVBox progressBarTextBox = new QVBox();
+        progressBarTextBox.addComponents(progressBarText);
+        progressBarTextBox.setMarginOfNode(progressBarText,150,0,80,140);
+        progressBarTextBox.setPrefWidthHeight(500,150);
+
+        /**QPROGRESSBAR**/
+        QProgressBar progressBarShow = new QProgressBar();
+        progressBarShow.setProgressValue(0.5);
+
+        /**QPROGRESSBAR CODE TITLE**/
+        QText progressBarCodeTitle = new QText();
+        progressBarCodeTitle.setContent("Usage of QProgressBar in Q");
+        progressBarCodeTitle.setSize(1.5,1.5);
+        progressBarCodeTitle.font("Verdana");
+
+        /**QPROGRESSBAR CODE**/
+        QText progressBarCode = new QText();
+        progressBarCode.setContent("QProgressBar progressBarShow = new QProgressBar();\n" +
+                "progressBarShow.setProgressValue(0.5);");
+        progressBarCode.setSize(1.3,1.3);
+        progressBarCode.setWrapperWidth(250);
+
+
+        /**QPROGRESSBAR IMAGE**/
+        QImageView progressBarImage = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/example-progressBar.png");
+            progressBarImage.setNewImage(input);
+        } catch (
+                FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        progressBarImage.setDimensions(125,250);
+
+        /**QPROGRESSBAR IMAGE DEF**/
+        QText progressBarImageDef = new QText();
+        progressBarImageDef.setContent("Definition of QProgressBar");
+        progressBarImageDef.setSize(1.2,1.2);
+
+        /**QPROGRESSBAR IMAGE BOX**/
+        QVBox progressBarImageBox = new QVBox();
+        progressBarImageBox.addComponents(progressBarImage,progressBarImageDef,progressBarCodeTitle,progressBarCode,progressBarShow);
+        progressBarImageBox.setPositionOfChildNodes("CENTER");
+        progressBarImageBox.setMarginOfNode(progressBarImage,0,0,10,25);
+        progressBarImageBox.setMarginOfNode(progressBarCodeTitle,50,0,30,0);
+        progressBarImageBox.setMarginOfNode(progressBarShow,30,0,0,0);
+        progressBarImageBox.setPrefWidthHeight(500,20);
+
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane progressBarBackground = new QBorderPane();
+        progressBarBackground.setPosition("LEFT",progressBarTextBox);
+        progressBarBackground.setPosition("RIGHT",progressBarImageBox);
+
+        /**----------------------PROGRESS INDICATOR ITEM SCENE--------------------**/
+        /**QPROGRESS INDICATOR TEXT**/
+        QText progressIndicatorText = new QText();
+        progressIndicatorText.setContent("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " );
+        progressIndicatorText.setWrapperWidth(225);
+        progressIndicatorText.setSize(1.5,1.5);
+
+        QVBox progressIndicatorTextBox = new QVBox();
+        progressIndicatorTextBox.addComponents(progressIndicatorText);
+        progressIndicatorTextBox.setMarginOfNode(progressIndicatorText,150,0,80,140);
+        progressIndicatorTextBox.setPrefWidthHeight(500,150);
+
+        /**QPROGRESS INDICATOR**/
+        QProgressIndicator progressIndicatorShow = new QProgressIndicator();
+        progressIndicatorShow.setProgressValue(0.5);
+
+        /**QPROGRESS INDICATOR CODE TITLE**/
+        QText progressIndicatorCodeTitle = new QText();
+        progressIndicatorCodeTitle.setContent("Usage of QProgressIndicator in Q");
+        progressIndicatorCodeTitle.setSize(1.5,1.5);
+        progressBarCodeTitle.font("Verdana");
+
+        /**QPROGRESS INDICATOR CODE**/
+        QText progressIndicatorCode = new QText();
+        progressIndicatorCode.setContent("QProgressIndicator progressIndicatorShow = new QProgressIndicator();\n" +
+                "progressIndicatorShow.setProgressValue(0.5);;");
+        progressIndicatorCode.setSize(1.3,1.3);
+        progressIndicatorCode.setWrapperWidth(250);
+
+
+        /**QPROGRESS INDICATOR IMAGE**/
+        QImageView progressIndicatorImage = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/example-progressIndicator.png");
+            progressIndicatorImage.setNewImage(input);
+        } catch (
+                FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        progressIndicatorImage.setDimensions(185,275);
+
+        /**QPROGRESS INDICATOR IMAGE DEF**/
+        QText progressIndicatorImageDef = new QText();
+        progressIndicatorImageDef.setContent("Definition of QProgressIndicator");
+        progressIndicatorImageDef.setSize(1.2,1.2);
+
+        /**QPROGRESS INDICATOR IMAGE BOX**/
+        QVBox progressIndicatorImageBox = new QVBox();
+        progressIndicatorImageBox.addComponents(progressIndicatorImage,progressIndicatorImageDef,progressIndicatorCodeTitle,progressIndicatorCode,progressIndicatorShow);
+        progressIndicatorImageBox.setPositionOfChildNodes("CENTER");
+        progressIndicatorImageBox.setMarginOfNode(progressIndicatorImage,0,0,10,25);
+        progressIndicatorImageBox.setMarginOfNode(progressIndicatorCodeTitle,50,0,30,0);
+        progressIndicatorImageBox.setMarginOfNode(progressIndicatorShow,30,0,0,0);
+        progressIndicatorImageBox.setPrefWidthHeight(500,20);
+
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane progressIndicatorBackground = new QBorderPane();
+        progressIndicatorBackground.setPosition("LEFT",progressIndicatorTextBox);
+        progressIndicatorBackground.setPosition("RIGHT",progressIndicatorImageBox);
+
+        /**----------------------PAGINATION ITEM SCENE--------------------**/
+        /**QPAGINATION TEXT**/
+        QText paginationText = new QText();
+        paginationText.setContent("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " );
+        paginationText.setWrapperWidth(225);
+        paginationText.setSize(1.5,1.5);
+
+        QVBox paginationTextBox = new QVBox();
+        paginationTextBox.addComponents(paginationText);
+        paginationTextBox.setMarginOfNode(paginationText,150,0,80,140);
+        paginationTextBox.setPrefWidthHeight(500,150);
+
+        /**QPAGINATION**/
+        QPagination paginationShow = new QPagination();
+        paginationShow.setPageNumber(5);
+        paginationShow.setCurrentPage(0);
+        paginationShow.setMaxPageIndicatorValue(5);
+        paginationShow.setContentFactory((index) -> {
+            QLabel label = new QLabel("Strana " + (index + 1));
+            QVBox paginationBox = new QVBox();
+            paginationBox.addComponents(label);
+            paginationBox.setPositionOfChildNodes("CENTER");
+            return paginationBox;
+        });
+
+        /**QPAGINATION CODE TITLE**/
+        QText paginationCodeTitle = new QText();
+        paginationCodeTitle.setContent("Usage of QPagination in Q");
+        paginationCodeTitle.setSize(1.5,1.5);
+        paginationCodeTitle.font("Verdana");
+
+        /**QPAGINATION CODE**/
+        QText paginationCode = new QText();
+        paginationCode.setContent("QPagination paginationShow = new QPagination();\n" +
+                "paginationShow.setPageNumber(5);\n" +
+                "paginationShow.setCurrentPage(0);\n" +
+                "paginationShow.setMaxPageIndicatorValue(5);\n" +
+                "paginationShow.setContentFactory((index) -> {\n" +
+                "   QLabel label = new QLabel(\"Strana \" + (index + 1));\n" +
+                "   QVBox paginationBox = new QVBox();\n" +
+                "   paginationBox.addComponents(label);\n" +
+                "   paginationBox.setPositionOfChildNodes(\"CENTER\");\n" +
+                "   return paginationBox;\n" +
+                "});");
+        paginationCode.setSize(1.3,1.3);
+        paginationCode.setWrapperWidth(250);
+
+
+        /**QPAGINATION IMAGE**/
+        QImageView paginationImage = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/example-pagination.png");
+            paginationImage.setNewImage(input);
+        } catch (
+                FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        paginationImage.setDimensions(125,250);
+
+        /**QPAGINATION IMAGE DEF**/
+        QText paginationImageDef = new QText();
+        paginationImageDef.setContent("Definition of QPagination");
+        paginationImageDef.setSize(1.2,1.2);
+
+        /**QPAGINATION IMAGE BOX**/
+        QVBox paginationImageBox = new QVBox();
+        paginationImageBox.addComponents(paginationImage,paginationImageDef,paginationCodeTitle,paginationCode,paginationShow);
+        paginationImageBox.setPositionOfChildNodes("CENTER");
+        paginationImageBox.setMarginOfNode(paginationImage,0,0,10,25);
+        paginationImageBox.setMarginOfNode(paginationCodeTitle,50,0,50,0);
+        paginationImageBox.setMarginOfNode(paginationShow,30,0,0,0);
+        paginationImageBox.setPrefWidthHeight(500,20);
+
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane paginationBackground = new QBorderPane();
+        paginationBackground.setPosition("LEFT",paginationTextBox);
+        paginationBackground.setPosition("RIGHT",paginationImageBox);
+
         /**------------------------------------SCENE MANAGEMENT AND DYNAMIC COMPONENT HANDLING--------------------------------------**/
 
         /**TOP MENU**/
         QComponentMenu topMenu = new QComponentMenu();
-        
+
         QMenu buttonsAndBoxes = new QMenu("Buttons and Boxes");
         QMenuItem buttonItem = new QMenuItem("QButton");
         QMenuItem radioButtonItem = new QMenuItem("QRadioButton");
@@ -830,9 +1044,47 @@ public class Main extends QApplication {
         QMenuItem menuItemItem = new QMenuItem("QMenuItem");
         menus.addItems(menuItem, menuBarItem, menuButtonItem, menuItemItem);
 
+        QMenu textAndImages = new QMenu("Text and Images");
+        QMenuItem qTextItem = new QMenuItem("QText");
+        QMenuItem qTextAreaItem = new QMenuItem("QTextArea");
+        QMenuItem qLabelItem = new QMenuItem("QLabel");
+        QMenuItem qTextFieldItem = new QMenuItem("QTextField");
+        QMenuItem qHyperLinkItem = new QMenuItem("QHyperLink");
+        QMenuItem qImageViewItem = new QMenuItem("QImageView");
+        textAndImages.addItems(qTextItem, qTextAreaItem, qLabelItem, qTextFieldItem, qHyperLinkItem, qImageViewItem);
+
+
+        QMenu layout = new QMenu("Layout");
+        QMenuItem qvBoxItem = new QMenuItem("QVBox");
+        QMenuItem qhBoxItem = new QMenuItem("QHBox");
+        QMenuItem qScrollPaneItem = new QMenuItem("QScrollPane");
+        QMenuItem qBorderPaneItem = new QMenuItem("QBorderPane");
+        QMenuItem qSeparatorItem = new QMenuItem("QSeparator");
+        QMenuItem qGroupItem = new QMenuItem("QGroup");
+        layout.addItems(qvBoxItem, qhBoxItem, qScrollPaneItem, qBorderPaneItem, qSeparatorItem,qGroupItem);
+
+        QMenu essential = new QMenu("Essential");
+        QMenuItem qApplicationItem = new QMenuItem("QApplication");
+        QMenuItem qStageItem = new QMenuItem("QStage");
+        QMenuItem qScene = new QMenuItem("QScene");
+        essential.addItems(qApplicationItem, qStageItem, qScene);
+
+        QMenu others = new QMenu("Others");
+        QMenuItem progressBarItem = new QMenuItem("QProgressBar");
+        QMenuItem progressIndicatorItem = new QMenuItem("QProgressIndicator");
+        QMenuItem paginationItem = new QMenuItem("QPagination");
+        others.addItems(progressBarItem,progressIndicatorItem,paginationItem);
+
+        QMenu specialComponents = new QMenu("Special Components");
+        QMenuItem qPaginationSceneSwitcherItem = new QMenuItem("QPaginationSceneSwitcher");
+        QMenuItem qComponentMenuItem = new QMenuItem("QComponentMenu");
+        QMenuItem qArticle = new QMenuItem("QArticle");
+        QMenuItem qImageTextCaption = new QMenuItem("QImageTextCaption");
+        specialComponents.addItems(qPaginationSceneSwitcherItem,qComponentMenuItem,qArticle,qImageTextCaption);
+
         /**---SCENE TITLES---**/
 
-        topMenu.addMenus(buttonsAndBoxes, menus);
+        topMenu.addMenus(buttonsAndBoxes, menus,textAndImages,layout,essential,others,specialComponents);
 
         /** MAIN SCENE */
         QScene mainScene = new QScene(mainBackground,1000,800);
@@ -866,6 +1118,15 @@ public class Main extends QApplication {
         /** MENUITEM SCENE **/
         QScene menuItemScene = new QScene(menuItemBackground,1000,800);
 
+        /** PROGRESSBAR SCENE **/
+        QScene progressBarScene = new QScene(progressBarBackground,1000,800);
+
+        /** MENUITEM SCENE **/
+        QScene progressIndicatorScene = new QScene(progressIndicatorBackground,1000,800);
+
+        /** MENUITEM SCENE **/
+        QScene paginationScene = new QScene(paginationBackground,1000,800);
+
         /** HASH MAPS AND ARRAYS FOR INDIVIDUAL SCENES AND PANES */
             /** SCENE MAP */
         Map<String, QScene> scenes = new HashMap<>();
@@ -879,10 +1140,14 @@ public class Main extends QApplication {
         scenes.put("QMenuBar", menuBarScene);
         scenes.put("QMenuButton", menuButtonScene);
         scenes.put("QMenuItem", menuItemScene);
+        scenes.put("QProgressBar", progressBarScene);
+        scenes.put("QProgressIndicator", progressIndicatorScene);
+        scenes.put("QPagination", paginationScene);
 
             /** SCENE ARRAY */
         QScene[] sceneIndexes = {buttonScene, radioButtonScene, checkboxScene, comboboxScene, toggleGroupScene};
         QScene[] menuSceneIndexes = { menuScene, menuBarScene, menuButtonScene, menuItemScene };
+        QScene[] othersSceneIndexes = { progressBarScene, progressIndicatorScene,paginationScene };
 
             /** PANE MAP */
         Map<String, QBorderPane> panes = new HashMap<>();
@@ -895,10 +1160,14 @@ public class Main extends QApplication {
         panes.put("QMenuBar", menuBarBackground);
         panes.put("QMenuButton", menuButtonBackground);
         panes.put("QMenuItem", menuItemBackground);
+        panes.put("QProgressBar", progressBarBackground);
+        panes.put("QProgressIndicator", progressIndicatorBackground);
+        panes.put("QPagination", paginationBackground);
 
             /** PANE ARRAY */
         QBorderPane[] paneIndexes = {buttonBackground, radioButtonBackground, checkBoxBackground, comboBoxBackground, toggleGroupBackground, menuBackground};
         QBorderPane[] menusPaneIndexes = { menuBackground, menuBarBackground, menuButtonBackground, menuItemBackground };
+        QBorderPane[] othersPaneIndexes = { progressBarBackground,progressIndicatorBackground,paginationBackground };
 
             /** TITLE MAP */
         Map<Integer, String> titles = new HashMap<>();
@@ -914,6 +1183,10 @@ public class Main extends QApplication {
         menuTitles.put(2, "QMenuButton");
         menuTitles.put(3, "QMenuItem");
 
+        Map<Integer, String> othersTitles = new HashMap<>();
+        othersTitles.put(0, "QProgressBar");
+        othersTitles.put(1, "QProgressIndicator");
+        othersTitles.put(2, "QPagination");
 
         /**IN COMPONENT PAGINATION NAVIGATION**/
         QPaginationSceneSwitcher buttonsAndBoxesSceneSwitcher = new QPaginationSceneSwitcher();
@@ -922,20 +1195,23 @@ public class Main extends QApplication {
         QPaginationSceneSwitcher menusSceneSwitcher = new QPaginationSceneSwitcher();
         menusSceneSwitcher.sceneSwitcher(qstage,menuSceneIndexes, menusPaneIndexes,topMenu.qhBox, 4, topMenu.title, menuTitles);
 
+        QPaginationSceneSwitcher othersSceneSwitcher = new QPaginationSceneSwitcher();
+        othersSceneSwitcher.sceneSwitcher(qstage,othersSceneIndexes, othersPaneIndexes,topMenu.qhBox, 3, topMenu.title,othersTitles);
+
         /**SWITCH MENU SCENES**/
         topMenu.switchSceneForSection(0, scenes, qstage, buttonsAndBoxesSceneSwitcher, sceneIndexes, paneIndexes);
         topMenu.switchSceneForSection(1, scenes, qstage, menusSceneSwitcher, menuSceneIndexes, menusPaneIndexes);
+        topMenu.switchSceneForSection(5, scenes, qstage, othersSceneSwitcher, othersSceneIndexes, othersPaneIndexes);
 
         /**TREE MENU**/
 
         qMainMenu.setOnMouseClicked(event -> {
             QTreeItem selected = (QTreeItem) qMainMenu.getSelectionModel().getSelectedItem();
 
-            /**CODE FOR ADDING PAGINATION WHEN LAUNCHING COMPONENTS FROM TREE MENU**/
+            /**CODE FOR ADDING PAGINATION AND TOP MENU WHEN LAUNCHING COMPONENTS FROM TREE MENU**/
             if(selected != null) {
 
                 String value = selected.getValue().toString();
-                System.out.println(value);
                 if(scenes.get(value) != null) {
                     switch (value){
                         /**ADD MORE MAIN TREE MENU OPTIONS HERE**/
@@ -990,6 +1266,24 @@ public class Main extends QApplication {
                         case "QMenuItem":
                             menusSceneSwitcher.getNode().setCurrentPage(3);
                             panes.get(value).setPosition("BOTTOM", menusSceneSwitcher.getNode());
+                            topMenu.title.setContent(value);
+                            panes.get(value).setPosition("TOP", topMenu.qhBox);
+                            break;
+                        case "QProgressBar":
+                            othersSceneSwitcher.getNode().setCurrentPage(0);
+                            panes.get(value).setPosition("BOTTOM", othersSceneSwitcher.getNode());
+                            topMenu.title.setContent(value);
+                            panes.get(value).setPosition("TOP", topMenu.qhBox);
+                            break;
+                        case "QProgressIndicator":
+                            othersSceneSwitcher.getNode().setCurrentPage(1);
+                            panes.get(value).setPosition("BOTTOM", othersSceneSwitcher.getNode());
+                            topMenu.title.setContent(value);
+                            panes.get(value).setPosition("TOP", topMenu.qhBox);
+                            break;
+                        case "QPagination":
+                            othersSceneSwitcher.getNode().setCurrentPage(2);
+                            panes.get(value).setPosition("BOTTOM", othersSceneSwitcher.getNode());
                             topMenu.title.setContent(value);
                             panes.get(value).setPosition("TOP", topMenu.qhBox);
                             break;

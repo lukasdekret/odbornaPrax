@@ -1888,6 +1888,8 @@ public class Main extends QApplication {
                             case "QPagination":
                                 othersSceneSwitcher.getNode().setCurrentPage(2);
                                 panes.get(value).setPosition("BOTTOM", othersSceneSwitcher.getNode());
+                                topMenu.title.setContent(value);
+                                panes.get(value).setPosition("TOP", topMenu.qhBox);
                             case "QVBox":
                                 layoutSceneSwitcher.getNode().setCurrentPage(0);
                                 panes.get(value).setPosition("BOTTOM", layoutSceneSwitcher.getNode());
@@ -1948,6 +1950,7 @@ public class Main extends QApplication {
                     }
 
                 }
+                qMainMenu.getSelectionModel().clearSelection();
             });
 
 

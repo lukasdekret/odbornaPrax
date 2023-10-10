@@ -2,10 +2,6 @@ package com.example.odbornaprax.application_test;
 
 import com.example.odbornaprax.framework.components.*;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -583,8 +579,6 @@ public class Main extends QApplication {
         menuImageBox.setMarginOfNode(menuCodeTitle, 100, 0, 30, 0);
         menuImageBox.setMarginOfNode(menuCode, 0, 0, 20, 0);
         menuImageBox.setMarginOfNode(menuBarShow, 20, 0, 0, 0);
-//        menuImageBox.setMarginOfNode(pressMenu,40,0,0,0);
-//        menuImageBox.setMarginOfNode(menuAlert,10,0,0,0);
         menuImageBox.setPrefWidthHeight(500, 20);
 
         /** MAIN BACKGROUND WITH COMPONENTS */
@@ -634,12 +628,6 @@ public class Main extends QApplication {
         menuBarCode.setSize(1.2, 1.2);
         menuBarCode.setWrapperWidth(350);
 
-        /** MENUBAR ALERT -- Zbytocne pre tento komponent, to iste ako u QMenu **/
-//        QText menuBarAlert = new QText();
-//        QLabel pressMenuBar = new QLabel();
-//        menuAlert.font("Verdana");
-//        pressMenu.setTitle("Pressed QMenuBar!");
-
         /** MENUBAR IMAGE **/
         QImageView menuBarImage = new QImageView();
         try {
@@ -664,8 +652,6 @@ public class Main extends QApplication {
         menuBarImageBox.setMarginOfNode(menuBarCodeTitle, 100, 0, 30, 0);
         menuBarImageBox.setMarginOfNode(menuBarCode, 20, 0, 20, 0);
         menuBarImageBox.setMarginOfNode(menuBarShow2, 40, 0, 0, 0);
-//        menuImageBox.setMarginOfNode(pressMenuBar,40,0,0,0);
-//        menuImageBox.setMarginOfNode(menuBarAlert,10,0,0,0);
         menuBarImageBox.setPrefWidthHeight(500, 20);
 
         /** MAIN BACKGROUND WITH COMPONENTS */
@@ -741,8 +727,6 @@ public class Main extends QApplication {
         menuButtonImageBox.setMarginOfNode(menuButtonCodeTitle, 100, 0, 30, 0);
         menuButtonImageBox.setMarginOfNode(menuButtonCode, 20, 0, 20, 0);
         menuButtonImageBox.setMarginOfNode(menuButtonShow, 40, 0, 0, 0);
-//        menuImageBox.setMarginOfNode(pressMenuBar,40,0,0,0);
-//        menuImageBox.setMarginOfNode(menuBarAlert,10,0,0,0);
         menuButtonImageBox.setPrefWidthHeight(500, 20);
 
         /** MAIN BACKGROUND WITH COMPONENTS */
@@ -823,8 +807,6 @@ public class Main extends QApplication {
         menuItemImageBox.setMarginOfNode(menuItemCodeTitle, 100, 0, 30, 0);
         menuItemImageBox.setMarginOfNode(menuItemCode, 20, 0, 20, 0);
         menuItemImageBox.setMarginOfNode(menuBarShow3, 20, 0, 0, 0);
-//        menuImageBox.setMarginOfNode(pressMenuBar,40,0,0,0);
-//        menuImageBox.setMarginOfNode(menuBarAlert,10,0,0,0);
         menuItemImageBox.setPrefWidthHeight(500, 20);
 
         /** MAIN BACKGROUND WITH COMPONENTS */
@@ -1613,8 +1595,8 @@ public class Main extends QApplication {
             QMenu essential = new QMenu("Essential");
             QMenuItem qApplicationItem = new QMenuItem("QApplication");
             QMenuItem qStageItem = new QMenuItem("QStage");
-            QMenuItem qScene = new QMenuItem("QScene");
-            essential.addItems(qApplicationItem, qStageItem, qScene);
+            QMenuItem qSceneItem = new QMenuItem("QScene");
+            essential.addItems(qApplicationItem, qStageItem, qSceneItem);
 
             QMenu others = new QMenu("Others");
             QMenuItem progressBarItem = new QMenuItem("QProgressBar");

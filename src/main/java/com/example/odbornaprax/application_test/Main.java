@@ -530,29 +530,25 @@ public class Main extends QApplication {
 
         /**TOP MENU**/
         QComponentMenu topMenu = new QComponentMenu();
-        QHBox menuQBox = new QHBox();
-        QMenuBar menuBar = new QMenuBar();
-        QButton mainPage = new QButton();
-        QMenu buttonsAndBoxes = new QMenu();
+        
+        QMenu buttonsAndBoxes = new QMenu("Buttons and Boxes");
         QMenuItem buttonItem = new QMenuItem("QButton");
         QMenuItem radioButtonItem = new QMenuItem("QRadioButton");
         QMenuItem checkBoxItem = new QMenuItem("QCheckBox");
         QMenuItem comboBoxItem = new QMenuItem("QComboBox");
         QMenuItem toggleGroupItem = new QMenuItem("QToggleGroup");
+        buttonsAndBoxes.addItems(buttonItem, radioButtonItem, checkBoxItem, comboBoxItem, toggleGroupItem);
+
         QMenu menus = new QMenu("Menus");
         QMenuItem menuItem = new QMenuItem("QMenu");
         QMenuItem menuBarItem = new QMenuItem("QMenuBar");
         QMenuItem menuButtonItem = new QMenuItem("QMenuButton");
         QMenuItem menuItemItem = new QMenuItem("QMenuItem");
+        menus.addItems(menuItem, menuBarItem, menuButtonItem, menuItemItem);
 
         /**---SCENE TITLES---**/
 
-            /**BUTTON TITLE*/
-        QText title = new QText();
-
-        topMenu.createMenu(menuQBox,menuBar,mainPage,buttonsAndBoxes,buttonItem,radioButtonItem,checkBoxItem,comboBoxItem,toggleGroupItem,title);
-//        topMenu.createMenu(menuQBox,menuBar,mainPage,menus,"Menus",new QMenuItem[]{menuItem, menuBarItem, menuButtonItem, menuItemItem}, title);
-
+        topMenu.addMenus(buttonsAndBoxes, menus);
 
         /** MAIN SCENE */
         QScene mainScene = new QScene(mainBackground,1000,800);
@@ -637,13 +633,14 @@ public class Main extends QApplication {
 
         /**IN COMPONENT PAGINATION NAVIGATION**/
         QPaginationSceneSwitcher buttonsAndBoxesSceneSwitcher = new QPaginationSceneSwitcher();
-        buttonsAndBoxesSceneSwitcher.sceneSwitcher(qstage,sceneIndexes, paneIndexes,menuQBox, 5,title, titles);
+        buttonsAndBoxesSceneSwitcher.sceneSwitcher(qstage,sceneIndexes, paneIndexes,topMenu.qhBox, 5,topMenu.title, titles);
 
         QPaginationSceneSwitcher menusSceneSwitcher = new QPaginationSceneSwitcher();
-        menusSceneSwitcher.sceneSwitcher(qstage,menuSceneIndexes, menusPaneIndexes,menuQBox, 4, title, menuTitles);
+        menusSceneSwitcher.sceneSwitcher(qstage,menuSceneIndexes, menusPaneIndexes,topMenu.qhBox, 4, topMenu.title, menuTitles);
 
         /**SWITCH MENU SCENES**/
-        topMenu.sceneSwitcher(scenes,qstage,buttonsAndBoxesSceneSwitcher, sceneIndexes, paneIndexes,buttonsAndBoxes,mainPage,menuQBox,title);
+        topMenu.switchSceneForSection(0, scenes, qstage, buttonsAndBoxesSceneSwitcher, sceneIndexes, paneIndexes);
+        topMenu.switchSceneForSection(1, scenes, qstage, menusSceneSwitcher, menuSceneIndexes, menusPaneIndexes);
 
         /**TREE MENU**/
 
@@ -661,50 +658,50 @@ public class Main extends QApplication {
                         case "QButton":
                             buttonsAndBoxesSceneSwitcher.getNode().setCurrentPage(0);
                             panes.get(value).setPosition("BOTTOM", buttonsAndBoxesSceneSwitcher.getNode());
-                            title.setContent(value);
-                            panes.get(value).setPosition("TOP",menuQBox);
+                            topMenu.title.setContent(value);
+                            panes.get(value).setPosition("TOP",topMenu.qhBox);
                             break;
                         case "QRadioButton":
                             buttonsAndBoxesSceneSwitcher.getNode().setCurrentPage(1);
                             panes.get(value).setPosition("BOTTOM", buttonsAndBoxesSceneSwitcher.getNode());
-                            title.setContent(value);
-                            panes.get(value).setPosition("TOP",menuQBox);
+                            topMenu.title.setContent(value);
+                            panes.get(value).setPosition("TOP",topMenu.qhBox);
                             break;
                         case "QCheckBox":
                             buttonsAndBoxesSceneSwitcher.getNode().setCurrentPage(2);
                             panes.get(value).setPosition("BOTTOM", buttonsAndBoxesSceneSwitcher.getNode());
-                            title.setContent(value);
-                            panes.get(value).setPosition("TOP",menuQBox);
+                            topMenu.title.setContent(value);
+                            panes.get(value).setPosition("TOP",topMenu.qhBox);
                             break;
                         case "QComboBox":
                             buttonsAndBoxesSceneSwitcher.getNode().setCurrentPage(3);
                             panes.get(value).setPosition("BOTTOM", buttonsAndBoxesSceneSwitcher.getNode());
-                            title.setContent(value);
-                            panes.get(value).setPosition("TOP",menuQBox);
+                            topMenu.title.setContent(value);
+                            panes.get(value).setPosition("TOP",topMenu.qhBox);
                             break;
                         case "QMenu":
                             menusSceneSwitcher.getNode().setCurrentPage(0);
                             panes.get(value).setPosition("BOTTOM", menusSceneSwitcher.getNode());
-                            title.setContent(value);
-                            panes.get(value).setPosition("TOP", menuQBox);
+                            topMenu.title.setContent(value);
+                            panes.get(value).setPosition("TOP", topMenu.qhBox);
                             break;
                         case "QMenuBar":
                             menusSceneSwitcher.getNode().setCurrentPage(1);
                             panes.get(value).setPosition("BOTTOM", menusSceneSwitcher.getNode());
-                            title.setContent(value);
-                            panes.get(value).setPosition("TOP", menuQBox);
+                            topMenu.title.setContent(value);
+                            panes.get(value).setPosition("TOP", topMenu.qhBox);
                             break;
                         case "QMenuButton":
                             menusSceneSwitcher.getNode().setCurrentPage(2);
                             panes.get(value).setPosition("BOTTOM", menusSceneSwitcher.getNode());
-                            title.setContent(value);
-                            panes.get(value).setPosition("TOP", menuQBox);
+                            topMenu.title.setContent(value);
+                            panes.get(value).setPosition("TOP", topMenu.qhBox);
                             break;
                         case "QMenuItem":
                             menusSceneSwitcher.getNode().setCurrentPage(3);
                             panes.get(value).setPosition("BOTTOM", menusSceneSwitcher.getNode());
-                            title.setContent(value);
-                            panes.get(value).setPosition("TOP", menuQBox);
+                            topMenu.title.setContent(value);
+                            panes.get(value).setPosition("TOP", topMenu.qhBox);
                             break;
                     }
                     qstage.setQScene(scenes.get(value));

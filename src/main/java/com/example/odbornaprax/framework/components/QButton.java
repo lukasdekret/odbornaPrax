@@ -52,7 +52,6 @@ public class QButton extends Button {
                     button.setContent("");
                     pom = false;
                 }
-
             }
         });
     }

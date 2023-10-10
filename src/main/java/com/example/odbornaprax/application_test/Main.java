@@ -76,6 +76,14 @@ public class Main extends QApplication {
         QTreeItem essentialRootItem = new QTreeItem("Essential");
         essentialRootItem.addItems(qApplication, qStage, qScene);
         rootItem.addItems(essentialRootItem);
+        /** Section: SpecialComponents */
+        QTreeItem qPaginationSceneSwitcher = new QTreeItem("QPaginationSceneSwitcher");
+        QTreeItem qComponentMenu = new QTreeItem("QComponentMenu");
+        QTreeItem qArticle = new QTreeItem("QArticle");
+        QTreeItem qImageTextCaption = new QTreeItem("QImageTextCaption");
+        QTreeItem specialComponentsRootItem = new QTreeItem("Special Components");
+        specialComponentsRootItem.addItems(qPaginationSceneSwitcher,qComponentMenu,qArticle,qImageTextCaption);
+        rootItem.addItems(specialComponentsRootItem);
 
         /** MENUBOX */
         QHBox buttonMenuBox = new QHBox();
@@ -1552,8 +1560,118 @@ public class Main extends QApplication {
         qSceneBackground.setPosition("LEFT",qSceneTextBox);
         qSceneBackground.setPosition("RIGHT",qSceneImageBox);
 
+        /**---------------------------------------SPECIAL COMPONENTS SECTION-------------------------------------------------------**/
 
-            /**------------------------------------SCENE MANAGEMENT AND DYNAMIC COMPONENT HANDLING--------------------------------------**/
+        /**----------------------QPAGINATION SCENE SWITCHER SCENE--------------------**/
+
+        /** QPAGINATION SCENE SWITCHER TEXT **/
+        QText qPaginationSceneSwitcherText = new QText();
+        qPaginationSceneSwitcherText.setContent("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " );
+        qPaginationSceneSwitcherText.setWrapperWidth(225);
+        qPaginationSceneSwitcherText.setSize(1.5,1.5);
+
+        QVBox qPaginationSceneSwitcherBox = new QVBox();
+        qPaginationSceneSwitcherBox.addComponents(qPaginationSceneSwitcherText);
+        qPaginationSceneSwitcherBox.setMarginOfNode(qPaginationSceneSwitcherText,150,0,80,140);
+        qPaginationSceneSwitcherBox.setPrefWidthHeight(500,150);
+
+        /** QPAGINATION SCENE SWITCHER CODE TITLE **/
+        QText qPaginationSceneSwitcherTitle = new QText();
+        qPaginationSceneSwitcherTitle.setContent("Usage of QScene in Q");
+        qPaginationSceneSwitcherTitle.setSize(1.5,1.5);
+        qPaginationSceneSwitcherTitle.font("Verdana");
+
+        /** QPAGINATION SCENE SWITCHER CODE **/
+        QText qPaginationSceneSwitcherCode = new QText();
+        qPaginationSceneSwitcherCode.setContent(
+                "QStage example = new QStage();\n" +
+                        "QScene [] indexes = {-scene1-,-scene2-,-scene3-,-scene4-};\n" +
+                        "QBorderPane [] panes = {-pane1-,-pane2-,-pane3-,-pane4-};\n" +
+                        "QHBox topMenu = new QHBox();\n" +
+                        "QText title = new QText();\n" +
+                        "title.setContent(\"example\");\n" +
+                        "Map<Integer,String> exampleTitles;\n" +
+                        "exampleTitles.put(0,\"example\");\n" +
+                        "\n" +
+                        "QPaginationSceneSwitcher exampleSceneSwitcher = new QPaginationSceneSwitcher();\n" +
+                        "exampleSceneSwitcher.sceneSwitcher(qstage,indexes, panes,topMenu, 3, title, exampleTitles);"
+
+        );
+        qPaginationSceneSwitcherCode.setSize(1,1);
+        qPaginationSceneSwitcherCode.setWrapperWidth(400);
+
+        /** QPAGINATION SCENE SWITCHER IMAGE BOX**/
+        QVBox qPaginationSceneSwitcherImageBox = new QVBox();
+        qPaginationSceneSwitcherImageBox.addComponents(qPaginationSceneSwitcherTitle,qPaginationSceneSwitcherCode);
+        qPaginationSceneSwitcherImageBox.setPositionOfChildNodes("CENTER");
+        qPaginationSceneSwitcherImageBox.setMarginOfNode(qPaginationSceneSwitcherTitle,20,0,30,0);
+        qPaginationSceneSwitcherImageBox.setMarginOfNode(qPaginationSceneSwitcherCode, 0,0,20,0);
+        qPaginationSceneSwitcherImageBox.setPrefWidthHeight(500,20);
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane qPaginationSceneSwitcherBackground = new QBorderPane();
+        qPaginationSceneSwitcherBackground.setPosition("LEFT",qPaginationSceneSwitcherBox);
+        qPaginationSceneSwitcherBackground.setPosition("RIGHT",qPaginationSceneSwitcherImageBox);
+
+        /**----------------------QCOMPONENTMENU SCENE--------------------**/
+
+        /** QCOMPONENTMENU TEXT **/
+        QText qComponentMenuText = new QText();
+        qComponentMenuText.setContent("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " );
+        qComponentMenuText.setWrapperWidth(225);
+        qComponentMenuText.setSize(1.5,1.5);
+
+        QVBox qComponentMenuBox = new QVBox();
+        qComponentMenuBox.addComponents(qComponentMenuText);
+        qComponentMenuBox.setMarginOfNode(qComponentMenuText,150,0,80,140);
+        qComponentMenuBox.setPrefWidthHeight(500,150);
+
+        /** QCOMPONENTMENU CODE TITLE **/
+        QText qComponentMenuTitle = new QText();
+        qComponentMenuTitle.setContent("Usage of QScene in Q");
+        qComponentMenuTitle.setSize(1.5,1.5);
+        qComponentMenuTitle.font("Verdana");
+
+
+
+        /** QCOMPONENTMENU CODE **/
+        QText qComponentMenuCode = new QText();
+        qComponentMenuCode.setContent(
+                "QComponentMenu topMenu = new QComponentMenu();\n" +
+                        "QMenu example1 = new QMenu();\n" +
+                        "QMenu example2 = new QMenu();\n" +
+                        "//Code for creating menu\n" +
+                        "Map<String,QScene> exampleScenes;\n" +
+                        "//Code for filling hashMap\n" +
+                        "QScene [] indexes = {-scene1-,-scene2-,-scene3-,-scene4-};\n" +
+                        "QBorderPane [] panes = {-pane1-,-pane2-,-pane3-,-pane4-};\n" +
+                        "QStage example = new QStage();\n" +
+                        "QPaginationSceneSwitcher exampleSceneSwitcher = new QPaginationSceneSwitcher();\n" +
+                        "topMenu.addMenus(example1, example2);\n" +
+                        "topMenu.switchSceneForSection(0, exampleScenes, example, exampleSceneSwitcher, indexes, panes);"
+
+        );
+        qComponentMenuCode.setSize(1,1);
+        qComponentMenuCode.setWrapperWidth(400);
+
+        /** QCOMPONENTMENU IMAGE BOX**/
+        QVBox qComponentMenuImageBox = new QVBox();
+        qComponentMenuImageBox.addComponents(qComponentMenuTitle,qComponentMenuCode);
+        qComponentMenuImageBox.setPositionOfChildNodes("CENTER");
+        qComponentMenuImageBox.setMarginOfNode(qComponentMenuTitle,20,0,30,0);
+        qComponentMenuImageBox.setMarginOfNode(qComponentMenuCode, 0,0,20,0);
+        qComponentMenuImageBox.setPrefWidthHeight(500,20);
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane qComponentMenuBackground = new QBorderPane();
+        qComponentMenuBackground.setPosition("LEFT",qComponentMenuBox);
+        qComponentMenuBackground.setPosition("RIGHT",qComponentMenuImageBox);
+
+
+
+        /**------------------------------------SCENE MANAGEMENT AND DYNAMIC COMPONENT HANDLING--------------------------------------**/
 
             /**TOP MENU**/
             QComponentMenu topMenu = new QComponentMenu();
@@ -1607,9 +1725,9 @@ public class Main extends QApplication {
             QMenu specialComponents = new QMenu("Special Components");
             QMenuItem qPaginationSceneSwitcherItem = new QMenuItem("QPaginationSceneSwitcher");
             QMenuItem qComponentMenuItem = new QMenuItem("QComponentMenu");
-            QMenuItem qArticle = new QMenuItem("QArticle");
-            QMenuItem qImageTextCaption = new QMenuItem("QImageTextCaption");
-            specialComponents.addItems(qPaginationSceneSwitcherItem, qComponentMenuItem, qArticle, qImageTextCaption);
+            QMenuItem qArticleItem = new QMenuItem("QArticle");
+            QMenuItem qImageTextCaptionItem = new QMenuItem("QImageTextCaption");
+            specialComponents.addItems(qPaginationSceneSwitcherItem, qComponentMenuItem, qArticleItem, qImageTextCaptionItem);
 
 
             /**---SCENE TITLES---**/
@@ -1684,6 +1802,11 @@ public class Main extends QApplication {
             /** QGROUP SCENE **/
             QScene qGroupScene = new QScene(qGroupBackground, 1000, 800);
 
+            /** QPAGINATION SCENE SWITCHER SCENE **/
+            QScene qPaginationSceneSwitcherScene = new QScene(qPaginationSceneSwitcherBackground, 1000, 800);
+
+            /** QCOMPONENT MENU SCENE **/
+            QScene qComponentMenuScene = new QScene(qComponentMenuBackground, 1000, 800);
 
             /** HASH MAPS AND ARRAYS FOR INDIVIDUAL SCENES AND PANES */
             /** SCENE MAP */
@@ -1710,6 +1833,8 @@ public class Main extends QApplication {
             scenes.put("QApplication", qApplicationScene);
             scenes.put("QStage", qStageScene);
             scenes.put("QScene", qSceneScene);
+            scenes.put("QPaginationSceneSwitcher", qPaginationSceneSwitcherScene);
+            scenes.put("QComponentMenu", qComponentMenuScene);
 
 
             /** SCENE ARRAY */
@@ -1718,6 +1843,7 @@ public class Main extends QApplication {
             QScene[] othersSceneIndexes = {progressBarScene, progressIndicatorScene, paginationScene};
             QScene[] layoutSceneIndexes = {qvBoxScene, qhBoxScene, qScrollPaneScene, qBorderPaneScene, qSeparatorScene, qGroupScene};
             QScene[] essentialSceneIndexes = { qApplicationScene, qStageScene, qSceneScene };
+            QScene[] specialComponentsIndexes = { qPaginationSceneSwitcherScene,qComponentMenuScene };
 
             /** PANE MAP */
             Map<String, QBorderPane> panes = new HashMap<>();
@@ -1742,6 +1868,8 @@ public class Main extends QApplication {
             panes.put("QApplication", qApplicationBackground);
             panes.put("QStage", qStageBackground);
             panes.put("QScene", qSceneBackground);
+            panes.put("QPaginationSceneSwitcher", qPaginationSceneSwitcherBackground);
+            panes.put("QComponentMenu", qComponentMenuBackground);
 
 
             /** PANE ARRAY */
@@ -1750,6 +1878,7 @@ public class Main extends QApplication {
             QBorderPane[] othersPaneIndexes = {progressBarBackground, progressIndicatorBackground, paginationBackground};
             QBorderPane[] layoutPaneIndexes = {qvBoxBackground, qhBoxBackground, qScrollPaneBackground, qBorderPaneBackground, qSeparatorBackground, qGroupBackground};
             QBorderPane[] essentialPaneIndexes = { qApplicationBackground, qStageBackground, qSceneBackground };
+            QBorderPane[] specialComponentsPaneIndexes = { qPaginationSceneSwitcherBackground,qComponentMenuBackground };
 
             /** TITLE MAP */
             Map<Integer, String> titles = new HashMap<>();
@@ -1783,7 +1912,11 @@ public class Main extends QApplication {
             essentialTitles.put(1, "QStage");
             essentialTitles.put(2, "QScene");
 
-
+            Map<Integer, String> specialComponentsTitles = new HashMap<>();
+            specialComponentsTitles.put(0, "QPaginationSceneSwitcher");
+            specialComponentsTitles.put(1, "QComponentMenu");
+            specialComponentsTitles.put(2, "QArticle");
+            specialComponentsTitles.put(3, "QImageTextCaption");
 
             /**IN COMPONENT PAGINATION NAVIGATION**/
             QPaginationSceneSwitcher buttonsAndBoxesSceneSwitcher = new QPaginationSceneSwitcher();
@@ -1801,12 +1934,16 @@ public class Main extends QApplication {
             QPaginationSceneSwitcher essentialSceneSwitcher = new QPaginationSceneSwitcher();
             essentialSceneSwitcher.sceneSwitcher(qstage,essentialSceneIndexes, essentialPaneIndexes,topMenu.qhBox, 3, topMenu.title, essentialTitles);
 
+            QPaginationSceneSwitcher specialComponentsSceneSwitcher = new QPaginationSceneSwitcher();
+            specialComponentsSceneSwitcher.sceneSwitcher(qstage,specialComponentsIndexes, specialComponentsPaneIndexes,topMenu.qhBox, 4, topMenu.title, specialComponentsTitles);
+
             /**SWITCH MENU SCENES**/
             topMenu.switchSceneForSection(0, scenes, qstage, buttonsAndBoxesSceneSwitcher, sceneIndexes, paneIndexes);
             topMenu.switchSceneForSection(1, scenes, qstage, menusSceneSwitcher, menuSceneIndexes, menusPaneIndexes);
             topMenu.switchSceneForSection(3, scenes, qstage, layoutSceneSwitcher, layoutSceneIndexes, layoutPaneIndexes);
             topMenu.switchSceneForSection(4, scenes, qstage, essentialSceneSwitcher, essentialSceneIndexes, essentialPaneIndexes);
             topMenu.switchSceneForSection(5, scenes, qstage, othersSceneSwitcher, othersSceneIndexes, othersPaneIndexes);
+            topMenu.switchSceneForSection(6, scenes, qstage, specialComponentsSceneSwitcher, specialComponentsIndexes, specialComponentsPaneIndexes);
             /**TREE MENU**/
 
             qMainMenu.setOnMouseClicked(event -> {
@@ -1941,6 +2078,18 @@ public class Main extends QApplication {
                             case "QScene":
                                 essentialSceneSwitcher.getNode().setCurrentPage(2);
                                 panes.get(value).setPosition("BOTTOM", essentialSceneSwitcher.getNode());
+                                topMenu.title.setContent(value);
+                                panes.get(value).setPosition("TOP", topMenu.qhBox);
+                                break;
+                            case "QPaginationSceneSwitcher":
+                                specialComponentsSceneSwitcher.getNode().setCurrentPage(0);
+                                panes.get(value).setPosition("BOTTOM", specialComponentsSceneSwitcher.getNode());
+                                topMenu.title.setContent(value);
+                                panes.get(value).setPosition("TOP", topMenu.qhBox);
+                                break;
+                            case "QComponentMenu":
+                                specialComponentsSceneSwitcher.getNode().setCurrentPage(1);
+                                panes.get(value).setPosition("BOTTOM", specialComponentsSceneSwitcher.getNode());
                                 topMenu.title.setContent(value);
                                 panes.get(value).setPosition("TOP", topMenu.qhBox);
                                 break;

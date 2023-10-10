@@ -2,12 +2,14 @@ package com.example.odbornaprax.application_test;
 
 import com.example.odbornaprax.framework.components.*;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -130,7 +132,7 @@ public class Main extends QApplication {
 
         /**BUTTON**/
         QButton buttonShow = new QButton();
-        buttonShow.setHeadline("Button");
+        buttonShow.setHeadline("QButton");
         buttonShow.setDimensions(50,50);
         buttonShow.setPrefSize(100,50);
 
@@ -138,11 +140,11 @@ public class Main extends QApplication {
         QText buttonAlert = new QText();
         QLabel pressButton = new QLabel();
         buttonAlert.font("Verdana");
-        pressButton.setTitle("Press Button!");
+        pressButton.setTitle("Press QButton!");
 
         /**BUTTON CODE TITLE**/
         QText buttonCodeTitle = new QText();
-        buttonCodeTitle.setContent("Usage of Button in JavaFX");
+        buttonCodeTitle.setContent("Usage of QButton in Q");
         buttonCodeTitle.setSize(1.5,1.5);
         buttonCodeTitle.font("Verdana");
 
@@ -158,7 +160,7 @@ public class Main extends QApplication {
         /**BUTTON IMAGE**/
         QImageView buttonImage = new QImageView();
         try {
-            FileInputStream input = new FileInputStream("src/main/java/Pictures/buttonLogo.png");
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/example-button.png");
             buttonImage.setNewImage(input);
         } catch (
                 FileNotFoundException e) {
@@ -168,7 +170,7 @@ public class Main extends QApplication {
 
         /**BUTTON IMAGE DEF**/
         QText buttonImageDef = new QText();
-        buttonImageDef.setContent("Definition of Image");
+        buttonImageDef.setContent("Definition of QButton");
         buttonImageDef.setSize(1.2,1.2);
 
         /**BUTTON IMAGE BOX**/
@@ -188,23 +190,305 @@ public class Main extends QApplication {
         buttonBackground.setPosition("LEFT",buttonTextBox);
         buttonBackground.setPosition("RIGHT",buttonImageBox);
 
-
         /**----------------------RADIOBUTTON SCENE--------------------**/
 
+        /**RADIOBUTTON TEXT**/
+        QText radioButtonText = new QText();
+        radioButtonText.setContent("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " );
+        radioButtonText.setWrapperWidth(225);
+        radioButtonText.setSize(1.5,1.5);
+
+        QVBox radioButtonTextBox = new QVBox();
+        radioButtonTextBox.addComponents(radioButtonText);
+        radioButtonTextBox.setMarginOfNode(radioButtonText,150,0,80,140);
+        radioButtonTextBox.setPrefWidthHeight(500,150);
+
+        /**RADIOBUTTON**/
+        QRadioButton radioButtonShow = new QRadioButton();
+        radioButtonShow.setTitle("QRadioButton");
+        radioButtonShow.setPrefSize(100,100);
+
+        /**RADIOBUTTON ALERT**/
+        QLabel pressRadioButton = new QLabel();
+        pressRadioButton.setTitle("Press QRadioButton!");
+
+        /**RADIOBUTTON CODE TITLE**/
+        QText radioButtonCodeTitle = new QText();
+        radioButtonCodeTitle.setContent("Usage of QRadioButton in Q");
+        radioButtonCodeTitle.setSize(1.5,1.5);
+        radioButtonCodeTitle.font("Verdana");
+
+        /**RADIOBUTTON CODE**/
+        QText radioButtonCode = new QText();
+        radioButtonCode.setContent("QRadioButton radioButtonShow = new QRadioButton();\n" +
+                "radioButtonShow.setTitle(\"RadioButton\");\n" +
+                "radioButtonShow.setPrefSize(100,100);\n");
+        radioButtonCode.setSize(1.3,1.3);
+        radioButtonCode.setWrapperWidth(250);
+
+
+        /**RADIOBUTTON IMAGE**/
+        QImageView radioButtonImage = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/example-radioButton.png");
+            radioButtonImage.setNewImage(input);
+        } catch (
+                FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        radioButtonImage.setDimensions(150,250);
+
+        /**RADIOBUTTON IMAGE DEF**/
+        QText radioButtonImageDef = new QText();
+        radioButtonImageDef.setContent("Definition of QRadioButton");
+        radioButtonImageDef.setSize(1.2,1.2);
+
+        /**RADIOBUTTON IMAGE BOX**/
+        QVBox radioButtonImageBox = new QVBox();
+        radioButtonImageBox.addComponents(radioButtonImage,radioButtonImageDef,radioButtonCodeTitle,radioButtonCode,pressRadioButton,radioButtonShow);
+        radioButtonImageBox.setPositionOfChildNodes("CENTER");
+        radioButtonImageBox.setMarginOfNode(radioButtonImage,0,0,20,25);
+        radioButtonImageBox.setMarginOfNode(radioButtonCodeTitle,100,0,30,0);
+        radioButtonImageBox.setMarginOfNode(pressRadioButton,40,0,0,0);
+        radioButtonImageBox.setMarginOfNode(radioButtonShow,0,0,0,0);
+        radioButtonImageBox.setPrefWidthHeight(500,20);
+
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
         QBorderPane radioButtonBackground = new QBorderPane();
+        radioButtonBackground.setPosition("LEFT",radioButtonTextBox);
+        radioButtonBackground.setPosition("RIGHT",radioButtonImageBox);
 
         /**----------------------CHECKBOX SCENE--------------------**/
 
-        QBorderPane checkboxBackground = new QBorderPane();
+        /**CHECKBOX TEXT**/
+        QText checkBoxText = new QText();
+        checkBoxText.setContent("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " );
+        checkBoxText.setWrapperWidth(225);
+        checkBoxText.setSize(1.5,1.5);
+
+        QVBox checkBoxTextBox = new QVBox();
+        checkBoxTextBox.addComponents(checkBoxText);
+        checkBoxTextBox.setMarginOfNode(checkBoxText,150,0,80,140);
+        checkBoxTextBox.setPrefWidthHeight(500,150);
+
+        /**CHECKBOX**/
+        QCheckBox checkBoxShow = new QCheckBox();
+        checkBoxShow.setTitle("QCheckBox");
+
+        /**CHECKBOX ALERT**/
+        QLabel pressCheckBox = new QLabel();
+        pressCheckBox.setTitle("Press QCheckBox!");
+
+        /**CHECKBOX CODE TITLE**/
+        QText checkBoxCodeTitle = new QText();
+        checkBoxCodeTitle.setContent("Usage of QCheckBox in Q");
+        checkBoxCodeTitle.setSize(1.5,1.5);
+        checkBoxCodeTitle.font("Verdana");
+
+        /**CHECKBOX CODE**/
+        QText checkBoxCode = new QText();
+        checkBoxCode.setContent("QCheckBox checkBoxShow = new QCheckBox();\n" +
+                "checkBoxShow.setTitle(\"QCheckBox\");\n" +
+                "checkBoxShow.setPrefSize(100,100);\n");
+        checkBoxCode.setSize(1.3,1.3);
+        checkBoxCode.setWrapperWidth(250);
+
+
+        /**CHECKBOX IMAGE**/
+        QImageView checkBoxImage = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/example-checkBox.png");
+            checkBoxImage.setNewImage(input);
+        } catch (
+                FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        checkBoxImage.setDimensions(150,250);
+
+        /**CHECKBOX IMAGE DEF**/
+        QText checkBoxImageDef = new QText();
+        checkBoxImageDef.setContent("Definition of QCheckBox");
+        checkBoxImageDef.setSize(1.2,1.2);
+
+        /**CHECKBOX IMAGE BOX**/
+        QVBox checkBoxImageBox = new QVBox();
+        checkBoxImageBox.addComponents(checkBoxImage,checkBoxImageDef,checkBoxCodeTitle,checkBoxCode,pressCheckBox,checkBoxShow);
+        checkBoxImageBox.setPositionOfChildNodes("CENTER");
+        checkBoxImageBox.setMarginOfNode(checkBoxImage,0,0,20,25);
+        checkBoxImageBox.setMarginOfNode(checkBoxCodeTitle,100,0,30,0);
+        checkBoxImageBox.setMarginOfNode(pressCheckBox,40,0,20,0);
+        checkBoxImageBox.setMarginOfNode(checkBoxShow,0,0,0,0);
+        checkBoxImageBox.setPrefWidthHeight(500,20);
+
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane checkBoxBackground = new QBorderPane();
+        checkBoxBackground.setPosition("LEFT",checkBoxTextBox);
+        checkBoxBackground.setPosition("RIGHT",checkBoxImageBox);
+
 
         /**----------------------COMBOBOX SCENE--------------------**/
 
-        QBorderPane comboboxBackground = new QBorderPane();
+        /**COMBOBOX TEXT**/
+        QText comboBoxText = new QText();
+        comboBoxText.setContent("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " );
+        comboBoxText.setWrapperWidth(225);
+        comboBoxText.setSize(1.5,1.5);
+
+        QVBox comboBoxTextBox = new QVBox();
+        comboBoxTextBox.addComponents(comboBoxText);
+        comboBoxTextBox.setMarginOfNode(comboBoxText,150,0,80,140);
+        comboBoxTextBox.setPrefWidthHeight(500,150);
+
+        /**COMBOBOX**/
+        QComboBox comboBoxShow = new QComboBox();
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Example 1");
+        list.add("Example 2");
+        list.add("Example 3");
+        comboBoxShow.addList(list);
+
+        /**COMBOBOX ALERT**/
+        QLabel pressComboBox = new QLabel();
+        pressComboBox.setTitle("Press QComboBox!");
+
+        /**COMBOBOX CODE TITLE**/
+        QText comboBoxCodeTitle = new QText();
+        comboBoxCodeTitle.setContent("Usage of QComboBox in Q");
+        comboBoxCodeTitle.setSize(1.5,1.5);
+        comboBoxCodeTitle.font("Verdana");
+
+        /**COMBOBOX CODE**/
+        QText comboBoxCode = new QText();
+        comboBoxCode.setContent("QComboBox comboBoxShow = new QComboBox();\n" +
+                "ArrayList<String> list = new ArrayList<>();\n" +
+                "list.add(\"Example 1\");\n" +
+                "list.add(\"Example 2\");\n" +
+                "list.add(\"Example 3\");\n" +
+                "comboBoxShow.addList(list);\n");
+        comboBoxCode.setSize(1.3,1.3);
+        comboBoxCode.setWrapperWidth(250);
+
+
+        /**COMBOBOX IMAGE**/
+        QImageView comboBoxImage = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/example-comboBox.png");
+            comboBoxImage.setNewImage(input);
+        } catch (
+                FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        comboBoxImage.setDimensions(150,250);
+
+        /**COMBOBOX IMAGE DEF**/
+        QText comboBoxImageDef = new QText();
+        comboBoxImageDef.setContent("Definition of QComboBox");
+        comboBoxImageDef.setSize(1.2,1.2);
+
+        /**COMBOBOX IMAGE BOX**/
+        QVBox comboBoxImageBox = new QVBox();
+        comboBoxImageBox.addComponents(comboBoxImage,comboBoxImageDef,comboBoxCodeTitle,comboBoxCode,pressComboBox,comboBoxShow);
+        comboBoxImageBox.setPositionOfChildNodes("CENTER");
+        comboBoxImageBox.setMarginOfNode(comboBoxImage,0,0,20,25);
+        comboBoxImageBox.setMarginOfNode(comboBoxCodeTitle,100,0,30,0);
+        comboBoxImageBox.setMarginOfNode(pressComboBox,40,0,20,0);
+        comboBoxImageBox.setMarginOfNode(comboBoxShow,0,0,0,0);
+        comboBoxImageBox.setPrefWidthHeight(500,20);
+
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane comboBoxBackground = new QBorderPane();
+        comboBoxBackground.setPosition("LEFT",comboBoxTextBox);
+        comboBoxBackground.setPosition("RIGHT",comboBoxImageBox);
+
+
 
         /**----------------------TOGGLEGROUP SCENE--------------------**/
 
-        /** TOGGLEGROUP BACKGROUND WITH COMPONENTS */
+        /**TOGGLEGROUP TEXT**/
+        QText toggleGroupText = new QText();
+        toggleGroupText.setContent("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " );
+        toggleGroupText.setWrapperWidth(225);
+        toggleGroupText.setSize(1.5,1.5);
+
+        QVBox toggleGroupTextBox = new QVBox();
+        toggleGroupTextBox.addComponents(toggleGroupText);
+        toggleGroupTextBox.setMarginOfNode(toggleGroupText,150,0,80,140);
+        toggleGroupTextBox.setPrefWidthHeight(500,150);
+
+        /**TOGGLEGROUP**/
+        QToggleGroup toggleGroupShow = new QToggleGroup();
+        QRadioButton example1 = new QRadioButton();
+        QRadioButton example2 = new QRadioButton();
+        QRadioButton example3 = new QRadioButton();
+        example1.setTitle("Example 1");
+        example2.setTitle("Example 2");
+        example3.setTitle("Example 3");
+        toggleGroupShow.addToggles(example1,example2,example3);
+
+        /**TOGGLEGROUP ALERT**/
+        QLabel pressToggleGroup = new QLabel();
+        pressToggleGroup.setTitle("Press QToggleGroup!");
+
+        /**TOGGLEGROUP CODE TITLE**/
+        QText toggleGroupCodeTitle = new QText();
+        toggleGroupCodeTitle.setContent("Usage of QToggleGroup in Q");
+        toggleGroupCodeTitle.setSize(1.5,1.5);
+        toggleGroupCodeTitle.font("Verdana");
+
+        /**TOGGLEGROUP CODE**/
+        QText toggleGroupCode = new QText();
+        toggleGroupCode.setContent("QToggleGroup toggleGroupShow = new QToggleGroup();\n" +
+                "QRadioButton example1 = new QRadioButton();\n" +
+                "QRadioButton example2 = new QRadioButton();\n" +
+                "QRadioButton example3 = new QRadioButton();\n" +
+                "example1.setTitle(\"Example 1\");\n" +
+                "example2.setTitle(\"Example 2\");\n" +
+                "example3.setTitle(\"Example 3\");\n" +
+                "toggleGroupShow.addToggles(example1,example2,example3);\n");
+        toggleGroupCode.setSize(1.3,1.3);
+        toggleGroupCode.setWrapperWidth(250);
+
+
+        /**TOGGLEGROUP IMAGE**/
+        QImageView toggleGroupImage = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/example-toggleGroup.png");
+            toggleGroupImage.setNewImage(input);
+        } catch (
+                FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        toggleGroupImage.setDimensions(150,250);
+
+        /**TOGGLEGROUP IMAGE DEF**/
+        QText toggleGroupImageDef = new QText();
+        toggleGroupImageDef.setContent("Definition of QToggleGroup");
+        toggleGroupImageDef.setSize(1.2,1.2);
+
+        /**TOGGLEGROUP IMAGE BOX**/
+        QVBox toggleGroupImageBox = new QVBox();
+        toggleGroupImageBox.addComponents(toggleGroupImage,toggleGroupImageDef,toggleGroupCodeTitle,toggleGroupCode,pressToggleGroup,example1,example2,example3);
+        toggleGroupImageBox.setPositionOfChildNodes("CENTER");
+        toggleGroupImageBox.setMarginOfNode(toggleGroupImage,0,0,10,25);
+        toggleGroupImageBox.setMarginOfNode(toggleGroupCodeTitle,50,0,50,0);
+        toggleGroupImageBox.setMarginOfNode(pressToggleGroup,40,0,10,0);
+        toggleGroupImageBox.setMarginOfNode(example1,20,0,0,0);
+        toggleGroupImageBox.setPrefWidthHeight(500,20);
+
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
         QBorderPane toggleGroupBackground = new QBorderPane();
+        toggleGroupBackground.setPosition("LEFT",toggleGroupTextBox);
+        toggleGroupBackground.setPosition("RIGHT",toggleGroupImageBox);
+
+
 
         /**---------------------------------------MENUS SECTION-------------------------------------------------------**/
 
@@ -562,10 +846,10 @@ public class Main extends QApplication {
         QScene radioButtonScene = new QScene(radioButtonBackground, 1000,800);
 
         /** CHECKBOX SCENE */
-        QScene checkboxScene = new QScene(checkboxBackground,1000,800);
+        QScene checkboxScene = new QScene(checkBoxBackground,1000,800);
 
         /** COMBOBOX SCENE */
-        QScene comboboxScene = new QScene(comboboxBackground,1000,800);
+        QScene comboboxScene = new QScene(comboBoxBackground,1000,800);
 
         /** TOGGLEGROUP SCENE */
         QScene toggleGroupScene = new QScene(toggleGroupBackground,1000,800);
@@ -604,8 +888,8 @@ public class Main extends QApplication {
         Map<String, QBorderPane> panes = new HashMap<>();
         panes.put("QButton", buttonBackground);
         panes.put("QRadioButton", radioButtonBackground);
-        panes.put("QCheckBox", checkboxBackground);
-        panes.put("QComboBox", comboboxBackground);
+        panes.put("QCheckBox", checkBoxBackground);
+        panes.put("QComboBox", comboBoxBackground);
         panes.put("QToggleGroup", toggleGroupBackground);
         panes.put("QMenu", menuBackground);
         panes.put("QMenuBar", menuBarBackground);
@@ -613,7 +897,7 @@ public class Main extends QApplication {
         panes.put("QMenuItem", menuItemBackground);
 
             /** PANE ARRAY */
-        QBorderPane[] paneIndexes = {buttonBackground, radioButtonBackground, checkboxBackground, comboboxBackground, toggleGroupBackground, menuBackground};
+        QBorderPane[] paneIndexes = {buttonBackground, radioButtonBackground, checkBoxBackground, comboBoxBackground, toggleGroupBackground, menuBackground};
         QBorderPane[] menusPaneIndexes = { menuBackground, menuBarBackground, menuButtonBackground, menuItemBackground };
 
             /** TITLE MAP */
@@ -675,6 +959,12 @@ public class Main extends QApplication {
                             break;
                         case "QComboBox":
                             buttonsAndBoxesSceneSwitcher.getNode().setCurrentPage(3);
+                            panes.get(value).setPosition("BOTTOM", buttonsAndBoxesSceneSwitcher.getNode());
+                            topMenu.title.setContent(value);
+                            panes.get(value).setPosition("TOP",topMenu.qhBox);
+                            break;
+                        case "QToggleGroup":
+                            buttonsAndBoxesSceneSwitcher.getNode().setCurrentPage(4);
                             panes.get(value).setPosition("BOTTOM", buttonsAndBoxesSceneSwitcher.getNode());
                             topMenu.title.setContent(value);
                             panes.get(value).setPosition("TOP",topMenu.qhBox);

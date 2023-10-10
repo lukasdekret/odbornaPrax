@@ -1,8 +1,11 @@
 package com.example.odbornaprax.framework.components;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.RadioButton;
 
 public class QRadioButton extends RadioButton {
+    private boolean pom = false;
     public QRadioButton() {
         super();
     }
@@ -13,4 +16,5 @@ public class QRadioButton extends RadioButton {
         return super.isSelected();
     }
     //TODO: QToggleGroup implementation
+
 }

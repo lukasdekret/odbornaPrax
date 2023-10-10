@@ -118,7 +118,7 @@ public class Test {
     // qstage.setParent(qhBox);
 
     // Scene
-    // QScene intro = new QScene(qhBox, 800, 800);
+    // QScene intro = new QScene(-node-, 800, 800);
     // qstage.setScene(intro);
     // qstage.show();
 

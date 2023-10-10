@@ -15,7 +15,7 @@ public class QComponentMenu {
        mainPage.setHeadline("Main Page");
        buttonsAndBoxes.QMenu("Buttons and Boxes");
        try {
-           FileInputStream input = new FileInputStream("C:\\Users\\Erik\\Desktop\\Projects-Prax\\odbornaPrax\\src\\main\\java\\Pictures\\logo.png");
+           FileInputStream input = new FileInputStream("src/main/java/Pictures/logo.png");
            mainPage.setImage(input);
        } catch (
                FileNotFoundException e) {
@@ -34,7 +34,6 @@ public class QComponentMenu {
        menuQBox.setPositionOfChildNodes("LEFT");
 
    }
-
     public void sceneSwitcher(Map<String,QScene> scenes, QStage qstage, QPaginationSceneSwitcher sceneSwitcher, QScene[] sceneIndexes, QBorderPane[] paneIndexes,QMenu menu, QButton mainPage,QHBox menuQBox,QText title){
 
             mainPage.setOnAction(new EventHandler<ActionEvent>() {

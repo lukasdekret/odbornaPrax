@@ -6,8 +6,14 @@ import javafx.scene.control.Menu;
 
 public class QMenu extends Menu {
 
+    private boolean pom = false;
+
     public QMenu() {
         super();
+    }
+
+    public QMenu(String text) {
+        super(text);
     }
 
     public void QMenu(String text) {
@@ -22,5 +28,21 @@ public class QMenu extends Menu {
         super.getItems().add(menuItem);
     }
 
+    /* Not working? */
+//    public void setAction(QText text) {
+//        super.setOnAction(new EventHandler<>() {
+//            @Override
+//            public void handle(ActionEvent actionEvent) {
+//                if (pom == false) {
+//                    text.setContent("Menu is pressed!");
+//                    pom = true;
+//                } else {
+//                    text.setContent("");
+//                    pom = false;
+//                }
+//            }
+//
+//        });
+//    }
 
 }

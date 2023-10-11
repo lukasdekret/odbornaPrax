@@ -2108,6 +2108,130 @@ public class Main extends QApplication {
         qComponentMenuBackground.setPosition("LEFT",qComponentMenuBox);
         qComponentMenuBackground.setPosition("RIGHT",qComponentMenuImageBox);
 
+        /**----------------------QARTICLE SCENE--------------------**/
+
+        /** QARTICLE TEXT **/
+        QText qArticleText = new QText();
+        qArticleText.setContent(
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " 
+        );
+        qArticleText.setWrapperWidth(225);
+        qArticleText.setSize(1.5,1.5);
+
+        QVBox qArticleBox = new QVBox();
+        qArticleBox.addComponents(qArticleText);
+        qArticleBox.setMarginOfNode(qArticleText,150,0,80,140);
+        qArticleBox.setPrefWidthHeight(500,150);
+
+        /** QARTICLE */
+        String[] qArticleShowParagraphs = new String[]{
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam arcu magna, fringilla imperdiet accumsan quis, aliquam vel purus. Curabitur mauris mauris, tempor aliquam lectus et, euismod porta velit.",
+            "Aliquam turpis felis, dignissim et sem nec, laoreet semper quam. Integer blandit vestibulum ante non ornare. Sed purus nibh, luctus ac velit sed, aliquam lobortis sem. Cras felis lorem, fringilla sed bibendum gravida, dictum ut libero. Donec sollicitudin vestibulum ultrices. Phasellus malesuada lorem ut pharetra bibendum."
+        };
+        QArticle qArticleShow = new QArticle("Header", qArticleShowParagraphs);
+        qArticleShow.setPrefWidthHeight(400, 600);
+
+        /** QARTICLE CODE TITLE **/
+        QText qArticleTitle = new QText();
+        qArticleTitle.setContent("Usage of QArticle in Q");
+        qArticleTitle.setSize(1.5,1.5);
+        qArticleTitle.font("Verdana");
+
+        /** QARTICLE CODE **/
+        QText qArticleCode = new QText();
+        qArticleCode.setContent(
+            "String[] qArticleShowParagraphs = new String[]{\n" +
+            "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam arcu magna, ...\",\n" +
+            "\"Aliquam turpis felis, dignissim et sem nec, laoreet semper quam. Integer blandit vestibulum ante non ornare. Sed purus nibh, ...\"\n" +
+            "};\n" +
+            "QArticle qArticleShow = new QArticle(\"Header\", qArticleShowParagraphs);\n" +
+            "qArticleShow.setPrefWidthHeight(400, 600);"
+        );
+        qArticleCode.setSize(1,1);
+        qArticleCode.setWrapperWidth(400);
+
+        /** QARTICLE IMAGE BOX**/
+        QVBox qArticleImageBox = new QVBox();
+        qArticleImageBox.addComponents(qArticleTitle,qArticleCode, qArticleShow);
+        qArticleImageBox.setPositionOfChildNodes("CENTER");
+        qArticleImageBox.setMarginOfNode(qArticleTitle,100,0,30,0);
+        qArticleImageBox.setMarginOfNode(qArticleCode, 0,0,20,0);
+        qArticleImageBox.setMarginOfNode(qArticleShow, 50, 0, 0, 0);
+        qArticleImageBox.setPrefWidthHeight(500,20);
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane qArticleBackground = new QBorderPane();
+        qArticleBackground.setPosition("LEFT", qArticleBox);
+        qArticleBackground.setPosition("RIGHT", qArticleImageBox);
+
+        /**----------------------QIMAGETEXTCAPTION SCENE--------------------**/
+
+        /** QIMAGETEXTCAPTION TEXT **/
+        QText qImageTextCaptionText = new QText();
+        qImageTextCaptionText.setContent(
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " 
+        );
+        qImageTextCaptionText.setWrapperWidth(225);
+        qImageTextCaptionText.setSize(1.5,1.5);
+
+        QVBox qImageTextCaptionBox = new QVBox();
+        qImageTextCaptionBox.addComponents(qImageTextCaptionText);
+        qImageTextCaptionBox.setMarginOfNode(qImageTextCaptionText,150,0,80,140);
+        qImageTextCaptionBox.setPrefWidthHeight(500,150);
+
+        /** QIMAGETEXTCAPTION */
+        QImageTextCaption qImageTextCaptionShow = new QImageTextCaption();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/scrollpane-image.jpg");
+            qImageTextCaptionShow.setImage(input);
+        } catch(FileNotFoundException exc) {
+            throw new RuntimeException(exc);
+        }
+        qImageTextCaptionShow.setCaption("Caption text");
+        qImageTextCaptionShow.setContainerSize(400, 600);
+        qImageTextCaptionShow.setImageDimensions(166, 260);
+        qImageTextCaptionShow.setPrefWidthHeight(400, 600);
+
+        /** QIMAGETEXTCAPTION CODE TITLE **/
+        QText qImageTextCaptionTitle = new QText();
+        qImageTextCaptionTitle.setContent("Usage of QImageTextCaption in Q");
+        qImageTextCaptionTitle.setSize(1.5,1.5);
+        qImageTextCaptionTitle.font("Verdana");
+
+        /** QIMAGETEXTCAPTION CODE **/
+        QText qImageTextCaptionCode = new QText();
+        qImageTextCaptionCode.setContent(
+            "QImageTextCaption qImageTextCaptionShow = new QImageTextCaption();\n" +
+            "try {\n" +
+            "    FileInputStream input = new FileInputStream(\"src/main/java/Pictures/scrollpane-image.jpg\");\n" +
+            "    qImageTextCaptionShow.setImage(input);\n" +
+            "} catch(FileNotFoundException exc) {\n" +
+            "    throw new RuntimeException(exc);\n" +
+            "}\n" +
+            "qImageTextCaptionShow.setCaption(\"Caption text\");\n" +
+            "qImageTextCaptionShow.setContainerSize(400, 600);\n" +
+            "qImageTextCaptionShow.setImageDimensions(83, 130);\n" +
+            "qImageTextCaptionShow.setPrefWidthHeight(400, 600);"
+        );
+        qImageTextCaptionCode.setSize(1,1);
+        qImageTextCaptionCode.setWrapperWidth(400);
+
+        /** QIMAGETEXTCAPTION IMAGE BOX**/
+        QVBox qImageTextCaptionImageBox = new QVBox();
+        qImageTextCaptionImageBox.addComponents(qImageTextCaptionTitle,qImageTextCaptionCode, qImageTextCaptionShow);
+        qImageTextCaptionImageBox.setPositionOfChildNodes("CENTER");
+        qImageTextCaptionImageBox.setMarginOfNode(qImageTextCaptionTitle,100,0,30,0);
+        qImageTextCaptionImageBox.setMarginOfNode(qImageTextCaptionCode, 0,0,20,0);
+        qImageTextCaptionImageBox.setMarginOfNode(qImageTextCaptionShow, 10, 0, 0, 0);
+        qImageTextCaptionImageBox.setPrefWidthHeight(500,20);
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane qImageTextCaptionBackground = new QBorderPane();
+        qImageTextCaptionBackground.setPosition("LEFT", qImageTextCaptionBox);
+        qImageTextCaptionBackground.setPosition("RIGHT", qImageTextCaptionImageBox);
+
 
 
         /**------------------------------------SCENE MANAGEMENT AND DYNAMIC COMPONENT HANDLING--------------------------------------**/
@@ -2259,6 +2383,12 @@ public class Main extends QApplication {
             /** QGROUP SCENE **/
             QScene qGroupScene = new QScene(qGroupBackground, 1000, 800);
 
+            /** QARTCILE SCENE */
+            QScene qArticleScene = new QScene(qArticleBackground, 1000, 800);
+
+            /** QIMAGETEXTCAPTION SCENE */
+            QScene qImageTextCaptionScene = new QScene(qImageTextCaptionBackground, 1000, 800);
+
             /** QPAGINATION SCENE SWITCHER SCENE **/
             QScene qPaginationSceneSwitcherScene = new QScene(qPaginationSceneSwitcherBackground, 1000, 800);
 
@@ -2298,6 +2428,8 @@ public class Main extends QApplication {
             scenes.put("QScene", qSceneScene);
             scenes.put("QPaginationSceneSwitcher", qPaginationSceneSwitcherScene);
             scenes.put("QComponentMenu", qComponentMenuScene);
+            scenes.put("QArticle", qArticleScene);
+            scenes.put("QImageTextCaption", qImageTextCaptionScene);
 
 
             /** SCENE ARRAY */
@@ -2307,7 +2439,7 @@ public class Main extends QApplication {
             QScene[] othersSceneIndexes = {progressBarScene, progressIndicatorScene, paginationScene};
             QScene[] layoutSceneIndexes = {qvBoxScene, qhBoxScene, qScrollPaneScene, qBorderPaneScene, qSeparatorScene, qGroupScene};
             QScene[] essentialSceneIndexes = { qApplicationScene, qStageScene, qSceneScene };
-            QScene[] specialComponentsIndexes = { qPaginationSceneSwitcherScene,qComponentMenuScene };
+            QScene[] specialComponentsIndexes = { qPaginationSceneSwitcherScene, qComponentMenuScene, qArticleScene, qImageTextCaptionScene };
 
             /** PANE MAP */
             Map<String, QBorderPane> panes = new HashMap<>();
@@ -2340,6 +2472,8 @@ public class Main extends QApplication {
             panes.put("QScene", qSceneBackground);
             panes.put("QPaginationSceneSwitcher", qPaginationSceneSwitcherBackground);
             panes.put("QComponentMenu", qComponentMenuBackground);
+            panes.put("QArticle", qArticleBackground);
+            panes.put("QImageTextCaption", qImageTextCaptionBackground);
 
 
             /** PANE ARRAY */
@@ -2349,7 +2483,7 @@ public class Main extends QApplication {
             QBorderPane[] othersPaneIndexes = {progressBarBackground, progressIndicatorBackground, paginationBackground};
             QBorderPane[] layoutPaneIndexes = {qvBoxBackground, qhBoxBackground, qScrollPaneBackground, qBorderPaneBackground, qSeparatorBackground, qGroupBackground};
             QBorderPane[] essentialPaneIndexes = { qApplicationBackground, qStageBackground, qSceneBackground };
-            QBorderPane[] specialComponentsPaneIndexes = { qPaginationSceneSwitcherBackground,qComponentMenuBackground };
+            QBorderPane[] specialComponentsPaneIndexes = { qPaginationSceneSwitcherBackground, qComponentMenuBackground, qArticleBackground, qImageTextCaptionBackground };
 
             /** TITLE MAP */
             Map<Integer, String> titles = new HashMap<>();
@@ -2608,6 +2742,18 @@ public class Main extends QApplication {
                                 break;
                             case "QComponentMenu":
                                 specialComponentsSceneSwitcher.getNode().setCurrentPage(1);
+                                panes.get(value).setPosition("BOTTOM", specialComponentsSceneSwitcher.getNode());
+                                topMenu.title.setContent(value);
+                                panes.get(value).setPosition("TOP", topMenu.qhBox);
+                                break;
+                            case "QArticle":
+                                specialComponentsSceneSwitcher.getNode().setCurrentPage(2);
+                                panes.get(value).setPosition("BOTTOM", specialComponentsSceneSwitcher.getNode());
+                                topMenu.title.setContent(value);
+                                panes.get(value).setPosition("TOP", topMenu.qhBox);
+                                break;
+                            case "QImageTextCaption":
+                                specialComponentsSceneSwitcher.getNode().setCurrentPage(3);
                                 panes.get(value).setPosition("BOTTOM", specialComponentsSceneSwitcher.getNode());
                                 topMenu.title.setContent(value);
                                 panes.get(value).setPosition("TOP", topMenu.qhBox);

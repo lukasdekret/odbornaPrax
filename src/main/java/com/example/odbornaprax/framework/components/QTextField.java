@@ -13,6 +13,9 @@ public class QTextField extends TextField {
         super.setPrefHeight(h);
         super.setPrefWidth(w);
     }
+    public void setMaxSize(int h, int w) {
+        super.setMaxSize(w, h);
+    }
     public void promptText(String s){
         super.setPromptText(s);
         super.setFocusTraversable(false);

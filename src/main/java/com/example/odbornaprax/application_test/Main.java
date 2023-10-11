@@ -44,6 +44,16 @@ public class Main extends QApplication {
         QTreeItem buttonsRootItem = new QTreeItem("Buttons and Boxes");
         buttonsRootItem.addItems(qButton, qRadioButton, qCheckBox, qComboBox, qToggleGroup);
         rootItem.addItems(buttonsRootItem);
+        /** Section: Text and Images */
+        QTreeItem qText = new QTreeItem("QText");
+        QTreeItem qTextArea = new QTreeItem("QTextArea");
+        QTreeItem qLabel = new QTreeItem("QLabel");
+        QTreeItem qTextField = new QTreeItem("QTextField");
+        QTreeItem qHyperlink = new QTreeItem("QHyperlink");
+        QTreeItem qImageView = new QTreeItem("QImageView");
+        QTreeItem textRootItem = new QTreeItem("Text and Images");
+        textRootItem.addItems(qText, qTextArea, qLabel, qTextField, qHyperlink, qImageView);
+        rootItem.addItems(textRootItem);
         /** Section: Menus */
         QTreeItem qMenu = new QTreeItem("QMenu");
         QTreeItem qMenuBar = new QTreeItem("QMenuBar");
@@ -823,6 +833,435 @@ public class Main extends QApplication {
         menuItemBackground.setPosition("RIGHT", menuItemImageBox);
 
 
+        /**--------------------------------------- TEXT AND IMAGES SECTION-------------------------------------------------------**/
+
+        /**----------------------TEXT SCENE--------------------**/
+
+        /** TEXT FOR TEXT **/
+        QText text = new QText();
+        text.setContent(
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ")
+        ;
+        text.setWrapperWidth(225);
+        text.setSize(1.5, 1.5);
+
+        QVBox textBox = new QVBox();
+        textBox.addComponents(text);
+        textBox.setMarginOfNode(text, 150, 0, 80, 140);
+        textBox.setPrefWidthHeight(500, 150);
+
+        /** TEXT **/
+        QText textShow = new QText();
+        textShow.setContent("Example Text");
+        textShow.setSize(2.0, 2.0);
+        textShow.font("System");
+
+
+        /** TEXT CODE TITLE **/
+        QText textCodeTitle = new QText();
+        textCodeTitle.setContent("Usage of Text in JavaFX");
+        textCodeTitle.setSize(1.5, 1.5);
+        textCodeTitle.font("Verdana");
+
+        /** TEXT CODE **/
+        QText textCode = new QText();
+        textCode.setContent(
+            "QText textShow = new QText();\n" + 
+            "textShow.setContent(\"Example Text\");" +
+            "textShow.setSize(2.0, 2.0);\n" +
+            "textShow.font(\"System\");"
+        );
+        textCode.setSize(1.2, 1.2);
+        textCode.setWrapperWidth(350);
+
+        /** TEXT IMAGE **/
+        QImageView textImage = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/example_text.jpg");
+            textImage.setNewImage(input);
+        } catch (
+                FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        textImage.setDimensions(169, 300);
+
+        /** TEXT IMAGE DEF**/
+        QText textImageDef = new QText();
+        textImageDef.setContent("Definition of Text");
+        textImageDef.setSize(1.2, 1.2);
+
+        /** TEXT IMAGE BOX**/
+        QVBox textImageBox = new QVBox();
+        textImageBox.addComponents(textImage, textImageDef, textCodeTitle, textCode, textShow);
+        textImageBox.setPositionOfChildNodes("CENTER");
+        textImageBox.setMarginOfNode(textImage, 0, 0, 20, 25);
+        textImageBox.setMarginOfNode(textCodeTitle, 100, 0, 30, 0);
+        textImageBox.setMarginOfNode(textCode, 20, 0, 20, 0);
+        textImageBox.setMarginOfNode(textShow, 20, 0, 0, 0);
+        textImageBox.setPrefWidthHeight(500, 20);
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane textBackground = new QBorderPane();
+        textBackground.setPosition("LEFT", textBox);
+        textBackground.setPosition("RIGHT", textImageBox);
+        
+        /** ----------------------TEXTAREA SCENE-------------------- **/
+
+        /** TEXTAREA TEXT **/
+        QText textArea = new QText();
+        textArea.setContent(
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. "
+        );
+        textArea.setWrapperWidth(225);
+        textArea.setSize(1.5, 1.5);
+
+        QVBox textAreaBox = new QVBox();
+        textAreaBox.addComponents(textArea);
+        textAreaBox.setMarginOfNode(textArea, 150, 0, 80, 140);
+        textAreaBox.setPrefWidthHeight(500, 150);
+
+        /** TEXTAREA **/
+        QTextArea textAreaShow = new QTextArea();
+        textAreaShow.setTextValue("Example text");
+        textAreaShow.setMaxSize(50, 200);
+
+        /** TEXTAREA CODE TITLE **/
+        QText textAreaCodeTitle = new QText();
+        textAreaCodeTitle.setContent("Usage of TextArea in JavaFX");
+        textAreaCodeTitle.setSize(1.5, 1.5);
+        textAreaCodeTitle.font("Verdana");
+
+        /** TEXTAREA CODE **/
+        QText textAreaCode = new QText();
+        textAreaCode.setContent(
+            "QTextArea textAreaShow = new QTextArea();\n" +
+            "textAreaShow.setTextValue(\"Example text\");\n" +
+            "textAreaShow.setMaxSize(50, 200);"
+        );
+        textAreaCode.setSize(1.2, 1.2);
+        textAreaCode.setWrapperWidth(350);
+
+        /** TEXTAREA ALERT -- Zbytocne pre tento komponent, to iste ako u QMenu **/
+
+        /** TEXTAREA IMAGE **/
+        QImageView textAreaImage = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/example_textarea.png");
+            textAreaImage.setNewImage(input);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        textAreaImage.setDimensions(158, 215);
+
+        /** TEXTAREA IMAGE DEF **/
+        QText textAreaImageDef = new QText();
+        textAreaImageDef.setContent("Definition of TextArea");
+        textAreaImageDef.setSize(1.2, 1.2);
+
+        /** TEXTAREA IMAGE BOX **/
+        QVBox textAreaImageBox = new QVBox();
+        textAreaImageBox.addComponents(textAreaImage, textAreaImageDef, textAreaCodeTitle, textAreaCode, textAreaShow);
+        textAreaImageBox.setPositionOfChildNodes("CENTER");
+        textAreaImageBox.setMarginOfNode(textAreaImage, 0, 0, 20, 25);
+        textAreaImageBox.setMarginOfNode(textAreaCodeTitle, 100, 0, 30, 0);
+        textAreaImageBox.setMarginOfNode(textAreaCode, 20, 0, 20, 0);
+        textAreaImageBox.setMarginOfNode(textAreaShow, 20, 0, 0, 0);
+        textAreaImageBox.setPrefWidthHeight(500, 20);
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane textAreaBackground = new QBorderPane();
+        textAreaBackground.setPosition("LEFT", textAreaBox);
+        textAreaBackground.setPosition("RIGHT", textAreaImageBox);
+
+        /** ----------------------LABEL SCENE-------------------- **/
+
+        /** LABEL TEXT **/
+        QText label = new QText();
+        label.setContent(
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. "
+        );
+        label.setWrapperWidth(225);
+        label.setSize(1.5, 1.5);
+
+        QVBox labelBox = new QVBox();
+        labelBox.addComponents(label);
+        labelBox.setMarginOfNode(label, 150, 0, 80, 140);
+        labelBox.setPrefWidthHeight(500, 150);
+
+        /** LABEL **/
+        QLabel labelShow = new QLabel();
+        labelShow.setTitle("Example text");
+        labelShow.font("Verdana");
+
+        /** LABEL CODE TITLE **/
+        QText labelCodeTitle = new QText();
+        labelCodeTitle.setContent("Usage of Label in JavaFX");
+        labelCodeTitle.setSize(1.5, 1.5);
+        labelCodeTitle.font("Verdana");
+
+        /** LABEL CODE **/
+        QText labelCode = new QText();
+        labelCode.setContent(
+            "QLabel labelShow = new QLabel();\n" + 
+            "labelShow.setTitle(\"Example text\");\n" + 
+            "labelShow.font(\"Verdana\");"
+        );
+        labelCode.setSize(1.2, 1.2);
+        labelCode.setWrapperWidth(350);
+
+        /** LABEL ALERT -- Zbytocne pre tento komponent, to iste ako u QMenu **/
+
+        /** LABEL IMAGE **/
+        QImageView labelImage = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/example_label.png");
+            labelImage.setNewImage(input);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        labelImage.setDimensions(232, 201);
+
+        /** LABEL IMAGE DEF **/
+        QText labelImageDef = new QText();
+        labelImageDef.setContent("Definition of Label");
+        labelImageDef.setSize(1.2, 1.2);
+
+        /** LABEL IMAGE BOX **/
+        QVBox labelImageBox = new QVBox();
+        labelImageBox.addComponents(labelImage, labelImageDef, labelCodeTitle, labelCode, labelShow);
+        labelImageBox.setPositionOfChildNodes("CENTER");
+        labelImageBox.setMarginOfNode(labelImage, 0, 0, 20, 25);
+        labelImageBox.setMarginOfNode(labelCodeTitle, 100, 0, 30, 0);
+        labelImageBox.setMarginOfNode(labelCode, 20, 0, 20, 0);
+        labelImageBox.setMarginOfNode(labelShow, 20, 0, 0, 0);
+        labelImageBox.setPrefWidthHeight(500, 20);
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane labelBackground = new QBorderPane();
+        labelBackground.setPosition("LEFT", labelBox);
+        labelBackground.setPosition("RIGHT", labelImageBox);
+
+        /** ----------------------TEXTFIELD SCENE-------------------- **/
+
+        /** TEXTFIELD TEXT **/
+        QText textField = new QText();
+        textField.setContent(
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. "
+        );
+        textField.setWrapperWidth(225);
+        textField.setSize(1.5, 1.5);
+
+        QVBox textFieldBox = new QVBox();
+        textFieldBox.addComponents(textField);
+        textFieldBox.setMarginOfNode(textField, 150, 0, 80, 140);
+        textFieldBox.setPrefWidthHeight(500, 150);
+
+        /** TEXTFIELD **/
+        QTextField textFieldShow = new QTextField();
+        textFieldShow.promptText("Placeholder text...");
+        textFieldShow.setMaxSize(50,150);
+
+        /** TEXTFIELD CODE TITLE **/
+        QText textFieldCodeTitle = new QText();
+        textFieldCodeTitle.setContent("Usage of TextField in JavaFX");
+        textFieldCodeTitle.setSize(1.5, 1.5);
+        textFieldCodeTitle.font("Verdana");
+
+        /** TEXTFIELD CODE **/
+        QText textFieldCode = new QText();
+        textFieldCode.setContent(
+            "QTextField textFieldShow = new QTextField();\n" +
+            "textFieldShow.promptText(\"Placeholder text...\");\n" +
+            "textFieldShow.setDimensions(50, 150);\n"
+        );
+        textFieldCode.setSize(1.2, 1.2);
+        textFieldCode.setWrapperWidth(350);
+
+        /** TEXTFIELD ALERT -- Zbytocne pre tento komponent, to iste ako u QMenu **/
+
+        /** TEXTFIELD IMAGE **/
+        QImageView textFieldImage = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/example_textfield.png");
+            textFieldImage.setNewImage(input);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        textFieldImage.setDimensions(138, 216);
+
+        /** TEXTFIELD IMAGE DEF **/
+        QText textFieldImageDef = new QText();
+        textFieldImageDef.setContent("Definition of TextField");
+        textFieldImageDef.setSize(1.2, 1.2);
+
+        /** TEXTFIELD IMAGE BOX **/
+        QVBox textFieldImageBox = new QVBox();
+        textFieldImageBox.addComponents(textFieldImage, textFieldImageDef, textFieldCodeTitle, textFieldCode, textFieldShow);
+        textFieldImageBox.setPositionOfChildNodes("CENTER");
+        textFieldImageBox.setMarginOfNode(textFieldImage, 0, 0, 20, 25);
+        textFieldImageBox.setMarginOfNode(textFieldCodeTitle, 100, 0, 30, 0);
+        textFieldImageBox.setMarginOfNode(textFieldCode, 20, 0, 20, 0);
+        textFieldImageBox.setMarginOfNode(textFieldShow, 20, 0, 0, 0);
+        textFieldImageBox.setPrefWidthHeight(500, 20);
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane textFieldBackground = new QBorderPane();
+        textFieldBackground.setPosition("LEFT", textFieldBox);
+        textFieldBackground.setPosition("RIGHT", textFieldImageBox);
+
+        /** ----------------------HYPERLINK SCENE-------------------- **/
+
+        /** HYPERLINK TEXT **/
+        QText hyperlink = new QText();
+        hyperlink.setContent(
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. "
+        );
+        hyperlink.setWrapperWidth(225);
+        hyperlink.setSize(1.5, 1.5);
+
+        QVBox hyperlinkBox = new QVBox();
+        hyperlinkBox.addComponents(hyperlink);
+        hyperlinkBox.setMarginOfNode(hyperlink, 150, 0, 80, 140);
+        hyperlinkBox.setPrefWidthHeight(500, 150);
+
+        /** HYPERLINK **/
+        QHyperlink hyperlinkShow = new QHyperlink();
+        hyperlinkShow.setHyperlinkText("https://www.google.com/");
+        hyperlinkShow.setFontStyle("-fx-text-fill: red; -fx-underline: true;");
+
+        /** HYPERLINK CODE TITLE **/
+        QText hyperlinkCodeTitle = new QText();
+        hyperlinkCodeTitle.setContent("Usage of Hyperlink in JavaFX");
+        hyperlinkCodeTitle.setSize(1.5, 1.5);
+        hyperlinkCodeTitle.font("Verdana");
+
+        /** HYPERLINK CODE **/
+        QText hyperlinkCode = new QText();
+        hyperlinkCode.setContent(
+            "hyperlinkShow.setHyperlinkText(\"https://www.google.com/\");\n" + 
+            "hyperlinkShow.setFontStyle(\"-fx-text-fill: red; -fx-underline: true;\");"
+        );
+        hyperlinkCode.setSize(1.2, 1.2);
+        hyperlinkCode.setWrapperWidth(350);
+
+        /** HYPERLINK ALERT -- Zbytocne pre tento komponent, to iste ako u QMenu **/
+
+        /** HYPERLINK IMAGE **/
+        QImageView hyperlinkImage = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/example_hyperlink.png");
+            hyperlinkImage.setNewImage(input);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        hyperlinkImage.setDimensions(158, 300);
+
+        /** HYPERLINK IMAGE DEF **/
+        QText hyperlinkImageDef = new QText();
+        hyperlinkImageDef.setContent("Definition of Hyperlink");
+        hyperlinkImageDef.setSize(1.2, 1.2);
+
+        /** HYPERLINK IMAGE BOX **/
+        QVBox hyperlinkImageBox = new QVBox();
+        hyperlinkImageBox.addComponents(hyperlinkImage, hyperlinkImageDef, hyperlinkCodeTitle, hyperlinkCode, hyperlinkShow);
+        hyperlinkImageBox.setPositionOfChildNodes("CENTER");
+        hyperlinkImageBox.setMarginOfNode(hyperlinkImage, 0, 0, 20, 25);
+        hyperlinkImageBox.setMarginOfNode(hyperlinkCodeTitle, 100, 0, 30, 0);
+        hyperlinkImageBox.setMarginOfNode(hyperlinkCode, 20, 0, 20, 0);
+        hyperlinkImageBox.setMarginOfNode(hyperlinkShow, 20, 0, 0, 0);
+        hyperlinkImageBox.setPrefWidthHeight(500, 20);
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane hyperlinkBackground = new QBorderPane();
+        hyperlinkBackground.setPosition("LEFT", hyperlinkBox);
+        hyperlinkBackground.setPosition("RIGHT", hyperlinkImageBox);
+
+        /** ----------------------IMAGEVIEW SCENE-------------------- **/
+
+        /** IMAGEVIEW TEXT **/
+        QText imageView = new QText();
+        imageView.setContent(
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. "
+        );
+        imageView.setWrapperWidth(225);
+        imageView.setSize(1.5, 1.5);
+
+        QVBox imageViewBox = new QVBox();
+        imageViewBox.addComponents(imageView);
+        imageViewBox.setMarginOfNode(imageView, 150, 0, 80, 140);
+        imageViewBox.setPrefWidthHeight(500, 150);
+
+        /** IMAGEVIEW **/
+        QImageView imageViewShow = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/scrollpane-image.jpg");
+            imageViewShow.setNewImage(input);
+        } catch(FileNotFoundException exc) {
+            throw new RuntimeException(exc);
+        }
+        imageViewShow.setDimensions(191, 264);
+
+        /** IMAGEVIEW CODE TITLE **/
+        QText imageViewCodeTitle = new QText();
+        imageViewCodeTitle.setContent("Usage of ImageView in JavaFX");
+        imageViewCodeTitle.setSize(1.5, 1.5);
+        imageViewCodeTitle.font("Verdana");
+
+        /** IMAGEVIEW CODE **/
+        QText imageViewCode = new QText();
+        imageViewCode.setContent(
+            "QImageView imageViewShow = new QImageView();\n" +
+            "try {\n" +
+            "FileInputStream input = new FileInputStream(\"src/main/java/Pictures/scrollpane-image.jpg\");\n" +
+            "imageViewShow.setNewImage(input);\n" +
+            "} catch(FileNotFoundException exc) {\n" +
+            "throw new RuntimeException(exc);\n" +
+            "}\n" +
+            "imageViewShow.setDimensions(191, 264);\n"
+        );
+        imageViewCode.setSize(1.2, 1.2);
+        imageViewCode.setWrapperWidth(350);
+
+        /** IMAGEVIEW ALERT -- Zbytocne pre tento komponent, to iste ako u QMenu **/
+
+        /** IMAGEVIEW IMAGE **/
+        QImageView imageViewImage = new QImageView();
+        try {
+            FileInputStream input = new FileInputStream("src/main/java/Pictures/example_imageview.png");
+            imageViewImage.setNewImage(input);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        imageViewImage.setDimensions(83, 130);
+
+        /** IMAGEVIEW IMAGE DEF **/
+        QText imageViewImageDef = new QText();
+        imageViewImageDef.setContent("Definition of ImageView");
+        imageViewImageDef.setSize(1.2, 1.2);
+
+        /** IMAGEVIEW IMAGE BOX **/
+        QVBox imageViewImageBox = new QVBox();
+        imageViewImageBox.addComponents(imageViewImage, imageViewImageDef, imageViewCodeTitle, imageViewCode,
+                imageViewShow);
+        imageViewImageBox.setPositionOfChildNodes("CENTER");
+        imageViewImageBox.setMarginOfNode(imageViewImage, 0, 0, 20, 25);
+        imageViewImageBox.setMarginOfNode(imageViewCodeTitle, 60, 0, 30, 0);
+        imageViewImageBox.setMarginOfNode(imageViewCode, 20, 0, 20, 0);
+        imageViewImageBox.setMarginOfNode(imageViewShow, 20, 0, 0, 0);
+        imageViewImageBox.setPrefWidthHeight(500, 20);
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane imageViewBackground = new QBorderPane();
+        imageViewBackground.setPosition("LEFT", imageViewBox);
+        imageViewBackground.setPosition("RIGHT", imageViewImageBox);
+
+
         /**---------------------------------------LAYOUT SECTION-------------------------------------------------------**/
 
         /**----------------------QVBOX SCENE--------------------**/
@@ -1360,9 +1799,9 @@ public class Main extends QApplication {
         paginationShow.setCurrentPage(0);
         paginationShow.setMaxPageIndicatorValue(5);
         paginationShow.setContentFactory((index) -> {
-            QLabel label = new QLabel("Strana " + (index + 1));
+            QLabel pageLabel = new QLabel("Strana " + (index + 1));
             QVBox paginationBox = new QVBox();
-            paginationBox.addComponents(label);
+            paginationBox.addComponents(pageLabel);
             paginationBox.setPositionOfChildNodes("CENTER");
             return paginationBox;
         });
@@ -1766,6 +2205,24 @@ public class Main extends QApplication {
             /** MENUITEM SCENE **/
             QScene menuItemScene = new QScene(menuItemBackground, 1000, 800);
 
+            /** TEXT SCENE */
+            QScene textScene = new QScene(textBackground, 1000, 800);
+            
+            /** TEXTAREA SCENE */
+            QScene textAreaScene = new QScene(textAreaBackground, 1000, 800);
+            
+            /** TEXTAREA SCENE */
+            QScene labelScene = new QScene(labelBackground, 1000, 800);
+            
+            /** TEXTAREA SCENE */
+            QScene textFieldScene = new QScene(textFieldBackground, 1000, 800);
+            
+            /** TEXTAREA SCENE */
+            QScene hyperlinkScene = new QScene(hyperlinkBackground, 1000, 800);
+            
+            /** TEXTAREA SCENE */
+            QScene imageViewScene = new QScene(imageViewBackground, 1000, 800);
+
             /** PROGRESSBAR SCENE **/
             QScene progressBarScene = new QScene(progressBarBackground, 1000, 800);
 
@@ -1821,6 +2278,12 @@ public class Main extends QApplication {
             scenes.put("QMenuBar", menuBarScene);
             scenes.put("QMenuButton", menuButtonScene);
             scenes.put("QMenuItem", menuItemScene);
+            scenes.put("QText", textScene);
+            scenes.put("QTextArea", textAreaScene);
+            scenes.put("QLabel", labelScene);
+            scenes.put("QTextField", textFieldScene);
+            scenes.put("QHyperlink", hyperlinkScene);
+            scenes.put("QImageView", imageViewScene);
             scenes.put("QProgressBar", progressBarScene);
             scenes.put("QProgressIndicator", progressIndicatorScene);
             scenes.put("QPagination", paginationScene);
@@ -1839,6 +2302,7 @@ public class Main extends QApplication {
 
             /** SCENE ARRAY */
             QScene[] sceneIndexes = {buttonScene, radioButtonScene, checkboxScene, comboboxScene, toggleGroupScene};
+            QScene[] textSceneIndexes = {textScene, textAreaScene, labelScene, textFieldScene, hyperlinkScene, imageViewScene};
             QScene[] menuSceneIndexes = {menuScene, menuBarScene, menuButtonScene, menuItemScene};
             QScene[] othersSceneIndexes = {progressBarScene, progressIndicatorScene, paginationScene};
             QScene[] layoutSceneIndexes = {qvBoxScene, qhBoxScene, qScrollPaneScene, qBorderPaneScene, qSeparatorScene, qGroupScene};
@@ -1856,6 +2320,12 @@ public class Main extends QApplication {
             panes.put("QMenuBar", menuBarBackground);
             panes.put("QMenuButton", menuButtonBackground);
             panes.put("QMenuItem", menuItemBackground);
+            panes.put("QText", textBackground);
+            panes.put("QTextArea", textAreaBackground);
+            panes.put("QLabel", labelBackground);
+            panes.put("QTextField", textFieldBackground);
+            panes.put("QHyperlink", hyperlinkBackground);
+            panes.put("QImageView", imageViewBackground);
             panes.put("QProgressBar", progressBarBackground);
             panes.put("QProgressIndicator", progressIndicatorBackground);
             panes.put("QPagination", paginationBackground);
@@ -1875,6 +2345,7 @@ public class Main extends QApplication {
             /** PANE ARRAY */
             QBorderPane[] paneIndexes = {buttonBackground, radioButtonBackground, checkBoxBackground, comboBoxBackground, toggleGroupBackground, menuBackground};
             QBorderPane[] menusPaneIndexes = {menuBackground, menuBarBackground, menuButtonBackground, menuItemBackground};
+            QBorderPane[] textPaneIndexes = { textBackground, textAreaBackground, labelBackground, textFieldBackground, hyperlinkBackground, imageViewBackground };
             QBorderPane[] othersPaneIndexes = {progressBarBackground, progressIndicatorBackground, paginationBackground};
             QBorderPane[] layoutPaneIndexes = {qvBoxBackground, qhBoxBackground, qScrollPaneBackground, qBorderPaneBackground, qSeparatorBackground, qGroupBackground};
             QBorderPane[] essentialPaneIndexes = { qApplicationBackground, qStageBackground, qSceneBackground };
@@ -1893,6 +2364,14 @@ public class Main extends QApplication {
             menuTitles.put(1, "QMenuBar");
             menuTitles.put(2, "QMenuButton");
             menuTitles.put(3, "QMenuItem");
+
+            Map<Integer, String> textTitles = new HashMap<>();
+            textTitles.put(0, "QText");
+            textTitles.put(1, "QTextArea");
+            textTitles.put(2, "QLabel");
+            textTitles.put(3, "QTextField");
+            textTitles.put(4, "QHyperlink");
+            textTitles.put(5, "QImageView");
 
             Map<Integer, String> othersTitles = new HashMap<>();
             othersTitles.put(0, "QProgressBar");
@@ -1925,6 +2404,9 @@ public class Main extends QApplication {
             QPaginationSceneSwitcher menusSceneSwitcher = new QPaginationSceneSwitcher();
             menusSceneSwitcher.sceneSwitcher(qstage, menuSceneIndexes, menusPaneIndexes, topMenu.qhBox, 4, topMenu.title, menuTitles);
 
+            QPaginationSceneSwitcher textAndImagesSwitcher = new QPaginationSceneSwitcher();
+            textAndImagesSwitcher.sceneSwitcher(qstage, textSceneIndexes, textPaneIndexes, topMenu.qhBox, 6, topMenu.title, textTitles);
+
             QPaginationSceneSwitcher othersSceneSwitcher = new QPaginationSceneSwitcher();
             othersSceneSwitcher.sceneSwitcher(qstage, othersSceneIndexes, othersPaneIndexes, topMenu.qhBox, 3, topMenu.title, othersTitles);
 
@@ -1940,6 +2422,7 @@ public class Main extends QApplication {
             /**SWITCH MENU SCENES**/
             topMenu.switchSceneForSection(0, scenes, qstage, buttonsAndBoxesSceneSwitcher, sceneIndexes, paneIndexes);
             topMenu.switchSceneForSection(1, scenes, qstage, menusSceneSwitcher, menuSceneIndexes, menusPaneIndexes);
+            topMenu.switchSceneForSection(2, scenes, qstage, textAndImagesSwitcher, textSceneIndexes, textPaneIndexes);
             topMenu.switchSceneForSection(3, scenes, qstage, layoutSceneSwitcher, layoutSceneIndexes, layoutPaneIndexes);
             topMenu.switchSceneForSection(4, scenes, qstage, essentialSceneSwitcher, essentialSceneIndexes, essentialPaneIndexes);
             topMenu.switchSceneForSection(5, scenes, qstage, othersSceneSwitcher, othersSceneIndexes, othersPaneIndexes);
@@ -2010,6 +2493,42 @@ public class Main extends QApplication {
                                 topMenu.title.setContent(value);
                                 panes.get(value).setPosition("TOP", topMenu.qhBox);
                                 break;
+                            case "QText":
+                                textAndImagesSwitcher.getNode().setCurrentPage(0);
+                                panes.get(value).setPosition("BOTTOM", textAndImagesSwitcher.getNode());
+                                topMenu.title.setContent(value);
+                                panes.get(value).setPosition("TOP", topMenu.qhBox);
+                                break;    
+                            case "QTextArea":
+                                textAndImagesSwitcher.getNode().setCurrentPage(1);
+                                panes.get(value).setPosition("BOTTOM", textAndImagesSwitcher.getNode());
+                                topMenu.title.setContent(value);
+                                panes.get(value).setPosition("TOP", topMenu.qhBox);
+                                break;    
+                            case "QLabel":
+                                textAndImagesSwitcher.getNode().setCurrentPage(2);
+                                panes.get(value).setPosition("BOTTOM", textAndImagesSwitcher.getNode());
+                                topMenu.title.setContent(value);
+                                panes.get(value).setPosition("TOP", topMenu.qhBox);
+                                break;    
+                            case "QTextField":
+                                textAndImagesSwitcher.getNode().setCurrentPage(3);
+                                panes.get(value).setPosition("BOTTOM", textAndImagesSwitcher.getNode());
+                                topMenu.title.setContent(value);
+                                panes.get(value).setPosition("TOP", topMenu.qhBox);
+                                break;    
+                            case "QHyperlink":
+                                textAndImagesSwitcher.getNode().setCurrentPage(4);
+                                panes.get(value).setPosition("BOTTOM", textAndImagesSwitcher.getNode());
+                                topMenu.title.setContent(value);
+                                panes.get(value).setPosition("TOP", topMenu.qhBox);
+                                break;    
+                            case "QImageView":
+                                textAndImagesSwitcher.getNode().setCurrentPage(5);
+                                panes.get(value).setPosition("BOTTOM", textAndImagesSwitcher.getNode());
+                                topMenu.title.setContent(value);
+                                panes.get(value).setPosition("TOP", topMenu.qhBox);
+                                break;    
                             case "QProgressBar":
                                 othersSceneSwitcher.getNode().setCurrentPage(0);
                                 panes.get(value).setPosition("BOTTOM", othersSceneSwitcher.getNode());

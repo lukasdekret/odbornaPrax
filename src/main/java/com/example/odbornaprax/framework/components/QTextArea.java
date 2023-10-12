@@ -20,4 +20,8 @@ public class QTextArea extends TextArea {
         super.appendText(text);
     }
 
+    public void setMaxSize(double h, double w) {
+        super.setMaxSize(w, h);
+    }
+
 }

@@ -2292,6 +2292,10 @@ public class Main extends QApplication {
             QMenuItem qImageTextCaptionItem = new QMenuItem("QImageTextCaption");
             specialComponents.addItems(qPaginationSceneSwitcherItem, qComponentMenuItem, qArticleItem, qImageTextCaptionItem);
 
+            QMenu quizTest = new QMenu("Quiz (Test)");
+            QMenuItem quizItem1 = new QMenuItem("Quiz 1 (Test)");
+            quizTest.addItems(quizItem1);
+
 
             /**---SCENE TITLES---**/
 
@@ -2395,6 +2399,21 @@ public class Main extends QApplication {
             /** QCOMPONENT MENU SCENE **/
             QScene qComponentMenuScene = new QScene(qComponentMenuBackground, 1000, 800);
 
+            /** QUIZ TEST SCENE AND COMPONENTS **/
+
+            HashMap<String, String[]> questions = new HashMap<>();
+            // QVbox to uklada ako zásobník, preto musia ísť otázky od poslednej po prvú?
+            questions.put("Čo je to Q?", new String[]{"Nový skvelý framework", "Penzión a reštaurácia vo Zvolene", "17. písmeno abecedy"});
+            questions.put("Doplňte reťazec: Lorem ipsum ...", new String[]{"dolor sit amet, consectetur adipiscing elit. Sed eget massa nisi.", "auctor diam eget congue hendrerit", "žiadna z uvedených"});
+            questions.put("Ponúka Q podporu pre kvízy?", new String[]{"Ano", "Nie"});
+            QQuiz testQuiz = new QQuiz("Testovací kvíz", questions);
+            testQuiz.renderContent();
+
+            QScene qQuizTestScene = new QScene(testQuiz, 1000, 800);
+
+            qstage.setQScene(qQuizTestScene);
+            qstage.showScene();
+
             /** HASH MAPS AND ARRAYS FOR INDIVIDUAL SCENES AND PANES */
             /** SCENE MAP */
             Map<String, QScene> scenes = new HashMap<>();
@@ -2430,6 +2449,7 @@ public class Main extends QApplication {
             scenes.put("QComponentMenu", qComponentMenuScene);
             scenes.put("QArticle", qArticleScene);
             scenes.put("QImageTextCaption", qImageTextCaptionScene);
+//            scenes.put("QQuiz", qQuizTestScene);
 
 
             /** SCENE ARRAY */

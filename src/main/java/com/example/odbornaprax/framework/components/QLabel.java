@@ -12,6 +12,16 @@ public class QLabel extends Label {
         super(text);
     }
 
+    public void setSize(double w, double h) {
+        super.setScaleX(w);
+        super.setScaleY(h);
+    }
+
+    public void setPrefWidthHeight(double width,double height){
+        super.setPrefWidth(width);
+        super.setPrefHeight(height);
+    }
+
     public void setTitle(String text){
         super.setText(text);
     }

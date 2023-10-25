@@ -5,9 +5,12 @@ import javafx.event.EventHandler;
 import javafx.scene.control.RadioButton;
 
 public class QRadioButton extends RadioButton {
-    private boolean pom = false;
+    private int index;
     public QRadioButton() {
         super();
+    }
+    public void setIndex(int index){
+        this.index = index;
     }
     public void setTitle(String text){
         super.setText(text);
@@ -15,6 +18,8 @@ public class QRadioButton extends RadioButton {
     public boolean isChecked(){
         return super.isSelected();
     }
-    //TODO: QToggleGroup implementation
 
+    public int getIndex() {
+        return index;
+    }
 }

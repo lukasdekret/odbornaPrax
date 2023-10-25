@@ -2,6 +2,8 @@ package com.example.odbornaprax.application_test;
 
 import com.example.odbornaprax.framework.components.*;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -124,10 +126,15 @@ public class Main extends QApplication {
         sideText.setWrapperWidth(130);
         sideText.setSize(1.5, 1.5);
 
+        /** QUIZ BUTTON */
+        QButton quizButton = new QButton();
+        quizButton.setHeadline("Test Yourself");
+
         /** SIDETEXT BOX */
-        QHBox sideBox = new QHBox();
-        sideBox.addComponents(sideText);
+        QVBox sideBox = new QVBox();
+        sideBox.addComponents(sideText, quizButton);
         sideBox.setMarginOfNode(sideText, 100, 0, 80, 0);
+        sideBox.setMarginOfNode(quizButton, 100, 0, 80, 0);
         sideBox.setPrefWidthHeight(200, 500);
 
         /** BOTTOM TEXT */
@@ -2232,6 +2239,17 @@ public class Main extends QApplication {
         qImageTextCaptionBackground.setPosition("LEFT", qImageTextCaptionBox);
         qImageTextCaptionBackground.setPosition("RIGHT", qImageTextCaptionImageBox);
 
+        /**----------------------QUIZ 1--------------------**/
+        QQuestion question1 = new QQuestion("Čo je to Q?",new String[]{"Nový skvelý framework", "Penzión a reštaurácia vo Zvolene", "17. písmeno abecedy"},2);
+        QQuestion question2 = new QQuestion("Doplňte reťazec: Lorem ipsum ...",new String[]{"dolor sit amet, consectetur adipiscing elit. Sed eget massa nisi.", "auctor diam eget congue hendrerit", "žiadna z uvedených"},1);
+
+        QQuiz quiz1 = new QQuiz("Vela stastia !",2);
+        quiz1.addQuestions(question1,question2);
+        quiz1.renderContent();
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane quiz1Background = new QBorderPane();
+        quiz1Background.setPosition("CENTER", quiz1);
 
 
         /**------------------------------------SCENE MANAGEMENT AND DYNAMIC COMPONENT HANDLING--------------------------------------**/
@@ -2292,14 +2310,19 @@ public class Main extends QApplication {
             QMenuItem qImageTextCaptionItem = new QMenuItem("QImageTextCaption");
             specialComponents.addItems(qPaginationSceneSwitcherItem, qComponentMenuItem, qArticleItem, qImageTextCaptionItem);
 
-            QMenu quizTest = new QMenu("Quiz (Test)");
-            QMenuItem quizItem1 = new QMenuItem("Quiz 1 (Test)");
-            quizTest.addItems(quizItem1);
+            /**QUIZ TOP MENU**/
+
+            QComponentMenu quizTopMenu = new QComponentMenu();
+
+            QMenu quizes = new QMenu("Quizes");
+            QMenuItem quizItem1 = new QMenuItem("Quiz 1");
+            quizes.addItems(quizItem1);
 
 
             /**---SCENE TITLES---**/
 
             topMenu.addMenus(buttonsAndBoxes, menus, textAndImages, layout, essential, others, specialComponents);
+            quizTopMenu.addMenus(quizes);
 
             /** MAIN SCENE */
             QScene mainScene = new QScene(mainBackground, 1000, 800);
@@ -2399,20 +2422,8 @@ public class Main extends QApplication {
             /** QCOMPONENT MENU SCENE **/
             QScene qComponentMenuScene = new QScene(qComponentMenuBackground, 1000, 800);
 
-            /** QUIZ TEST SCENE AND COMPONENTS **/
-
-            HashMap<String, String[]> questions = new HashMap<>();
-            // QVbox to uklada ako zásobník, preto musia ísť otázky od poslednej po prvú?
-            questions.put("Čo je to Q?", new String[]{"Nový skvelý framework", "Penzión a reštaurácia vo Zvolene", "17. písmeno abecedy"});
-            questions.put("Doplňte reťazec: Lorem ipsum ...", new String[]{"dolor sit amet, consectetur adipiscing elit. Sed eget massa nisi.", "auctor diam eget congue hendrerit", "žiadna z uvedených"});
-            questions.put("Ponúka Q podporu pre kvízy?", new String[]{"Ano", "Nie"});
-            QQuiz testQuiz = new QQuiz("Testovací kvíz", questions);
-            testQuiz.renderContent();
-
-            QScene qQuizTestScene = new QScene(testQuiz, 1000, 800);
-
-            qstage.setQScene(qQuizTestScene);
-            qstage.showScene();
+            /** QUIZ SCENE 1 **/
+            QScene quizScene1 = new QScene(quiz1Background, 1000, 800);
 
             /** HASH MAPS AND ARRAYS FOR INDIVIDUAL SCENES AND PANES */
             /** SCENE MAP */
@@ -2449,7 +2460,7 @@ public class Main extends QApplication {
             scenes.put("QComponentMenu", qComponentMenuScene);
             scenes.put("QArticle", qArticleScene);
             scenes.put("QImageTextCaption", qImageTextCaptionScene);
-//            scenes.put("QQuiz", qQuizTestScene);
+            scenes.put("Quiz1", quizScene1);
 
 
             /** SCENE ARRAY */
@@ -2460,6 +2471,7 @@ public class Main extends QApplication {
             QScene[] layoutSceneIndexes = {qvBoxScene, qhBoxScene, qScrollPaneScene, qBorderPaneScene, qSeparatorScene, qGroupScene};
             QScene[] essentialSceneIndexes = { qApplicationScene, qStageScene, qSceneScene };
             QScene[] specialComponentsIndexes = { qPaginationSceneSwitcherScene, qComponentMenuScene, qArticleScene, qImageTextCaptionScene };
+            QScene[] quizSceneIndexes = { quizScene1 };
 
             /** PANE MAP */
             Map<String, QBorderPane> panes = new HashMap<>();
@@ -2494,6 +2506,7 @@ public class Main extends QApplication {
             panes.put("QComponentMenu", qComponentMenuBackground);
             panes.put("QArticle", qArticleBackground);
             panes.put("QImageTextCaption", qImageTextCaptionBackground);
+            panes.put("Quiz1", quiz1Background);
 
 
             /** PANE ARRAY */
@@ -2504,6 +2517,7 @@ public class Main extends QApplication {
             QBorderPane[] layoutPaneIndexes = {qvBoxBackground, qhBoxBackground, qScrollPaneBackground, qBorderPaneBackground, qSeparatorBackground, qGroupBackground};
             QBorderPane[] essentialPaneIndexes = { qApplicationBackground, qStageBackground, qSceneBackground };
             QBorderPane[] specialComponentsPaneIndexes = { qPaginationSceneSwitcherBackground, qComponentMenuBackground, qArticleBackground, qImageTextCaptionBackground };
+            QBorderPane[] quizPaneIndexes = { quiz1Background };
 
             /** TITLE MAP */
             Map<Integer, String> titles = new HashMap<>();
@@ -2551,6 +2565,9 @@ public class Main extends QApplication {
             specialComponentsTitles.put(2, "QArticle");
             specialComponentsTitles.put(3, "QImageTextCaption");
 
+            Map<Integer, String> quizComponentTitles = new HashMap<>();
+            quizComponentTitles.put(0,"Quiz1");
+
             /**IN COMPONENT PAGINATION NAVIGATION**/
             QPaginationSceneSwitcher buttonsAndBoxesSceneSwitcher = new QPaginationSceneSwitcher();
             buttonsAndBoxesSceneSwitcher.sceneSwitcher(qstage, sceneIndexes, paneIndexes, topMenu.qhBox, 5, topMenu.title, titles);
@@ -2581,6 +2598,20 @@ public class Main extends QApplication {
             topMenu.switchSceneForSection(4, scenes, qstage, essentialSceneSwitcher, essentialSceneIndexes, essentialPaneIndexes);
             topMenu.switchSceneForSection(5, scenes, qstage, othersSceneSwitcher, othersSceneIndexes, othersPaneIndexes);
             topMenu.switchSceneForSection(6, scenes, qstage, specialComponentsSceneSwitcher, specialComponentsIndexes, specialComponentsPaneIndexes);
+
+            quizTopMenu.switchSceneForSection(0, scenes, qstage, null, quizSceneIndexes, quizPaneIndexes);
+
+            /**QUIZ BUTTON NAVIGATION**/
+            quizButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    quizTopMenu.title.setContent("Quiz1");
+                    panes.get("Quiz1").setPosition("TOP", quizTopMenu.qhBox);
+                    qstage.setQScene(scenes.get("Quiz1"));
+                    qstage.showScene();
+                }
+            });
+
             /**TREE MENU**/
 
             qMainMenu.setOnMouseClicked(event -> {

@@ -1,30 +1,32 @@
 package com.example.odbornaprax.framework.components;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
+import javafx.scene.control.Toggle;
 
-import java.util.HashMap;
-
+import java.util.ArrayList;
+//TODO: Add more questions in main
 public class QQuiz extends QBorderPane {
 
-    /* Rozlozenie: header, content, footer
-        - header: Obsahuje hlavnu navigaciu (topMenu)
-        - content: 2 casti
-            1. cast: nadpis, podnadpis pre ktoru cast je kviz urceny
-            2. cast: zoznam QQuizComponent komponentov (pre zaciatok staci aj pole dvojic otazka-moznosti
-     */
     private QText textTitle = new QText();
     private QVBox content = new QVBox();
-    private HashMap<String, String[]> questions;
+    //private HashMap<String, String[]> questions;
+    private ArrayList<QQuestion> questions;
+    private int [] correctIndexes;
 
-
-    //TODO: Pridať pole QQuizComponent na vstupe konstruktora
-    public QQuiz(String title, HashMap<String ,String[]> questions) {
+    public QQuiz(String title,int questionAmount) {
         this.textTitle.setContent(title);
-        this.questions = questions;
+        this.questions = new ArrayList<>();
+        this.correctIndexes = new int[questionAmount];
+    }
+    public void addQuestions(QQuestion... queries){
+        for (int i=0;i<queries.length;i++){
+            this.questions.add(queries[i]);
+            this.correctIndexes[i] = queries[i].getIndex();
+        }
     }
 
-    //TODO: Prisposobit pre QQuizComponent
     public void renderContent() {
 
         // Header
@@ -33,44 +35,81 @@ public class QQuiz extends QBorderPane {
         this.content.addComponents(quizHeader);
         this.content.setMarginOfNode(quizHeader, 50, 0, 50, 0);
         this.content.setPrefWidthHeight(1000,600);
-
+        //Scroll Pane
+        QScrollPane scroll = new QScrollPane();
+        scroll.displayVbarAlways();
+        scroll.displayHbarNever();
         // Content
-        int index = 0;
-        for(String question: questions.keySet()) {
-
-            index++;
-            QLabel textQuestion = new QLabel("Otázka " + index + ": " + question);
+        for(int i=0;i<this.questions.size();i++) {
+            QLabel textQuestion = new QLabel("Otázka " + (i+1) + ": " + questions.get(i).getQuestion());
             textQuestion.setPrefWidthHeight(300, 50);
             textQuestion.setSize(1.5,1.5);
             textQuestion.setStyle("-fx-font-weight: bold");
 
-            QVBox questionBox = new QVBox();
             this.content.addComponents(textQuestion);
             this.content.setMarginOfNode(textQuestion,10,100,0,90);
 
             QToggleGroup toggleGroup = new QToggleGroup();
-            for(String option: questions.get(question)) {
+            Toggle[] toggles = new Toggle[questions.get(i).getAnswers().length];
+            for(int x=0;x<questions.get(i).getAnswers().length;x++) {
                 QRadioButton buttonOption = new QRadioButton();
-                buttonOption.setTitle(option);
+                buttonOption.setIndex(x);
+                buttonOption.setTitle(questions.get(i).getAnswers()[x]);
                 this.content.addComponents(buttonOption);
                 this.content.setMarginOfNode(buttonOption, 10, 100, 10, 30);
-                toggleGroup.addToggles(buttonOption);
+                toggles[x] = buttonOption;
             }
-
+            questions.get(i).setAnswerButtons(toggleGroup);
+            toggleGroup.addToggles(toggles);
         }
+        scroll.setBody(this.content);
         super.setPosition("TOP", quizHeader);
-        super.setPosition("CENTER", this.content);
+        super.setPosition("CENTER", scroll);
 
         // Footer
         QVBox submitBox = new QVBox();
         QButton submitButton = new QButton();
         submitButton.setHeadline("Odoslať");
 
+        submitButton.setOnAction(new EventHandler<ActionEvent>() {
+            int correct = 0;
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                for (int y=0;y<questions.size();y++){
+                    if (correctIndexes[y] == questions.get(y).getAnswerButtons().getIndexes().get(questions.get(y).getAnswerButtons().getSelectedToggle())){
+                        correct++;
+                    }
+                    questions.get(y).getAnswerButtons().disable();
+                }
+                QText resultMessage = new QText();
+                resultMessage.setContent("You answered "+correct+" out of "+questions.size()+" correctly");
+                resultMessage.setStyle("-fx-font-size: 16px;");
+
+                QButton resetButton = new QButton();
+                resetButton.setHeadline("Reset");
+
+                submitBox.addComponents(resultMessage, resetButton);
+                submitBox.setMarginOfNode(resultMessage,0,0,40,0);
+                submitBox.setMarginOfNode(resetButton,0,0,40,0);
+                submitButton.setDisable(true);
+                correct = 0;
+
+                //TODO: Remove old questions from the screen
+                resetButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        renderContent();
+                    }
+                });
+            }
+        });
+
         submitBox.addComponents(submitButton);
         submitBox.setAlignment(Pos.CENTER);
         submitBox.setMarginOfNode(submitButton,20,0,50,0);
         super.setPosition("BOTTOM", submitBox);
-
     }
+
 
 }

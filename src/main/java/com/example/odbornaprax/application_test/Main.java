@@ -2251,6 +2251,53 @@ public class Main extends QApplication {
         QBorderPane quiz1Background = new QBorderPane();
         quiz1Background.setPosition("CENTER", quiz1);
 
+        /**----------------------QUIZ 2--------------------**/
+        QQuestion question2_1 = new QQuestion("Je toto framework?",new String[]{"Áno, toto je framework", "Nie som si istý", "Určite nie"},0);
+        QQuestion question2_2 = new QQuestion("Co nepatri medzi komponenty Q?",new String[]{"QArticle", "QProgressBar", "QBorder", "žiadny z uvedených"},2);
+
+        QQuiz quiz2 = new QQuiz("Vela stastia! Toto je Kviz2",2);
+        quiz2.addQuestions(question2_1,question2_2);
+        quiz2.renderContent();
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane quiz2Background = new QBorderPane();
+        quiz2Background.setPosition("CENTER", quiz2);
+
+        /**----------------------QUIZ 3--------------------**/
+        QQuestion question3_1 = new QQuestion("Čo znamená skratka GUI?", new String[]{"Grafické Užívateľské Rozhranie", "Globálne Udalosti Inicializácie", "Grafický Univerzálny Injektor"}, 0);
+        QQuestion question3_2 = new QQuestion("Aký kontajner sa používa na usporiadanie prvkov v JavaFX?", new String[]{"JBox", "GridLayout", "VBox"}, 2);
+        QQuestion question3_3 = new QQuestion("Čo je CSS v súvislosti s JavaFX?", new String[]{"Kaskádové štýly pre definovanie vzhľadu prvkov", "Java Syntax Scripting", "Centralizovaný Skriptovací Systém"}, 0);
+        QQuestion question3_4 = new QQuestion("Ktorá trieda sa používa na reprezentáciu textového pola v JavaFX?", new String[]{"TextField", "TextBlock", "DataLabel"}, 0);
+        QQuestion question3_5 = new QQuestion("Ako sa pridáva udalosť onClick na tlačidlo v JavaFX?", new String[]{"setEventOnClick()", "setOnAction()", "addClickEventListener()"}, 1);
+        QQuestion question3_6 = new QQuestion("Čo robí metóda 'start()' v triede rozšírenia Application v JavaFX?", new String[]{"Inicializuje grafické užívateľské rozhranie", "Štartuje nový vlákno pre aplikáciu", "Štartuje grafickú aplikáciu"}, 0);
+        QQuestion question3_7 = new QQuestion("Ktorá komponenta sa používa na vytvorenie rozbalovacieho zoznamu v JavaFX?", new String[]{"DropDownMenu", "ComboBox", "SelectionList"}, 1);
+        QQuestion question3_8 = new QQuestion("Ktorá trieda sa používa na načítanie obrázkov v JavaFX?", new String[]{"ImageLoader", "PictureLoader", "Image"}, 2);
+        QQuestion question3_9 = new QQuestion("Ktorý kontajner umožňuje usporiadať prístup k prvkom podľa ich mena v JavaFX?", new String[]{"GridPane", "FlowPane", "AnchorPane"}, 0);
+        QQuestion question3_10 = new QQuestion("Ako sa nastavuje farba pozadia sceny v JavaFX?", new String[]{"setBackgroundFill()", "setSceneColor()", "setFill()"}, 0);
+
+        QQuiz quiz3 = new QQuiz("Testovací kvíz z JavaFX !",10);
+        quiz3.addQuestions(question3_1,question3_2,question3_3,question3_4,question3_5,question3_6,question3_7,question3_8,question3_9,question3_10);
+        quiz3.renderContent();
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane quiz3Background = new QBorderPane();
+        quiz3Background.setPosition("CENTER", quiz3);
+
+        /**----------------------QUIZ 4--------------------**/
+        QQuestion question_4_1 = new QQuestion("Aký nástroj sa používa na dizajn grafického užívateľského rozhrania v JavaFX?", new String[]{"SceneBuilder", "UIPainter", "GUIWizard"}, 0);
+
+        QQuestion question_4_2 = new QQuestion("Ktorá metóda sa používa na pridanie prvku do VBox v JavaFX?", new String[]{"addToVBox()", "addElement()", "getChildren().add()"}, 2);
+
+        QQuestion question_4_3 = new QQuestion("Ktorá trieda sa používa na zobrazovanie správ a dialógových okien v JavaFX?", new String[]{"PopupWindow", "MessageDialog", "Alert"}, 2);
+
+        QQuiz quiz4 = new QQuiz("Testovací kvíz z JavaFX !",10);
+        quiz4.addQuestions(question_4_1, question_4_2, question_4_3);
+        quiz4.renderContent();
+
+        /** MAIN BACKGROUND WITH COMPONENTS */
+        QBorderPane quiz4Background = new QBorderPane();
+        quiz4Background.setPosition("CENTER", quiz4);
+
 
         /**------------------------------------SCENE MANAGEMENT AND DYNAMIC COMPONENT HANDLING--------------------------------------**/
 
@@ -2315,8 +2362,11 @@ public class Main extends QApplication {
             QComponentMenu quizTopMenu = new QComponentMenu();
 
             QMenu quizes = new QMenu("Quizes");
-            QMenuItem quizItem1 = new QMenuItem("Quiz 1");
-            quizes.addItems(quizItem1);
+            QMenuItem quizItem1 = new QMenuItem("Kvíz 1 - Úvod");
+            QMenuItem quizItem2 = new QMenuItem("Kvíz 2 - Základy");
+            QMenuItem quizItem3 = new QMenuItem("Kvíz 3 - JavaFX I");
+            QMenuItem quizItem4 = new QMenuItem("Kvíz 4 - JavaFX II");
+            quizes.addItems(quizItem1, quizItem2, quizItem3, quizItem4);
 
 
             /**---SCENE TITLES---**/
@@ -2425,6 +2475,17 @@ public class Main extends QApplication {
             /** QUIZ SCENE 1 **/
             QScene quizScene1 = new QScene(quiz1Background, 1000, 800);
 
+            /** QUIZ SCENE 2 **/
+            QScene quizScene2 = new QScene(quiz2Background, 1000, 800);
+
+            /** QUIZ SCENE 3 **/
+            QScene quizScene3 = new QScene(quiz3Background, 1000, 800);
+
+            /** QUIZ SCENE 3 **/
+            QScene quizScene4 = new QScene(quiz4Background, 1000, 800);
+
+
+
             /** HASH MAPS AND ARRAYS FOR INDIVIDUAL SCENES AND PANES */
             /** SCENE MAP */
             Map<String, QScene> scenes = new HashMap<>();
@@ -2461,6 +2522,9 @@ public class Main extends QApplication {
             scenes.put("QArticle", qArticleScene);
             scenes.put("QImageTextCaption", qImageTextCaptionScene);
             scenes.put("Quiz1", quizScene1);
+            scenes.put("Quiz2", quizScene2);
+            scenes.put("Quiz3", quizScene3);
+            scenes.put("Quiz4", quizScene4);
 
 
             /** SCENE ARRAY */
@@ -2471,7 +2535,7 @@ public class Main extends QApplication {
             QScene[] layoutSceneIndexes = {qvBoxScene, qhBoxScene, qScrollPaneScene, qBorderPaneScene, qSeparatorScene, qGroupScene};
             QScene[] essentialSceneIndexes = { qApplicationScene, qStageScene, qSceneScene };
             QScene[] specialComponentsIndexes = { qPaginationSceneSwitcherScene, qComponentMenuScene, qArticleScene, qImageTextCaptionScene };
-            QScene[] quizSceneIndexes = { quizScene1 };
+            QScene[] quizSceneIndexes = { quizScene1, quizScene2, quizScene3, quizScene4 };
 
             /** PANE MAP */
             Map<String, QBorderPane> panes = new HashMap<>();
@@ -2507,6 +2571,9 @@ public class Main extends QApplication {
             panes.put("QArticle", qArticleBackground);
             panes.put("QImageTextCaption", qImageTextCaptionBackground);
             panes.put("Quiz1", quiz1Background);
+            panes.put("Quiz2", quiz2Background);
+            panes.put("Quiz3", quiz3Background);
+            panes.put("Quiz4", quiz4Background);
 
 
             /** PANE ARRAY */
@@ -2517,7 +2584,7 @@ public class Main extends QApplication {
             QBorderPane[] layoutPaneIndexes = {qvBoxBackground, qhBoxBackground, qScrollPaneBackground, qBorderPaneBackground, qSeparatorBackground, qGroupBackground};
             QBorderPane[] essentialPaneIndexes = { qApplicationBackground, qStageBackground, qSceneBackground };
             QBorderPane[] specialComponentsPaneIndexes = { qPaginationSceneSwitcherBackground, qComponentMenuBackground, qArticleBackground, qImageTextCaptionBackground };
-            QBorderPane[] quizPaneIndexes = { quiz1Background };
+            QBorderPane[] quizPaneIndexes = { quiz1Background, quiz2Background, quiz3Background, quiz4Background };
 
             /** TITLE MAP */
             Map<Integer, String> titles = new HashMap<>();
@@ -2566,7 +2633,10 @@ public class Main extends QApplication {
             specialComponentsTitles.put(3, "QImageTextCaption");
 
             Map<Integer, String> quizComponentTitles = new HashMap<>();
-            quizComponentTitles.put(0,"Quiz1");
+            quizComponentTitles.put(0,"Quiz1 - Úvod");
+            quizComponentTitles.put(1,"Quiz2 - Základy");
+            quizComponentTitles.put(2,"Quiz3 - JavaFX I");
+            quizComponentTitles.put(3,"Quiz4 - JavaFX II");
 
             /**IN COMPONENT PAGINATION NAVIGATION**/
             QPaginationSceneSwitcher buttonsAndBoxesSceneSwitcher = new QPaginationSceneSwitcher();
@@ -2590,6 +2660,10 @@ public class Main extends QApplication {
             QPaginationSceneSwitcher specialComponentsSceneSwitcher = new QPaginationSceneSwitcher();
             specialComponentsSceneSwitcher.sceneSwitcher(qstage,specialComponentsIndexes, specialComponentsPaneIndexes,topMenu.qhBox, 4, topMenu.title, specialComponentsTitles);
 
+            QPaginationSceneSwitcher quizSceneSwitcher = new QPaginationSceneSwitcher();
+            quizSceneSwitcher.sceneSwitcher(qstage, quizSceneIndexes, quizPaneIndexes, quizTopMenu.qhBox, 4, quizTopMenu.title, quizComponentTitles);
+            quizSceneSwitcher.setVisibility(false); // Aby sa nezobrazoval na spodnej casti
+
             /**SWITCH MENU SCENES**/
             topMenu.switchSceneForSection(0, scenes, qstage, buttonsAndBoxesSceneSwitcher, sceneIndexes, paneIndexes);
             topMenu.switchSceneForSection(1, scenes, qstage, menusSceneSwitcher, menuSceneIndexes, menusPaneIndexes);
@@ -2599,13 +2673,13 @@ public class Main extends QApplication {
             topMenu.switchSceneForSection(5, scenes, qstage, othersSceneSwitcher, othersSceneIndexes, othersPaneIndexes);
             topMenu.switchSceneForSection(6, scenes, qstage, specialComponentsSceneSwitcher, specialComponentsIndexes, specialComponentsPaneIndexes);
 
-            quizTopMenu.switchSceneForSection(0, scenes, qstage, null, quizSceneIndexes, quizPaneIndexes);
+            quizTopMenu.switchSceneForSection(0, scenes, qstage, quizSceneSwitcher, quizSceneIndexes, quizPaneIndexes);
 
             /**QUIZ BUTTON NAVIGATION**/
             quizButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    quizTopMenu.title.setContent("Quiz1");
+                    quizTopMenu.title.setContent("Kvíz 1 - Úvod");
                     panes.get("Quiz1").setPosition("TOP", quizTopMenu.qhBox);
                     qstage.setQScene(scenes.get("Quiz1"));
                     qstage.showScene();

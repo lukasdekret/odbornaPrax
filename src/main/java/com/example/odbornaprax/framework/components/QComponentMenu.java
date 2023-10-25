@@ -90,7 +90,9 @@ public class QComponentMenu {
        Menu selectedMenu = menuBar.getMenus().get(index);
        for(int i = 0; i < selectedMenu.getItems().toArray().length; i++) {
            int selectedIndex = i;
+           System.out.println(selectedMenu.getItems().toArray().length + " " + selectedIndex + " " + selectedMenu.getItems().get(i).getText());
            selectedMenu.getItems().get(i).setOnAction(new EventHandler<ActionEvent>() {
+
                @Override
                public void handle(ActionEvent actionEvent) {
                    title.setContent(selectedMenu.getItems().get(selectedIndex).getText().toString());

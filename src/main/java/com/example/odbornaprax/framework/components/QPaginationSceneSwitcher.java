@@ -23,6 +23,11 @@ public class QPaginationSceneSwitcher {
             return paginationBox;
         });
     }
+
+    public void setVisibility(boolean visibility) {
+        buttonPagination.setVisible(visibility);
+    }
+
     public QPagination getNode(){
         return this.buttonPagination;
     }

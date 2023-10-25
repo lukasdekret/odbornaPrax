@@ -57,5 +57,10 @@ public class QVBox extends VBox {
                 break;
         }
     }
+
+    public void reset() {
+        super.getChildren().clear();
+    }
+
 }
 

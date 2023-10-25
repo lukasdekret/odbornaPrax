@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Toggle;
+import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
 //TODO: Add more questions in main
@@ -29,6 +30,9 @@ public class QQuiz extends QBorderPane {
 
     public void renderContent() {
 
+        // Content reset
+        this.content.reset();
+
         // Header
         QArticle quizHeader = new QArticle(this.textTitle.getText(), new String[]{"Pri každej otázke možete vybrať jednu z možností."});
         quizHeader.header.setSize(1.5, 1.5);
@@ -42,12 +46,13 @@ public class QQuiz extends QBorderPane {
         // Content
         for(int i=0;i<this.questions.size();i++) {
             QLabel textQuestion = new QLabel("Otázka " + (i+1) + ": " + questions.get(i).getQuestion());
-            textQuestion.setPrefWidthHeight(300, 50);
+            textQuestion.setPrefWidthHeight(600, 50);
+            textQuestion.setWrapText(true);
             textQuestion.setSize(1.5,1.5);
             textQuestion.setStyle("-fx-font-weight: bold");
 
             this.content.addComponents(textQuestion);
-            this.content.setMarginOfNode(textQuestion,10,100,0,90);
+            this.content.setMarginOfNode(textQuestion,10,100,0,180);
 
             QToggleGroup toggleGroup = new QToggleGroup();
             Toggle[] toggles = new Toggle[questions.get(i).getAnswers().length];
@@ -76,11 +81,14 @@ public class QQuiz extends QBorderPane {
             @Override
             public void handle(ActionEvent actionEvent) {
 
+
                 for (int y=0;y<questions.size();y++){
-                    if (correctIndexes[y] == questions.get(y).getAnswerButtons().getIndexes().get(questions.get(y).getAnswerButtons().getSelectedToggle())){
-                        correct++;
+                    if(questions.get(y).getAnswerButtons().getSelectedToggle() != null) {
+                        if (correctIndexes[y] == questions.get(y).getAnswerButtons().getIndexes().get(questions.get(y).getAnswerButtons().getSelectedToggle())){
+                            correct++;
+                        }
+                        questions.get(y).getAnswerButtons().disable();
                     }
-                    questions.get(y).getAnswerButtons().disable();
                 }
                 QText resultMessage = new QText();
                 resultMessage.setContent("You answered "+correct+" out of "+questions.size()+" correctly");
@@ -95,8 +103,8 @@ public class QQuiz extends QBorderPane {
                 submitButton.setDisable(true);
                 correct = 0;
 
-                //TODO: Remove old questions from the screen
                 resetButton.setOnAction(new EventHandler<ActionEvent>() {
+
                     @Override
                     public void handle(ActionEvent actionEvent) {
                         renderContent();

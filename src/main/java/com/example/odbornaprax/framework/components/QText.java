@@ -30,4 +30,9 @@ public class QText extends Text {
         Font setfont = Font.font(font);
         super.setFont(setfont);
     }
+
+    public void applyStyle(String value) {
+        super.setStyle(value);
+    }
+
 }

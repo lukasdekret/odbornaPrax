@@ -252,7 +252,7 @@ public class Main extends QApplication {
         /**RADIOBUTTON**/
         QRadioButton radioButtonShow = new QRadioButton();
         radioButtonShow.setTitle("QRadioButton");
-        radioButtonShow.setPrefSize(100, 100);
+        radioButtonShow.setPrefSize(100, 100); //TODO: Replace
 
         /**RADIOBUTTON ALERT**/
         QLabel pressRadioButton = new QLabel();
@@ -499,7 +499,6 @@ public class Main extends QApplication {
         toggleGroupCode.setSize(1.3, 1.3);
         toggleGroupCode.setWrapperWidth(250);
 
-
         /**TOGGLEGROUP IMAGE**/
         QImageView toggleGroupImage = new QImageView();
         try {
@@ -551,10 +550,10 @@ public class Main extends QApplication {
 
         /** MENU **/
         QMenu menuShow = new QMenu();
-        menuShow.setText("Menu");
+        menuShow.setText("Menu"); // TODO: Zmeniť
         QMenuBar menuBarShow = new QMenuBar();
         menuBarShow.addMenu(menuShow);
-        menuBarShow.setMaxSize(200, 50);
+        menuBarShow.setMaxSize(200, 50); // TODO: Zmeniť
 
 
         /** MENU CODE TITLE **/
@@ -631,7 +630,7 @@ public class Main extends QApplication {
         QMenu menu2 = new QMenu("Menu 2");
         QMenu menu3 = new QMenu("Menu 3");
         menuBarShow2.addMenus(menu1, menu2, menu3);
-        menuBarShow2.setMaxSize(200, 50);
+        menuBarShow2.setMaxSize(200, 50); // TODO: Zmeniť
 
 
         /** MENUBAR CODE TITLE **/
@@ -704,7 +703,7 @@ public class Main extends QApplication {
         QMenuItem mb_item2 = new QMenuItem("Item 2");
         QMenuItem mb_item3 = new QMenuItem("Item 3");
         menuButtonShow.addItems(mb_item1, mb_item2, mb_item3);
-        menuButtonShow.setMaxSize(100, 50);
+        menuButtonShow.setMaxSize(100, 50); // TODO: Zmeniť
 
 
         /** MENUBUTTON CODE TITLE **/
@@ -781,7 +780,7 @@ public class Main extends QApplication {
         QMenuItem mi_item3 = new QMenuItem("Item 3");
         menuShow2.addItems(mi_item1, mi_item2, mi_item3);
         menuBarShow3.addMenu(menuShow2);
-        menuBarShow3.setMaxSize(100, 50);
+        menuBarShow3.setMaxSize(100, 50); // TODO: Zmeniť
 
 
         /** MENUITEM CODE TITLE **/
@@ -2676,7 +2675,7 @@ public class Main extends QApplication {
             quizTopMenu.switchSceneForSection(0, scenes, qstage, quizSceneSwitcher, quizSceneIndexes, quizPaneIndexes);
 
             /**QUIZ BUTTON NAVIGATION**/
-            quizButton.setOnAction(new EventHandler<ActionEvent>() {
+            quizButton.setOnAction(new EventHandler<>() { // TODO: Zmeniť
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     quizTopMenu.title.setContent("Kvíz 1 - Úvod");
@@ -2689,12 +2688,12 @@ public class Main extends QApplication {
             /**TREE MENU**/
 
             qMainMenu.setOnMouseClicked(event -> {
-                QTreeItem selected = (QTreeItem) qMainMenu.getSelectionModel().getSelectedItem();
+                QTreeItem selected = (QTreeItem) qMainMenu.getSelectionModel().getSelectedItem(); // TODO: Zmeniť
 
                 /**CODE FOR ADDING PAGINATION AND TOP MENU WHEN LAUNCHING COMPONENTS FROM TREE MENU**/
                 if (selected != null) {
 
-                    String value = selected.getValue().toString();
+                    String value = selected.getValue().toString(); // TODO: Zmeniť
                     if (scenes.get(value) != null) {
                         switch (value) {
                             /**ADD MORE MAIN TREE MENU OPTIONS HERE**/
@@ -2889,7 +2888,7 @@ public class Main extends QApplication {
                     }
 
                 }
-                qMainMenu.getSelectionModel().clearSelection();
+                qMainMenu.getSelectionModel().clearSelection(); // TODO: Zmeniť
             });
 
 

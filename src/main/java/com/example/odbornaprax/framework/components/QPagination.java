@@ -30,4 +30,8 @@ public class QPagination extends Pagination {
         super.setPageFactory(value);
     }
 
+    public void setVisibility(boolean value) {
+        super.setVisible(value);
+    }
+
 }

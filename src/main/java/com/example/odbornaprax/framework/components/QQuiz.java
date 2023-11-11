@@ -47,9 +47,9 @@ public class QQuiz extends QBorderPane {
         for(int i=0;i<this.questions.size();i++) {
             QLabel textQuestion = new QLabel("Otázka " + (i+1) + ": " + questions.get(i).getQuestion());
             textQuestion.setPrefWidthHeight(600, 50);
-            textQuestion.setWrapText(true);
+            textQuestion.enableTextWrapping(true); // notTODO: Zmeniť
             textQuestion.setSize(1.5,1.5);
-            textQuestion.setStyle("-fx-font-weight: bold");
+            textQuestion.applyStyle("-fx-font-weight: bold"); // notTODO: Zmeniť
 
             this.content.addComponents(textQuestion);
             this.content.setMarginOfNode(textQuestion,10,100,0,180);
@@ -76,14 +76,14 @@ public class QQuiz extends QBorderPane {
         QButton submitButton = new QButton();
         submitButton.setHeadline("Odoslať");
 
-        submitButton.setOnAction(new EventHandler<ActionEvent>() {
+        submitButton.setOnAction(new EventHandler<ActionEvent>() { // TODO: Zmeniť
             int correct = 0;
             @Override
             public void handle(ActionEvent actionEvent) {
 
 
                 for (int y=0;y<questions.size();y++){
-                    if(questions.get(y).getAnswerButtons().getSelectedToggle() != null) {
+                    if(questions.get(y).getAnswerButtons().getSelectedToggle() != null) { // FIXME: Nedá sa (?)
                         if (correctIndexes[y] == questions.get(y).getAnswerButtons().getIndexes().get(questions.get(y).getAnswerButtons().getSelectedToggle())){
                             correct++;
                         }
@@ -92,7 +92,7 @@ public class QQuiz extends QBorderPane {
                 }
                 QText resultMessage = new QText();
                 resultMessage.setContent("You answered "+correct+" out of "+questions.size()+" correctly");
-                resultMessage.setStyle("-fx-font-size: 16px;");
+                resultMessage.applyStyle("-fx-font-size: 16px;"); // notTODO: Zmeniť
 
                 QButton resetButton = new QButton();
                 resetButton.setHeadline("Reset");
@@ -100,7 +100,7 @@ public class QQuiz extends QBorderPane {
                 submitBox.addComponents(resultMessage, resetButton);
                 submitBox.setMarginOfNode(resultMessage,0,0,40,0);
                 submitBox.setMarginOfNode(resetButton,0,0,40,0);
-                submitButton.setDisable(true);
+                submitButton.disabled(true); // notTODO: Zmeniť
                 correct = 0;
 
                 resetButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -114,7 +114,7 @@ public class QQuiz extends QBorderPane {
         });
 
         submitBox.addComponents(submitButton);
-        submitBox.setAlignment(Pos.CENTER);
+        submitBox.setPosition(Pos.CENTER); // notTODO: Zmeniť
         submitBox.setMarginOfNode(submitButton,20,0,50,0);
         super.setPosition("BOTTOM", submitBox);
     }

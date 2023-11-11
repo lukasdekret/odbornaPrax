@@ -29,7 +29,7 @@ public class QHBox extends HBox {
         super.setMaxHeight(height);
     }
     public void setMarginOfNode(Node node,double fromTop,double fromRight, double fromBottom, double fromLeft){
-        setMargin(node,new Insets(fromTop,fromRight,fromBottom,fromLeft));
+        super.setMargin(node,new Insets(fromTop,fromRight,fromBottom,fromLeft)); // notTODO: Zmeniť
     }
     public void setPositionOfChildNodes(String string){
         switch (string){

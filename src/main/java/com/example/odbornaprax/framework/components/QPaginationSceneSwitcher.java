@@ -18,14 +18,14 @@ public class QPaginationSceneSwitcher {
             paneIndexes[index].setPosition("BOTTOM", buttonPagination);
             paneIndexes[index].setPosition("TOP",menuQBox);
             qstage.setQScene(sceneIndexes[index]);
-            qstage.show();
+            qstage.showScene(); // notTODO: Zmeniť
 
             return paginationBox;
         });
     }
 
     public void setVisibility(boolean visibility) {
-        buttonPagination.setVisible(visibility);
+        buttonPagination.setVisibility(visibility); // notTODO: Zmeniť
     }
 
     public QPagination getNode(){

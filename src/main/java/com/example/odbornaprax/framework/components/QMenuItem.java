@@ -33,4 +33,8 @@ public class QMenuItem extends MenuItem {
             }
         });
     }
+
+    public String getTextContent() {
+        return super.getText();
+    }
 }

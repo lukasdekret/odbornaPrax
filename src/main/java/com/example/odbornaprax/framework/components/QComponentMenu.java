@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -78,7 +79,7 @@ public class QComponentMenu {
    public void switchSceneForSection(int index, Map<String, QScene> scenes, QStage qstage, QPaginationSceneSwitcher sceneSwitcher, QScene[] sceneIndexes, QBorderPane[] paneIndexes) {
 
        // Nastavenie pre tlacidlo na hlavnu scenu
-       mainPageButton.setOnAction(new EventHandler<ActionEvent>() {
+       mainPageButton.setOnAction(new EventHandler<ActionEvent>() { // TODO: Zmeniť
            @Override
            public void handle(ActionEvent actionEvent) {
                qstage.setQScene(scenes.get("QMainPage"));
@@ -87,21 +88,21 @@ public class QComponentMenu {
        });
 
        // Nastavenie pre stlacenie na MenuItem v Menu podla indexu
-       Menu selectedMenu = menuBar.getMenus().get(index);
-       for(int i = 0; i < selectedMenu.getItems().toArray().length; i++) {
+       QMenu selectedMenu = (QMenu) menuBar.getMenusList().get(index);
+       for(int i = 0; i < selectedMenu.getMenuItems().toArray().length; i++) { // notTODO: Zmeniť
            int selectedIndex = i;
-           System.out.println(selectedMenu.getItems().toArray().length + " " + selectedIndex + " " + selectedMenu.getItems().get(i).getText());
-           selectedMenu.getItems().get(i).setOnAction(new EventHandler<ActionEvent>() {
+           System.out.println(selectedMenu.getMenuItems().toArray().length + " " + selectedIndex + " " + selectedMenu.getItems().get(i).getText()); // noTODO: Zmeniť
+           selectedMenu.getMenuItems().get(i).setOnAction(new EventHandler<ActionEvent>() { // notTODO: Zmeniť
 
                @Override
                public void handle(ActionEvent actionEvent) {
-                   title.setContent(selectedMenu.getItems().get(selectedIndex).getText().toString());
+                   title.setContent(((QMenuItem) selectedMenu.getMenuItems().get(selectedIndex)).getTextContent().toString()); // notTODO: Zmeniť
                    sceneSwitcher.getNode().setCurrentPage(selectedIndex);
 
                    paneIndexes[selectedIndex].setPosition("BOTTOM", sceneSwitcher.getNode());
                    paneIndexes[selectedIndex].setPosition("TOP", qhBox);
                    qstage.setQScene(sceneIndexes[selectedIndex]);
-                   qstage.show();
+                   qstage.showScene(); // notTODO: Zmeniť
                }
            });
 

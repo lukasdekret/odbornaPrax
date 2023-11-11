@@ -33,7 +33,7 @@ public class QVBox extends VBox {
         super.setMaxHeight(height);
     }
     public void setMarginOfNode(Node node,double fromTop,double fromRight, double fromBottom, double fromLeft){
-        setMargin(node,new Insets(fromTop,fromRight,fromBottom,fromLeft));
+        super.setMargin(node,new Insets(fromTop,fromRight,fromBottom,fromLeft)); // TODO: Zmeniť
     }
     public void setPositionOfChildNodes(String string){
         switch (string){
@@ -56,6 +56,14 @@ public class QVBox extends VBox {
                 System.out.println("Wrong Input!");
                 break;
         }
+    }
+
+    public void setPosition(Pos value) {
+        super.setAlignment(value);
+    }
+
+    public void applyPadding(Insets value) {
+        super.setPadding(value);
     }
 
     public void reset() {

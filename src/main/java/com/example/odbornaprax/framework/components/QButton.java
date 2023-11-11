@@ -55,4 +55,8 @@ public class QButton extends Button {
             }
         });
     }
+
+    public void disabled(boolean value) {
+        super.setDisable(value);
+    }
 }

@@ -19,7 +19,7 @@ public class QComboBox extends ComboBox {
     }
 
     public void onAction(QButton button) {
-        button.setOnAction((e) -> {
+        button.setOnAction((e) -> { // TODO: Zmeniť
             System.out.println(super.getSelectionModel().getSelectedItem());
         });
     }

@@ -1,7 +1,10 @@
 package com.example.odbornaprax.framework.components;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 public class QLabel extends Label {
     public QLabel() {
@@ -30,4 +33,18 @@ public class QLabel extends Label {
         Font setfont = Font.font(font);
         super.setFont(setfont);
     }
+
+
+    public void applyStyle(String value) {
+        super.setStyle(value);
+    }
+
+    public void enableTextWrapping(boolean value) {
+        super.setWrapText(value);
+    }
+
+    public void setAlignment(TextAlignment value) {
+        super.setTextAlignment(value);
+    }
+
 }

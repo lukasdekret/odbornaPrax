@@ -79,7 +79,7 @@ public class QComponentMenu {
    public void switchSceneForSection(int index, Map<String, QScene> scenes, QStage qstage, QPaginationSceneSwitcher sceneSwitcher, QScene[] sceneIndexes, QBorderPane[] paneIndexes) {
 
        // Nastavenie pre tlacidlo na hlavnu scenu
-       mainPageButton.setOnAction(new EventHandler<ActionEvent>() { // TODO: Zmeniť
+       mainPageButton.setOnAction(new EventHandler<ActionEvent>() {
            @Override
            public void handle(ActionEvent actionEvent) {
                qstage.setQScene(scenes.get("QMainPage"));
@@ -89,20 +89,20 @@ public class QComponentMenu {
 
        // Nastavenie pre stlacenie na MenuItem v Menu podla indexu
        QMenu selectedMenu = (QMenu) menuBar.getMenusList().get(index);
-       for(int i = 0; i < selectedMenu.getMenuItems().toArray().length; i++) { // notTODO: Zmeniť
+       for(int i = 0; i < selectedMenu.getMenuItems().toArray().length; i++) {
            int selectedIndex = i;
            System.out.println(selectedMenu.getMenuItems().toArray().length + " " + selectedIndex + " " + selectedMenu.getItems().get(i).getText()); // noTODO: Zmeniť
-           selectedMenu.getMenuItems().get(i).setOnAction(new EventHandler<ActionEvent>() { // notTODO: Zmeniť
+           selectedMenu.getMenuItems().get(i).setOnAction(new EventHandler<ActionEvent>() {
 
                @Override
                public void handle(ActionEvent actionEvent) {
-                   title.setContent(((QMenuItem) selectedMenu.getMenuItems().get(selectedIndex)).getTextContent().toString()); // notTODO: Zmeniť
+                   title.setContent(((QMenuItem) selectedMenu.getMenuItems().get(selectedIndex)).getTextContent().toString());
                    sceneSwitcher.getNode().setCurrentPage(selectedIndex);
 
                    paneIndexes[selectedIndex].setPosition("BOTTOM", sceneSwitcher.getNode());
                    paneIndexes[selectedIndex].setPosition("TOP", qhBox);
                    qstage.setQScene(sceneIndexes[selectedIndex]);
-                   qstage.showScene(); // notTODO: Zmeniť
+                   qstage.showScene();
                }
            });
 

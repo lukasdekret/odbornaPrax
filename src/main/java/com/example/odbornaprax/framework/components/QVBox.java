@@ -33,7 +33,7 @@ public class QVBox extends VBox {
         super.setMaxHeight(height);
     }
     public void setMarginOfNode(Node node,double fromTop,double fromRight, double fromBottom, double fromLeft){
-        super.setMargin(node,new Insets(fromTop,fromRight,fromBottom,fromLeft)); // TODO: Zmeniť
+        super.setMargin(node,new Insets(fromTop,fromRight,fromBottom,fromLeft));
     }
     public void setPositionOfChildNodes(String string){
         switch (string){

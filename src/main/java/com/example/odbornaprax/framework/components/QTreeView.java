@@ -2,6 +2,7 @@ package com.example.odbornaprax.framework.components;
 
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.TreeCell;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -16,6 +17,10 @@ public class QTreeView extends TreeView {
 
     public void setRootItem(QTreeItem item){
         super.setRoot(item);
+    }
+
+    public MultipleSelectionModel getCurrentlySelectedModel() {
+        return super.getSelectionModel();
     }
 
     public void showRoot(Boolean choice){

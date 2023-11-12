@@ -1,6 +1,7 @@
 package com.example.odbornaprax.framework.components;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
@@ -54,6 +55,12 @@ public class QButton extends Button {
                 }
             }
         });
+    }
+
+    public void setEventHandler(EventHandler event) {
+
+        super.setOnAction(event);
+
     }
 
     public void disabled(boolean value) {

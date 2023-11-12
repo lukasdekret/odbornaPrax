@@ -34,6 +34,11 @@ public class QMenu extends Menu {
         return super.getItems();
     }
 
+    public void setTextContent(String value) {
+        super.setText(value);
+    }
+
+
     /* Not working? */
 //    public void setAction(QText text) {
 //        super.setOnAction(new EventHandler<>() {

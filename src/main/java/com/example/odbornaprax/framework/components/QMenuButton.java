@@ -20,6 +20,10 @@ public class QMenuButton extends MenuButton {
         super.getItems().addAll(menuItems);
     }
 
+    public void setMaxWidthHeight(double width, double height) {
+        super.setMaxSize(width, height);
+    }
+
     public void addItem(QMenuItem menuItem) {
         super.getItems().add(menuItem);
     }

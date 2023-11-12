@@ -24,6 +24,10 @@ public class QMenuBar extends MenuBar {
         super.setUseSystemMenuBar(t);
     }
 
+    public void setMaxWidthHeight(double width, double height) {
+        super.setMaxSize(width, height);
+    }
+
     public ObservableList<Menu> getMenusList() {
         return super.getMenus();
     }

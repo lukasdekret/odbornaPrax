@@ -23,10 +23,10 @@ public class QArticle extends QVBox {
     public QArticle(String header, String[] paragraphs) {
         super.addComponents(this.header);
         this.header.setTitle(header == null ? "Default header" : header);
-        this.header.applyStyle("-fx-font-size: 14px; -fx-font-weight: bold"); // notTODO: Zmeniť
+        this.header.applyStyle("-fx-font-size: 14px; -fx-font-weight: bold");
         this.header.setPrefWidthHeight(200, 50);
         super.setMarginOfNode(this.header, 10, 20, 10,50);
-        super.applyPadding(new Insets(10,20,10,20)); // notTODO: Zmeniť
+        super.applyPadding(new Insets(10,20,10,20));
         this.paragraphs = paragraphs == null ? new String[]{"No paragraphs has been added."} : paragraphs;
         loadParagraphs();
     }
@@ -35,8 +35,8 @@ public class QArticle extends QVBox {
         for(String paragraph : paragraphs) {
             QLabel label = new QLabel();
             label.setTitle(paragraph);
-            label.enableTextWrapping(true); // notTODO: Zmeniť
-            label.setAlignment(TextAlignment.JUSTIFY); // notTODO: Zmeniť
+            label.enableTextWrapping(true);
+            label.setAlignment(TextAlignment.JUSTIFY);
             super.addComponents(label);
             super.setMarginOfNode(label, 10, 20, 10, 0);
         }

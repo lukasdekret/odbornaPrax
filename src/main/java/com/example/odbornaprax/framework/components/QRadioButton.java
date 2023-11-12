@@ -19,6 +19,12 @@ public class QRadioButton extends RadioButton {
         return super.isSelected();
     }
 
+
+    public void setPrefWidthHeight(double width, double height) {
+        super.setPrefWidth(width);
+        super.setPrefHeight(height);
+    }
+
     public int getIndex() {
         return index;
     }

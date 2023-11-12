@@ -2,6 +2,7 @@ package com.example.odbornaprax.framework.components;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SingleSelectionModel;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class QComboBox extends ComboBox {
     }
 
     public void onAction(QButton button) {
-        button.setOnAction((e) -> {
+        button.setEventHandler((e) -> {
             System.out.println(super.getSelectionModel().getSelectedItem());
         });
     }

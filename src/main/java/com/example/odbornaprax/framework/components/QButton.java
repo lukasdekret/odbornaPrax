@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.MultipleSelectionModel;
 
 import java.io.FileInputStream;
 
@@ -57,7 +58,7 @@ public class QButton extends Button {
         });
     }
 
-    public void setEventHandler(EventHandler event) {
+    public void setEventHandler(EventHandler<ActionEvent> event) {
 
         super.setOnAction(event);
 

@@ -76,7 +76,7 @@ public class QQuiz extends QBorderPane {
         QButton submitButton = new QButton();
         submitButton.setHeadline("Odoslať");
 
-        submitButton.setOnAction(new EventHandler<ActionEvent>() {
+        submitButton.setEventHandler(new EventHandler<ActionEvent>() {
             int correct = 0;
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -84,7 +84,7 @@ public class QQuiz extends QBorderPane {
 
                 for (int y=0;y<questions.size();y++){
                     if(questions.get(y).getAnswerButtons().getSelectedToggle() != null) { // FIXME: Nedá sa (?)
-                        if (correctIndexes[y] == questions.get(y).getAnswerButtons().getIndexes().get(questions.get(y).getAnswerButtons().getSelectedToggle())){
+                        if (correctIndexes[y] == questions.get(y).getAnswerButtons().getIndexes().get(questions.get(y).getAnswerButtons().retrieveSelectedToggle())){
                             correct++;
                         }
                         questions.get(y).getAnswerButtons().disable();
@@ -103,7 +103,7 @@ public class QQuiz extends QBorderPane {
                 submitButton.disabled(true);
                 correct = 0;
 
-                resetButton.setOnAction(new EventHandler<ActionEvent>() {
+                resetButton.setEventHandler(new EventHandler<ActionEvent>() {
 
                     @Override
                     public void handle(ActionEvent actionEvent) {

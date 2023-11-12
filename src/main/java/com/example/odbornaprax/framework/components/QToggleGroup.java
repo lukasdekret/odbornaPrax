@@ -30,4 +30,9 @@ public class QToggleGroup extends ToggleGroup {
     public HashMap<Toggle, Integer> getIndexes() {
         return indexes;
     }
+
+    public Toggle retrieveSelectedToggle() {
+        return super.getSelectedToggle();
+    }
+
 }

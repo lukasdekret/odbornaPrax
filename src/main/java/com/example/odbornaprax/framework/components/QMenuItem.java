@@ -34,6 +34,10 @@ public class QMenuItem extends MenuItem {
         });
     }
 
+    public void setEventHandler(EventHandler<ActionEvent> event) {
+        super.setOnAction(event);
+    }
+
     public String getTextContent() {
         return super.getText();
     }

@@ -79,7 +79,7 @@ public class QComponentMenu {
    public void switchSceneForSection(int index, Map<String, QScene> scenes, QStage qstage, QPaginationSceneSwitcher sceneSwitcher, QScene[] sceneIndexes, QBorderPane[] paneIndexes) {
 
        // Nastavenie pre tlacidlo na hlavnu scenu
-       mainPageButton.setOnAction(new EventHandler<ActionEvent>() {
+       mainPageButton.setEventHandler(new EventHandler<ActionEvent>() {
            @Override
            public void handle(ActionEvent actionEvent) {
                qstage.setQScene(scenes.get("QMainPage"));
@@ -92,7 +92,7 @@ public class QComponentMenu {
        for(int i = 0; i < selectedMenu.getMenuItems().toArray().length; i++) {
            int selectedIndex = i;
            System.out.println(selectedMenu.getMenuItems().toArray().length + " " + selectedIndex + " " + selectedMenu.getItems().get(i).getText()); // noTODO: Zmeniť
-           selectedMenu.getMenuItems().get(i).setOnAction(new EventHandler<ActionEvent>() {
+           ((QMenuItem) selectedMenu.getMenuItems().get(i)).setEventHandler(new EventHandler<ActionEvent>() {
 
                @Override
                public void handle(ActionEvent actionEvent) {

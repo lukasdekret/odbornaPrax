@@ -27,5 +27,9 @@ public class QTreeView extends TreeView {
         super.setShowRoot(choice);
     }
 
+    public void setOnMouseClick(EventHandler<MouseEvent> event) {
+        super.setOnMouseClicked(event);
+    }
+
 
 }

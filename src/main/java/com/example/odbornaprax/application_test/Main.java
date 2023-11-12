@@ -2675,7 +2675,7 @@ public class Main extends QApplication {
             quizTopMenu.switchSceneForSection(0, scenes, qstage, quizSceneSwitcher, quizSceneIndexes, quizPaneIndexes);
 
             /**QUIZ BUTTON NAVIGATION**/
-            quizButton.setOnAction(new EventHandler<>() {
+            quizButton.setEventHandler(new EventHandler<>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     quizTopMenu.title.setContent("Kvíz 1 - Úvod");
@@ -2687,7 +2687,7 @@ public class Main extends QApplication {
 
             /**TREE MENU**/
 
-            qMainMenu.setOnMouseClicked(event -> {
+            qMainMenu.setOnMouseClick(event -> {
                 QTreeItem selected = (QTreeItem) qMainMenu.getCurrentlySelectedModel().getSelectedItem();
 
                 /**CODE FOR ADDING PAGINATION AND TOP MENU WHEN LAUNCHING COMPONENTS FROM TREE MENU**/

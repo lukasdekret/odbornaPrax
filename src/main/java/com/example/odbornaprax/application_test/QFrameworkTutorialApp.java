@@ -3,7 +3,6 @@ package com.example.odbornaprax.application_test;
 import com.example.odbornaprax.framework.components.*;
 
 import java.io.FileInputStream;
-import java.util.Map;
 
 public class QFrameworkTutorialApp extends QApplication {
 
@@ -28,7 +27,7 @@ public class QFrameworkTutorialApp extends QApplication {
         logoImageView.setDimensions(200, 200);
 
         // Tree Menu
-        QTreeView treeView = createTreeMenu();
+        QTreeView treeView = createTreeMenu(primaryStage);
 
         // Lorem Ipsum Text
         QText loremIpsumText = new QText();
@@ -76,14 +75,14 @@ public class QFrameworkTutorialApp extends QApplication {
 
         // Final Scene
         QScene homePageScene = new QScene(homePagePane, 800, 600);
-
+        QScene qButtonScene = createQButtonScene();
         primaryStage.setTitle("QFramework Tutorial App");
-        primaryStage.setScene(createQButtonScene(primaryStage));
+        primaryStage.setScene(homePageScene);
         primaryStage.show();
     }
 
     // Method to create the Tree Menu
-    private QTreeView createTreeMenu() {
+    private QTreeView createTreeMenu(QStage primaryStage) {
         QTreeView treeView = new QTreeView();
 
         // Add categories and items to the tree
@@ -156,75 +155,73 @@ public class QFrameworkTutorialApp extends QApplication {
         // Add categories to root
         rootItem.addItems(buttonsAndBoxes, textAndImages,menus,others,layout,essential,specialComponents);
 
+        // Set event handler for QButton item
+        treeView.setOnMouseClicked(event -> {
+            // Get the selected item
+            QTreeItem selectedItem = (QTreeItem) treeView.getSelectionModel().getSelectedItem();
+
+            // Check if QButton item is selected
+            if (selectedItem == qButton) {
+                // Switch to QButton scene
+                QScene qButtonScene = createQButtonScene();
+                primaryStage.setScene(qButtonScene);
+            }
+            // ... (add similar checks for other items)
+        });
+
+
+
         return treeView;
     }
-    // Úprava createQButtonScene() na pridanie QStage ako parameter a obalenie komponentov v QHBox/QVBox
-    // Úprava createQButtonScene() na pridanie QStage ako parameter a obalenie komponentov v QHBox/QVBox
-    private QScene createQButtonScene(QStage primaryStage) {
-        // ... predchádzajúci kód ...
+    private QScene createQButtonScene() {
+        // Text na vrchu a spodku scény
+        QText sceneTitle = new QText();
+        sceneTitle.setContent("QButton Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Nastaví škálu na 2 pre šírku a výšku
 
-        // QPaginationSceneSwitcher pre navigáciu medzi scénami v danej kategórii
-        QPaginationSceneSwitcher paginationSceneSwitcher = new QPaginationSceneSwitcher();
-        paginationSceneSwitcher.sceneSwitcher(
-                primaryStage,
-                new QScene[]{createQButtonScene(primaryStage)}, // Zatiaľ iba jedna scéna
-                new QBorderPane[]{}, // Tu pridaj všetky QBorderPane pre jednotlivé scény
-                createTopMenu(),
-                1, // Počet strán
-                createSceneTitle(),
-                Map.of(1, "QButton Scene") // Mapa strán a ich názvov
-        );
+        QText sceneBottomText = new QText();
+        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
+        sceneBottomText.setSize(2, 2); // Nastaví škálu na 2 pre šírku a výšku
 
-        // Zostavenie layoutu scény
+        // Popis komponentu na ľavej strane
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
+
+        // Obrázok komponentu (preddefinovaný priestor)
+        QImageView componentImage = new QImageView();
+        try {
+            // Tu sa načíta obrázok zo súboru "example-button.jpg"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example-button.png");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Príklad kódu a funkčný komponent na pravej strane
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\nQButton myButton = new QButton();\nmyButton.setHeadline(\"Click me!\");\nmyButton.setAction(() -> myButton.setText(\"Button Clicked!\"));");
+
+        QButton functionalComponent = new QButton();
+        functionalComponent.setHeadline("Click me!");
+        QText buttonText = new QText();
+        buttonText.setContent("Button Clicked!");
+
+        functionalComponent.setAction(buttonText);
+        // Layout pre pravú stranu s obrázkom, popisom obrázku, príkladom kódu a funkčným komponentom
         QVBox rightLayout = new QVBox();
-        rightLayout.addComponents(componentImage, imageDescription, codeExample, functionalComponent);
+        rightLayout.addComponents(componentImage, componentDescription, codeExample, functionalComponent);
 
-        QHBox leftLayout = new QHBox();
-        leftLayout.addComponents(componentDescription);
-
-        QVBox topBox = new QVBox();
-        QText topText = new QText();
-        topBox.addComponents(topText);
-        topText.setContent("Top of Scene (Lorem Ipsum Text)");
-        topText.setSize(3, 3); // Set scale to 3 for both width and height
-
-        QVBox bottomBox = new QVBox();
-        QText bottomText = new QText();
-        bottomBox.addComponents(bottomText);
-        bottomText.setContent("Bottom of Scene (Lorem Ipsum Text)");
-        bottomText.setSize(3, 3); // Set scale to 3 for both width and height
-
+        // Hlavný BorderPane pre scénu
         QBorderPane scenePane = new QBorderPane();
-        scenePane.setPosition("TOP", topBox);
-        scenePane.setPosition("LEFT", leftLayout);
-        scenePane.setPosition("RIGHT", rightLayout);
-        scenePane.setPosition("BOTTOM", bottomBox);
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Popis komponentu na ľavej strane
+        scenePane.setPosition("RIGHT", rightLayout); // Pravá strana s obrázkom, popisom, kódom a komponentom
+        scenePane.setPosition("BOTTOM", sceneBottomText);
 
-        return new QScene(scenePane, 800, 600);
+        // Vytvorenie scény
+        QScene qButtonScene = new QScene(scenePane, 800, 600);
+
+        return qButtonScene;
     }
-
-
-
-
-    // Úprava createTopMenu() na vrátenie QText v QHBox namiesto QMenu
-    private QHBox createTopMenu() {
-        QText topText = new QText();
-        topText.setContent("QButton Scene Menu (Lorem Ipsum Text)");
-        topText.setSize(3, 3); // Set scale to 3 for both width and height
-
-        QHBox topMenu = new QHBox();
-        topMenu.addComponents(topText);
-
-        return topMenu;
-    }
-
-    private QText createSceneTitle() {
-        QText title = new QText();
-        title.setContent("QButton Scene");
-        title.setSize(3, 3); // Set scale to 3 for both width and height
-        return title;
-    }
-
 
 }
-

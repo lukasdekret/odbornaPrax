@@ -3,9 +3,11 @@ package com.example.odbornaprax.application_test;
 import com.example.odbornaprax.framework.components.*;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class QFrameworkTutorialApp extends QApplication {
-
+    private QStage primaryStage;
     public static void main(String[] args) {
         launch(args);
     }
@@ -13,6 +15,7 @@ public class QFrameworkTutorialApp extends QApplication {
     @Override
     public void start(QStage primaryStage) {
         // Home Page Title
+        this.primaryStage = primaryStage;
         QText homeTitle = new QText();
         homeTitle.setContent("Welcome to QFramework Tutorial App!");
         homeTitle.setSize(3, 3); // Set scale to 3 for both width and height
@@ -81,13 +84,17 @@ public class QFrameworkTutorialApp extends QApplication {
         quizPane.setPosition("CENTER", simpleQuiz);
         // Create the main scene
         QScene quizScene = new QScene(quizPane, 800, 600);
+        // Create the scene for QCheckBox
+        QScene qCheckBoxScene = createQCheckBoxScene();
+
 
         // Final Scene
         QScene homePageScene = new QScene(homePagePane, 800, 600);
-        QScene qButtonScene = createQButtonScene();
+        handleTreeItemSelection(treeView);
         primaryStage.setTitle("QFramework Tutorial App");
         primaryStage.setScene(homePageScene);
         primaryStage.show();
+
     }
 
     private QQuiz createQuiz(){
@@ -199,24 +206,58 @@ public class QFrameworkTutorialApp extends QApplication {
         // Add categories to root
         rootItem.addItems(buttonsAndBoxes, textAndImages,menus,others,layout,essential,specialComponents);
 
-        // Set event handler for QButton item
-        treeView.setOnMouseClicked(event -> {
-            // Get the selected item
-            QTreeItem selectedItem = (QTreeItem) treeView.getSelectionModel().getSelectedItem();
-
-            // Check if QButton item is selected
-            if (selectedItem == qButton) {
-                // Switch to QButton scene
-                QScene qButtonScene = createQButtonScene();
-                primaryStage.setScene(qButtonScene);
-            }
-            // ... (add similar checks for other items)
-        });
-
 
 
         return treeView;
     }
+    private void switchScene(QScene newScene) {
+        // Set the new scene for QStage
+        primaryStage.setScene(newScene);
+    }
+// ... (existing code)
+
+    // Method to handle tree item selection
+    // Metóda na spracovanie výberu položky stromu
+    private void handleTreeItemSelection(QTreeView treeView) {
+        treeView.setOnMouseClicked(event -> {
+            // Získať vybranú položku stromu
+            QTreeItem selectedItem = (QTreeItem) treeView.getSelectionModel().getSelectedItem();
+
+            // Kontrola, či vybraná položka nie je null
+            if (selectedItem != null) {
+                // Získať hodnotu (text) vybranej položky
+                String selectedText = String.valueOf(selectedItem.getValue());
+
+                // Prepínač scén na základe vybranej položky
+                switch (selectedText) {
+                    case "QButton":
+                        switchScene(createQButtonScene());
+                        break;
+                    case "QRadioButton":
+                        switchScene(createQRadioButtonScene("radioButton"));
+                        break;
+                    case "QCheckBox":
+                        switchScene(createQCheckBoxScene());
+                        break;
+                    case "QComboBox":
+                        switchScene(createQComboBoxScene());
+                        break;
+                    case "QToggleGroup": // Pridané pre QToggleGroup
+                        switchScene(createQToggleGroupScene());
+                        break;
+                    default:
+                        // Riešenie neznámeho výberu
+                        System.out.println("Unknown selection: " + selectedText);
+                }
+            }
+        });
+    }
+
+
+
+// ... (existing code)
+
+
     private QScene createQButtonScene() {
         // Text na vrchu a spodku scény
         QText sceneTitle = new QText();
@@ -266,6 +307,205 @@ public class QFrameworkTutorialApp extends QApplication {
         QScene qButtonScene = new QScene(scenePane, 800, 600);
 
         return qButtonScene;
+    }
+    // Method to create a scene for QButton and QRadioButton
+    private QScene createQRadioButtonScene(String componentName) {
+        // Text at the top and bottom of the scene
+        QText sceneTitle = new QText();
+        sceneTitle.setContent(componentName + " Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
+
+        QText sceneBottomText = new QText();
+        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
+        sceneBottomText.setSize(2, 2); // Set scale to 2 for both width and height
+
+        // Description of the component on the left side
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
+
+        // Image of the component (predefined space)
+        QImageView componentImage = new QImageView();
+        try {
+            // Load the image from the file "example-button.jpg"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example-" + componentName.toLowerCase() + ".png");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Example code and functional component on the right side
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\n" + componentName + " myComponent = new " + componentName + "();\nmyComponent.setHeadline(\"Click me!\");\nmyComponent.setAction(() -> myComponent.setText(\"Component Clicked!\"));");
+
+        QButton functionalComponent = new QButton();
+        functionalComponent.setHeadline("Click me!");
+        QText buttonText = new QText();
+        buttonText.setContent(componentName + " Clicked!");
+
+        functionalComponent.setAction(buttonText);
+
+        // Layout for the right side with the image, description, code example, and functional component
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage, componentDescription, codeExample, functionalComponent);
+
+        // Main BorderPane for the scene
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Description of the component on the left side
+        scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and component
+        scenePane.setPosition("BOTTOM", sceneBottomText);
+
+        // Create the scene
+        return new QScene(scenePane, 800, 600);
+    }
+    private QScene createQCheckBoxScene() {
+        // Text at the top and bottom of the scene
+        QText sceneTitle = new QText();
+        sceneTitle.setContent("QCheckBox Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
+
+        QText sceneBottomText = new QText();
+        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
+        sceneBottomText.setSize(2, 2); // Set scale to 2 for both width and height
+
+        // Description of the component on the left side
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
+
+        // Image of the component (predefined space)
+        QImageView componentImage = new QImageView();
+        try {
+            // Load the image from the file "example-checkbox.jpg"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example-checkbox.png");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Example code and functional component on the right side
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\nQCheckBox myCheckBox = new QCheckBox();\nmyCheckBox.setTitle(\"Check me!\");\nmyCheckBox.setAction(() -> myCheckBox.setTitle(\"CheckBox Checked!\"));");
+
+        QButton functionalComponent = new QButton();
+        functionalComponent.setHeadline("Check me!");
+        QText buttonText = new QText();
+        buttonText.setContent("CheckBox Checked!");
+
+        functionalComponent.setAction(buttonText);
+
+        // Layout for the right side with the image, description, code example, and functional component
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage, componentDescription, codeExample, functionalComponent);
+
+        // Main BorderPane for the scene
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Description of the component on the left side
+        scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and component
+        scenePane.setPosition("BOTTOM", sceneBottomText);
+
+        // Create the scene
+        return new QScene(scenePane, 800, 600);
+    }
+    private QScene createQComboBoxScene() {
+        // Text at the top and bottom of the scene
+        QText sceneTitle = new QText();
+        sceneTitle.setContent("QComboBox Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
+
+        QText sceneBottomText = new QText();
+        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
+        sceneBottomText.setSize(2, 2); // Set scale to 2 for both width and height
+
+        // Component description on the left side
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
+
+        // Image of the component (predefined space)
+        QImageView componentImage = new QImageView();
+        try {
+            // Load the image from the file "example-combobox.png"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example-combobox.png");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Example code and functional component on the right side
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\nQComboBox myComboBox = new QComboBox();\nmyComboBox.addList(Arrays.asList(\"Option 1\", \"Option 2\", \"Option 3\"));");
+
+        QComboBox functionalComponent = new QComboBox();
+        functionalComponent.addList(new ArrayList<>(Arrays.asList("Option 1", "Option 2", "Option 3")));
+        QText selectedOptionText = new QText();
+        selectedOptionText.setContent("Selected Option: None");
+
+        // Layout for the right side with the image, description, code, and functional component
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage, componentDescription, codeExample, functionalComponent, selectedOptionText);
+
+        // Main BorderPane for the scene
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Component description on the left side
+        scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and functional component
+        scenePane.setPosition("BOTTOM", sceneBottomText);
+
+        // Create the scene
+        return new QScene(scenePane, 800, 600);
+    }
+    // Method to create the scene for QToggleGroup
+    // Method to create the scene for QToggleGroup
+// Method to create the scene for QToggleGroup
+    private QScene createQToggleGroupScene() {
+        // Text at the top and bottom of the scene
+        QText sceneTitle = new QText();
+        sceneTitle.setContent("QToggleGroup Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
+
+        QText sceneBottomText = new QText();
+        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
+        sceneBottomText.setSize(2, 2); // Set scale to 2 for both width and height
+
+        // Component description on the left side
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
+
+        // Image of the component (predefined space)
+        QImageView componentImage = new QImageView();
+        try {
+            // Load the image from the file "example-togglegroup.png"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example-togglegroup.png");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Example code on the right side
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\nQToggleGroup myToggleGroup = new QToggleGroup();\n" +
+                "QRadioButton option1 = new QRadioButton();\n" +
+                "QRadioButton option2 = new QRadioButton();\n" +
+                "myToggleGroup.addToggles(option1, option2);");
+
+        // QRadioButton options on the right side
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage, componentDescription, codeExample);
+
+        // Add QRadioButton options to the layout
+        QRadioButton option1 = new QRadioButton();
+        QRadioButton option2 = new QRadioButton();
+        rightLayout.addComponents(option1, option2);
+
+        // Main BorderPane for the scene
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Component description on the left side
+        scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and QRadioButton options
+        scenePane.setPosition("BOTTOM", sceneBottomText);
+
+        // Create the scene
+        return new QScene(scenePane, 800, 600);
     }
 
 }

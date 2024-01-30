@@ -88,6 +88,12 @@ public class QFrameworkTutorialApp extends QApplication {
         QScene qCheckBoxScene = createQCheckBoxScene();
 
 
+        // Add an event handler to the Test Yourself Button
+        testYourselfButton.setOnMouseClicked(event -> {
+            // Switch to the quizScene when the button is clicked
+            primaryStage.setScene(quizScene);
+        });
+
         // Final Scene
         QScene homePageScene = new QScene(homePagePane, 800, 600);
         handleTreeItemSelection(treeView);

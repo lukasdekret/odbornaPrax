@@ -218,6 +218,15 @@ public class QFrameworkTutorialApp extends QApplication {
         return treeView;
     }
     private QScene createQButtonScene() {
+        // Creating the navigation menu
+        QMenu mainMenu = new QMenu("Main Menu");
+        QMenu quizesMenu = new QMenu("Quizes");
+        quizesMenu.addItems(new QMenuItem("Example Quiz 1"), new QMenuItem("Example Quiz 2"), new QMenuItem("Example Quiz 3"));
+
+        // Adding menus to the menu bar
+        QMenuBar menuBar = new QMenuBar();
+        menuBar.addMenus(mainMenu, quizesMenu);
+
         // Text na vrchu a spodku scény
         QText sceneTitle = new QText();
         sceneTitle.setContent("QButton Component Description - Lorem Ipsum Text");
@@ -226,6 +235,10 @@ public class QFrameworkTutorialApp extends QApplication {
         QText sceneBottomText = new QText();
         sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
         sceneBottomText.setSize(2, 2); // Nastaví škálu na 2 pre šírku a výšku
+
+        // Container for menu bar and scene title
+        QVBox topContainer = new QVBox();
+        topContainer.addComponents(menuBar, sceneTitle);
 
         // Popis komponentu na ľavej strane
         QText componentDescription = new QText();
@@ -257,7 +270,7 @@ public class QFrameworkTutorialApp extends QApplication {
 
         // Hlavný BorderPane pre scénu
         QBorderPane scenePane = new QBorderPane();
-        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("TOP", topContainer); // Adding the container with menu bar and scene title
         scenePane.setPosition("LEFT", componentDescription); // Popis komponentu na ľavej strane
         scenePane.setPosition("RIGHT", rightLayout); // Pravá strana s obrázkom, popisom, kódom a komponentom
         scenePane.setPosition("BOTTOM", sceneBottomText);
@@ -267,5 +280,6 @@ public class QFrameworkTutorialApp extends QApplication {
 
         return qButtonScene;
     }
+
 
 }

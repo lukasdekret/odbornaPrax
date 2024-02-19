@@ -192,9 +192,6 @@ public class QFrameworkTutorialApp extends QApplication {
         QTreeItem qArticle = new QTreeItem("QArticle");
         QTreeItem qImageTextCaption = new QTreeItem("QImageTextCaption");
 
-        // ... add other items ...
-
-        // ... add other categories and items ...
 
         // Set root item for the TreeView
         treeView.setRootItem(rootItem);
@@ -251,7 +248,12 @@ public class QFrameworkTutorialApp extends QApplication {
                     case "QToggleGroup": // Pridané pre QToggleGroup
                         switchScene(createQToggleGroupScene());
                         break;
-                    default:
+                    case "QText": // Pridané pre QText
+                        switchScene(createQTextScene());
+                        break;
+                    case "QTextArea": // Pridané pre QTextArea
+                        switchScene(createQTextAreaScene());
+                        break;                    default:
                         // Riešenie neznámeho výberu
                         System.out.println("Unknown selection: " + selectedText);
                 }
@@ -513,5 +515,133 @@ public class QFrameworkTutorialApp extends QApplication {
         // Create the scene
         return new QScene(scenePane, 800, 600);
     }
+    private QScene createQTextScene() {
+        // Text at the top and bottom of the scene
+        QText sceneTitle = new QText();
+        sceneTitle.setContent("QText Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
+
+        QText sceneBottomText = new QText();
+        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
+        sceneBottomText.setSize(2, 2); // Set scale to 2 for both width and height
+
+        // Component description on the left side
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
+
+        // Image of the component (predefined space)
+        QImageView componentImage = new QImageView();
+        try {
+            // Load the image from the file "example-text.png"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example_text.jpg");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Example code and functional component on the right side
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\nQText myText = new QText();\nmyText.setContent(\"This is a QText component.\");");
+
+        // Layout for the right side with the image, description, code example, and functional component
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage, componentDescription, codeExample);
+
+        // Main BorderPane for the scene
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Component description on the left side
+        scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and component
+        scenePane.setPosition("BOTTOM", sceneBottomText);
+
+        // Create the scene
+        return new QScene(scenePane, 800, 600);
+    }
+    private QScene createQTextAreaScene() {
+        // Text at the top and bottom of the scene
+        QText sceneTitle = new QText();
+        sceneTitle.setContent("QTextArea Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
+
+        QText sceneBottomText = new QText();
+        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
+        sceneBottomText.setSize(2, 2); // Set scale to 2 for both width and height
+
+        // Component description on the left side
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
+
+        // Image of the component (predefined space)
+        QImageView componentImage = new QImageView();
+        try {
+            // Load the image from the file "example-text.png"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example_textarea.png");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Example code and functional component on the right side
+        QTextArea textAreaExample = new QTextArea();
+        textAreaExample.setText("This is a QTextArea component.");
+
+        // Layout for the right side with the image, description, code example, and functional component
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage, componentDescription, textAreaExample);
+
+        // Main BorderPane for the scene
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Component description on the left side
+        scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and component
+        scenePane.setPosition("BOTTOM", sceneBottomText);
+
+        // Create the scene
+        return new QScene(scenePane, 800, 600);
+    }
+    private QScene createQLabelScene() {
+        // Text at the top and bottom of the scene
+        QText sceneTitle = new QText();
+        sceneTitle.setContent("QLabel Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
+
+        QText sceneBottomText = new QText();
+        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
+        sceneBottomText.setSize(2, 2); // Set scale to 2 for both width and height
+
+        // Component description on the left side
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
+
+        // Image of the component (predefined space)
+        QImageView componentImage = new QImageView();
+        try {
+            // Load the image from the file "example-text.png"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example_text.jpg");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Example code and functional component on the right side
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\nQLabel myLabel = new QLabel();\nmyLabel.setText(\"This is a QLabel component.\");");
+
+        // Layout for the right side with the image, description, code example, and functional component
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage, componentDescription, codeExample);
+
+        // Main BorderPane for the scene
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Component description on the left side
+        scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and component
+        scenePane.setPosition("BOTTOM", sceneBottomText);
+
+        // Create the scene
+        return new QScene(scenePane, 800, 600);
+    }
+
+
 
 }

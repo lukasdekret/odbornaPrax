@@ -23,6 +23,7 @@ public class QFrameworkTutorialApp extends QApplication {
             3, "QComboBox",
             4, "QToggleGroup"
     );
+    private QBorderPane[] panesTI = new QBorderPane[6];
     public static void main(String[] args) {
         launch(args);
     }
@@ -295,12 +296,7 @@ public class QFrameworkTutorialApp extends QApplication {
                         panesBB[4].setPosition("BOTTOM", paginationSSBB.getNode());
                         switchScene(scenesBB[4]);
                         break;
-                    case "QText": // Pridané pre QText
-                        switchScene(createQTextScene());
-                        break;
-                    case "QTextArea": // Pridané pre QTextArea
-                        switchScene(createQTextAreaScene());
-                        break;                    default:
+                    default:
                         // Riešenie neznámeho výberu
                         System.out.println("Unknown selection: " + selectedText);
                 }
@@ -332,6 +328,8 @@ public class QFrameworkTutorialApp extends QApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QButton: A clickable button GUI component.");
 
         // Príklad kódu a funkčný komponent na pravej strane
         QText codeExample = new QText();
@@ -345,7 +343,7 @@ public class QFrameworkTutorialApp extends QApplication {
         functionalComponent.setAction(buttonText);
         // Layout pre pravú stranu s obrázkom, popisom obrázku, príkladom kódu a funkčným komponentom
         QVBox rightLayout = new QVBox();
-        rightLayout.addComponents(componentImage, componentDescription, codeExample, functionalComponent);
+        rightLayout.addComponents(componentImage,sceneDefinition, componentDescription, codeExample, functionalComponent);
 
         // Hlavný BorderPane pre scénu
         QBorderPane scenePane = new QBorderPane();
@@ -379,21 +377,22 @@ public class QFrameworkTutorialApp extends QApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QRadioButton");
 
         // Example code and functional component on the right side
         QText codeExample = new QText();
         codeExample.setContent("Example Code:\n\n" + componentName + " myComponent = new " + componentName + "();\nmyComponent.setHeadline(\"Click me!\");\nmyComponent.setAction(() -> myComponent.setText(\"Component Clicked!\"));");
 
-        QButton functionalComponent = new QButton();
-        functionalComponent.setHeadline("Click me!");
-        QText buttonText = new QText();
-        buttonText.setContent(componentName + " Clicked!");
+        QToggleGroup functionalComponent = new QToggleGroup();
+        QRadioButton option1 = new QRadioButton();
+        QRadioButton option2 = new QRadioButton();
+        functionalComponent.addToggles(option1, option2);
 
-        functionalComponent.setAction(buttonText);
 
         // Layout for the right side with the image, description, code example, and functional component
         QVBox rightLayout = new QVBox();
-        rightLayout.addComponents(componentImage, componentDescription, codeExample, functionalComponent);
+        rightLayout.addComponents(componentImage,sceneDefinition, componentDescription, codeExample, option1, option2);
 
         // Main BorderPane for the scene
         QBorderPane scenePane = new QBorderPane();
@@ -425,21 +424,21 @@ public class QFrameworkTutorialApp extends QApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QCheckBox");
 
         // Example code and functional component on the right side
         QText codeExample = new QText();
         codeExample.setContent("Example Code:\n\nQCheckBox myCheckBox = new QCheckBox();\nmyCheckBox.setTitle(\"Check me!\");\nmyCheckBox.setAction(() -> myCheckBox.setTitle(\"CheckBox Checked!\"));");
 
-        QButton functionalComponent = new QButton();
-        functionalComponent.setHeadline("Check me!");
-        QText buttonText = new QText();
-        buttonText.setContent("CheckBox Checked!");
+        QCheckBox functionalComponent = new QCheckBox();
+        functionalComponent.setTitle("Check me"); // Nastaví názov QCheckBox
 
-        functionalComponent.setAction(buttonText);
+        functionalComponent.setSelected(true);
 
         // Layout for the right side with the image, description, code example, and functional component
         QVBox rightLayout = new QVBox();
-        rightLayout.addComponents(componentImage, componentDescription, codeExample, functionalComponent);
+        rightLayout.addComponents(componentImage,sceneDefinition, componentDescription, codeExample, functionalComponent);
 
         // Main BorderPane for the scene
         QBorderPane scenePane = new QBorderPane();
@@ -471,6 +470,8 @@ public class QFrameworkTutorialApp extends QApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QComboBox");
 
         // Example code and functional component on the right side
         QText codeExample = new QText();
@@ -483,7 +484,7 @@ public class QFrameworkTutorialApp extends QApplication {
 
         // Layout for the right side with the image, description, code, and functional component
         QVBox rightLayout = new QVBox();
-        rightLayout.addComponents(componentImage, componentDescription, codeExample, functionalComponent, selectedOptionText);
+        rightLayout.addComponents(componentImage,sceneDefinition, componentDescription, codeExample, functionalComponent, selectedOptionText);
 
         // Main BorderPane for the scene
         QBorderPane scenePane = new QBorderPane();
@@ -518,6 +519,8 @@ public class QFrameworkTutorialApp extends QApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QToggleGroup");
 
         // Example code on the right side
         QText codeExample = new QText();
@@ -528,7 +531,7 @@ public class QFrameworkTutorialApp extends QApplication {
 
         // QRadioButton options on the right side
         QVBox rightLayout = new QVBox();
-        rightLayout.addComponents(componentImage, componentDescription, codeExample);
+        rightLayout.addComponents(componentImage,sceneDefinition, componentDescription, codeExample);
 
         // Add QRadioButton options to the layout
         QRadioButton option1 = new QRadioButton();
@@ -553,10 +556,6 @@ public class QFrameworkTutorialApp extends QApplication {
         sceneTitle.setContent("QText Component Description - Lorem Ipsum Text");
         sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
 
-        QText sceneBottomText = new QText();
-        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
-        sceneBottomText.setSize(2, 2); // Set scale to 2 for both width and height
-
         // Component description on the left side
         QText componentDescription = new QText();
         componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
@@ -570,22 +569,26 @@ public class QFrameworkTutorialApp extends QApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QText");
         // Example code and functional component on the right side
         QText codeExample = new QText();
         codeExample.setContent("Example Code:\n\nQText myText = new QText();\nmyText.setContent(\"This is a QText component.\");");
 
+        QText exampleText = new QText();
+        exampleText.setContent("Example Text");
+
         // Layout for the right side with the image, description, code example, and functional component
         QVBox rightLayout = new QVBox();
-        rightLayout.addComponents(componentImage, componentDescription, codeExample);
+        rightLayout.addComponents(componentImage,sceneDefinition, componentDescription, codeExample,exampleText);
 
         // Main BorderPane for the scene
         QBorderPane scenePane = new QBorderPane();
         scenePane.setPosition("TOP", sceneTitle);
         scenePane.setPosition("LEFT", componentDescription); // Component description on the left side
         scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and component
-        scenePane.setPosition("BOTTOM", sceneBottomText);
 
+        panesTI[0] = scenePane;
         // Create the scene
         return new QScene(scenePane, 800, 600);
     }
@@ -595,9 +598,6 @@ public class QFrameworkTutorialApp extends QApplication {
         sceneTitle.setContent("QTextArea Component Description - Lorem Ipsum Text");
         sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
 
-        QText sceneBottomText = new QText();
-        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
-        sceneBottomText.setSize(2, 2); // Set scale to 2 for both width and height
 
         // Component description on the left side
         QText componentDescription = new QText();
@@ -612,6 +612,13 @@ public class QFrameworkTutorialApp extends QApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QTextArea");
+
+        QText exampleCodeText = new QText();
+        exampleCodeText.setContent("Example Code\n\n"
+                + "QTextArea textAreaExample = new QTextArea(); "
+                + "textAreaExample.setText(\"This is a QTextArea component.\");");
 
         // Example code and functional component on the right side
         QTextArea textAreaExample = new QTextArea();
@@ -619,61 +626,207 @@ public class QFrameworkTutorialApp extends QApplication {
 
         // Layout for the right side with the image, description, code example, and functional component
         QVBox rightLayout = new QVBox();
-        rightLayout.addComponents(componentImage, componentDescription, textAreaExample);
+        rightLayout.addComponents(componentImage,sceneDefinition, componentDescription,exampleCodeText, textAreaExample);
 
         // Main BorderPane for the scene
         QBorderPane scenePane = new QBorderPane();
         scenePane.setPosition("TOP", sceneTitle);
         scenePane.setPosition("LEFT", componentDescription); // Component description on the left side
         scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and component
-        scenePane.setPosition("BOTTOM", sceneBottomText);
 
+        panesTI[1] = scenePane;
         // Create the scene
         return new QScene(scenePane, 800, 600);
     }
-    private QScene createQLabelScene() {
+
+
+    private QScene createQLabelScene(String componentName) {
         // Text at the top and bottom of the scene
         QText sceneTitle = new QText();
-        sceneTitle.setContent("QLabel Component Description - Lorem Ipsum Text");
+        sceneTitle.setContent(componentName + " Component Description - Lorem Ipsum Text");
         sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
 
-        QText sceneBottomText = new QText();
-        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
-        sceneBottomText.setSize(2, 2); // Set scale to 2 for both width and height
-
-        // Component description on the left side
+        // Description of the component on the left side
         QText componentDescription = new QText();
         componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
 
         // Image of the component (predefined space)
         QImageView componentImage = new QImageView();
         try {
-            // Load the image from the file "example-text.png"
-            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example_text.jpg");
+            // Load the image from the file "example-label.jpg"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example_label.png");
             componentImage.setNewImage(imageStream);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QLabel");
         // Example code and functional component on the right side
         QText codeExample = new QText();
-        codeExample.setContent("Example Code:\n\nQLabel myLabel = new QLabel();\nmyLabel.setText(\"This is a QLabel component.\");");
+        codeExample.setContent("Example Code:\n\n" + componentName + " myComponent = new " + componentName + "();\nmyComponent.setText(\"Hello, World!\");");
+
+        QLabel functionalComponent = new QLabel();
+        functionalComponent.setText("Hello, World!");
 
         // Layout for the right side with the image, description, code example, and functional component
         QVBox rightLayout = new QVBox();
-        rightLayout.addComponents(componentImage, componentDescription, codeExample);
+        rightLayout.addComponents(componentImage, sceneDefinition, componentDescription, codeExample, functionalComponent);
 
         // Main BorderPane for the scene
         QBorderPane scenePane = new QBorderPane();
         scenePane.setPosition("TOP", sceneTitle);
-        scenePane.setPosition("LEFT", componentDescription); // Component description on the left side
+        scenePane.setPosition("LEFT", componentDescription); // Description of the component on the left side
         scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and component
-        scenePane.setPosition("BOTTOM", sceneBottomText);
 
+        panesTI[2] = scenePane;
+        // Create the scene
+        return new QScene(scenePane, 800, 600);
+    }
+    private QScene createQTextFieldScene(String componentName) {
+        // Text at the top and bottom of the scene
+        QText sceneTitle = new QText();
+        sceneTitle.setContent(componentName + " Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
+
+
+
+        // Description of the component on the left side
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
+
+        // Image of the component (predefined space)
+        QImageView componentImage = new QImageView();
+        try {
+            // Load the image from the file "example-textfield.jpg"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example_textfield.png");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QTextField");
+        // Example code and functional component on the right side
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\n" + componentName + " myComponent = new " + componentName + "();\nmyComponent.setPlaceholder(\"Enter text here\");");
+
+        QTextField functionalComponent = new QTextField();
+        functionalComponent.promptText("Enter text here");
+
+        // Layout for the right side with the image, description, code example, and functional component
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage, sceneDefinition, componentDescription, codeExample, functionalComponent);
+
+        // Main BorderPane for the scene
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Description of the component on the left side
+        scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and component
+
+        panesTI[3] = scenePane;
         // Create the scene
         return new QScene(scenePane, 800, 600);
     }
 
+    private QScene createQHyperlinkScene(String componentName) {
+        // Text at the top and bottom of the scene
+        QText sceneTitle = new QText();
+        sceneTitle.setContent(componentName + " Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
 
+        // Description of the component on the left side
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
+
+        // Image of the component (predefined space)
+        QImageView componentImage = new QImageView();
+        try {
+            // Load the image from the file "example-hyperlink.jpg"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example_hyperlink.png");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QHyperlink");
+
+        // Example code and functional component on the right side
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\n" + componentName + " myComponent = new " + componentName + "();\nmyComponent.setURL(\"https://example.com\");\nmyComponent.setText(\"Visit Example\");");
+
+        QHyperlink functionalComponent = new QHyperlink();
+        functionalComponent.setHyperlinkText("https://example.com");
+
+
+        // Layout for the right side with the image, description, code example, and functional component
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage, sceneDefinition, componentDescription, codeExample, functionalComponent);
+
+        // Main BorderPane for the scene
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Description of the component on the left side
+        scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and component
+
+        // Add the scene pane to the panesTI array
+        panesTI[4] = scenePane;
+
+        // Create the scene
+        return new QScene(scenePane, 800, 600);
+    }
+    private QScene createQImageViewScene(String componentName) {
+        // Text at the top and bottom of the scene
+        QText sceneTitle = new QText();
+        sceneTitle.setContent(componentName + " Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
+
+        // Description of the component on the left side
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
+
+        // Image of the component (predefined space)
+        QImageView componentImage = new QImageView();
+        try {
+            // Load the image from the file "example-image.jpg"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example_imageview.png");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QImageView");
+
+        // Example code and functional component on the right side
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\n" + componentName + " myComponent = new " + componentName + "();\nmyComponent.setImage(\"src/main/java/Pictures/example_image.jpg\");");
+
+        QImageView functionalComponent = new QImageView();
+        try {
+            // Load the image from the file "example-image.jpg"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/logo.png");
+            functionalComponent.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Layout for the right side with the image, description, code example, and functional component
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage, sceneDefinition, componentDescription, codeExample, functionalComponent);
+
+        // Main BorderPane for the scene
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Description of the component on the left side
+        scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and component
+
+        // Add the scene pane to the panesTI array
+        panesTI[5] = scenePane;
+
+        // Create the scene
+        return new QScene(scenePane, 800, 600);
+    }
 
 }

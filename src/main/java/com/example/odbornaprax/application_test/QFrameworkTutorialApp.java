@@ -5,9 +5,24 @@ import com.example.odbornaprax.framework.components.*;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 public class QFrameworkTutorialApp extends QApplication {
     private QStage primaryStage;
+    // QPaginationSceneSwitcher initialization for Buttons and Boxes section
+    // Create QPaginationSceneSwitcher component here
+    private QPaginationSceneSwitcher paginationSSBB = new QPaginationSceneSwitcher();
+    // Initialize your titles, scenes and panes here
+    private QScene[] scenesBB;
+    private QBorderPane[] panesBB = new QBorderPane[5];
+
+    private Map<Integer, String> titlesBB = Map.of(
+            0, "QButton",
+            1, "QRadioButton",
+            2, "QCheckBox",
+            3, "QComboBox",
+            4, "QToggleGroup"
+    );
     public static void main(String[] args) {
         launch(args);
     }
@@ -16,6 +31,8 @@ public class QFrameworkTutorialApp extends QApplication {
     public void start(QStage primaryStage) {
         // Home Page Title
         this.primaryStage = primaryStage;
+        //Fill out scenesBB array
+        this.scenesBB = new QScene[]{createQButtonScene(), createQRadioButtonScene("QRadioButton"), createQCheckBoxScene(), createQComboBoxScene(), createQToggleGroupScene()};
         QText homeTitle = new QText();
         homeTitle.setContent("Welcome to QFramework Tutorial App!");
         homeTitle.setSize(3, 3); // Set scale to 3 for both width and height
@@ -84,8 +101,7 @@ public class QFrameworkTutorialApp extends QApplication {
         quizPane.setPosition("CENTER", simpleQuiz);
         // Create the main scene
         QScene quizScene = new QScene(quizPane, 800, 600);
-        // Create the scene for QCheckBox
-        QScene qCheckBoxScene = createQCheckBoxScene();
+
 
 
         // Add an event handler to the Test Yourself Button
@@ -96,11 +112,33 @@ public class QFrameworkTutorialApp extends QApplication {
 
         // Final Scene
         QScene homePageScene = new QScene(homePagePane, 800, 600);
+        //Call sceneSwitcher init function here
+        initSSBB();
+
         handleTreeItemSelection(treeView);
         primaryStage.setTitle("QFramework Tutorial App");
         primaryStage.setScene(homePageScene);
         primaryStage.show();
 
+
+
+    }
+
+    //Implementation of QPaginationSceneSwitcher based on example given by ChatGPT for Buttons and Boxes section
+    private void initSSBB(){
+        // Initialize pagination scene switcher
+        paginationSSBB.sceneSwitcher(
+                primaryStage,
+                scenesBB,
+                panesBB,
+                new QHBox(), // Example: You need to provide your menuQHBox
+                5, // Example: Assuming 3 pages
+                new QText(), // Example: You need to provide your title object
+                titlesBB
+        );
+
+        // Set visibility of pagination scene switcher
+        paginationSSBB.setVisibility(true); // Or false based on your requirements
     }
 
     private QQuiz createQuiz(){
@@ -220,7 +258,6 @@ public class QFrameworkTutorialApp extends QApplication {
         // Set the new scene for QStage
         primaryStage.setScene(newScene);
     }
-// ... (existing code)
 
     // Method to handle tree item selection
     // Metóda na spracovanie výberu položky stromu
@@ -237,19 +274,29 @@ public class QFrameworkTutorialApp extends QApplication {
                 // Prepínač scén na základe vybranej položky
                 switch (selectedText) {
                     case "QButton":
-                        switchScene(createQButtonScene());
+                        paginationSSBB.getNode().setCurrentPage(0); // set current page of pagination
+                        panesBB[0].setPosition("BOTTOM", paginationSSBB.getNode()); // place pagination component
+                        switchScene(scenesBB[0]); // switch scene
                         break;
                     case "QRadioButton":
-                        switchScene(createQRadioButtonScene("radioButton"));
+                        paginationSSBB.getNode().setCurrentPage(1);
+                        panesBB[1].setPosition("BOTTOM", paginationSSBB.getNode());
+                        switchScene(scenesBB[1]);
                         break;
                     case "QCheckBox":
-                        switchScene(createQCheckBoxScene());
+                        paginationSSBB.getNode().setCurrentPage(2);
+                        panesBB[2].setPosition("BOTTOM", paginationSSBB.getNode());
+                        switchScene(scenesBB[2]);
                         break;
                     case "QComboBox":
-                        switchScene(createQComboBoxScene());
+                        paginationSSBB.getNode().setCurrentPage(3);
+                        panesBB[3].setPosition("BOTTOM", paginationSSBB.getNode());
+                        switchScene(scenesBB[3]);
                         break;
                     case "QToggleGroup": // Pridané pre QToggleGroup
-                        switchScene(createQToggleGroupScene());
+                        paginationSSBB.getNode().setCurrentPage(4);
+                        panesBB[4].setPosition("BOTTOM", paginationSSBB.getNode());
+                        switchScene(scenesBB[4]);
                         break;
                     default:
                         // Riešenie neznámeho výberu
@@ -269,10 +316,6 @@ public class QFrameworkTutorialApp extends QApplication {
         QText sceneTitle = new QText();
         sceneTitle.setContent("QButton Component Description - Lorem Ipsum Text");
         sceneTitle.setSize(2, 2); // Nastaví škálu na 2 pre šírku a výšku
-
-        QText sceneBottomText = new QText();
-        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
-        sceneBottomText.setSize(2, 2); // Nastaví škálu na 2 pre šírku a výšku
 
         // Popis komponentu na ľavej strane
         QText componentDescription = new QText();
@@ -307,11 +350,11 @@ public class QFrameworkTutorialApp extends QApplication {
         scenePane.setPosition("TOP", sceneTitle);
         scenePane.setPosition("LEFT", componentDescription); // Popis komponentu na ľavej strane
         scenePane.setPosition("RIGHT", rightLayout); // Pravá strana s obrázkom, popisom, kódom a komponentom
-        scenePane.setPosition("BOTTOM", sceneBottomText);
 
         // Vytvorenie scény
         QScene qButtonScene = new QScene(scenePane, 800, 600);
-
+        //Add scenePane to global array
+        panesBB[0] = scenePane;
         return qButtonScene;
     }
     // Method to create a scene for QButton and QRadioButton
@@ -321,10 +364,6 @@ public class QFrameworkTutorialApp extends QApplication {
         sceneTitle.setContent(componentName + " Component Description - Lorem Ipsum Text");
         sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
 
-        QText sceneBottomText = new QText();
-        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
-        sceneBottomText.setSize(2, 2); // Set scale to 2 for both width and height
-
         // Description of the component on the left side
         QText componentDescription = new QText();
         componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
@@ -333,7 +372,7 @@ public class QFrameworkTutorialApp extends QApplication {
         QImageView componentImage = new QImageView();
         try {
             // Load the image from the file "example-button.jpg"
-            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example-" + componentName.toLowerCase() + ".png");
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example-radioButton.png");
             componentImage.setNewImage(imageStream);
         } catch (Exception e) {
             e.printStackTrace();
@@ -359,8 +398,9 @@ public class QFrameworkTutorialApp extends QApplication {
         scenePane.setPosition("TOP", sceneTitle);
         scenePane.setPosition("LEFT", componentDescription); // Description of the component on the left side
         scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and component
-        scenePane.setPosition("BOTTOM", sceneBottomText);
 
+        //Add scenePane to global array
+        panesBB[1] = scenePane;
         // Create the scene
         return new QScene(scenePane, 800, 600);
     }
@@ -369,10 +409,6 @@ public class QFrameworkTutorialApp extends QApplication {
         QText sceneTitle = new QText();
         sceneTitle.setContent("QCheckBox Component Description - Lorem Ipsum Text");
         sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
-
-        QText sceneBottomText = new QText();
-        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
-        sceneBottomText.setSize(2, 2); // Set scale to 2 for both width and height
 
         // Description of the component on the left side
         QText componentDescription = new QText();
@@ -408,8 +444,9 @@ public class QFrameworkTutorialApp extends QApplication {
         scenePane.setPosition("TOP", sceneTitle);
         scenePane.setPosition("LEFT", componentDescription); // Description of the component on the left side
         scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and component
-        scenePane.setPosition("BOTTOM", sceneBottomText);
 
+        //Add scenePane to global array
+        panesBB[2] = scenePane;
         // Create the scene
         return new QScene(scenePane, 800, 600);
     }
@@ -418,10 +455,6 @@ public class QFrameworkTutorialApp extends QApplication {
         QText sceneTitle = new QText();
         sceneTitle.setContent("QComboBox Component Description - Lorem Ipsum Text");
         sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
-
-        QText sceneBottomText = new QText();
-        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
-        sceneBottomText.setSize(2, 2); // Set scale to 2 for both width and height
 
         // Component description on the left side
         QText componentDescription = new QText();
@@ -455,8 +488,9 @@ public class QFrameworkTutorialApp extends QApplication {
         scenePane.setPosition("TOP", sceneTitle);
         scenePane.setPosition("LEFT", componentDescription); // Component description on the left side
         scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and functional component
-        scenePane.setPosition("BOTTOM", sceneBottomText);
 
+        //Add scenePane to global array
+        panesBB[3] = scenePane;
         // Create the scene
         return new QScene(scenePane, 800, 600);
     }
@@ -468,10 +502,6 @@ public class QFrameworkTutorialApp extends QApplication {
         QText sceneTitle = new QText();
         sceneTitle.setContent("QToggleGroup Component Description - Lorem Ipsum Text");
         sceneTitle.setSize(2, 2); // Set scale to 2 for both width and height
-
-        QText sceneBottomText = new QText();
-        sceneBottomText.setContent("Additional Lorem Ipsum Text at the Bottom");
-        sceneBottomText.setSize(2, 2); // Set scale to 2 for both width and height
 
         // Component description on the left side
         QText componentDescription = new QText();
@@ -508,8 +538,10 @@ public class QFrameworkTutorialApp extends QApplication {
         scenePane.setPosition("TOP", sceneTitle);
         scenePane.setPosition("LEFT", componentDescription); // Component description on the left side
         scenePane.setPosition("RIGHT", rightLayout); // Right side with image, description, code, and QRadioButton options
-        scenePane.setPosition("BOTTOM", sceneBottomText);
+        scenePane.setPosition("BOTTOM", paginationSSBB.getNode()); // add global pagination component for section
 
+        //Add scenePane to global array
+        panesBB[4] = scenePane;
         // Create the scene
         return new QScene(scenePane, 800, 600);
     }

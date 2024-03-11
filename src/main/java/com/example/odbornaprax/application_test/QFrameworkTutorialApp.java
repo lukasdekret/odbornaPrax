@@ -23,7 +23,22 @@ public class QFrameworkTutorialApp extends QApplication {
             3, "QComboBox",
             4, "QToggleGroup"
     );
-    private QBorderPane[] panesTI = new QBorderPane[6];
+    // QPaginationSceneSwitcher initialization for Text and Images section
+    private QPaginationSceneSwitcher paginationSSTI = new QPaginationSceneSwitcher();
+
+    // Initialize your titles, scenes and panes here for Text and Images section
+    private QScene[] scenesTI;
+    private QBorderPane[] panesTI = new QBorderPane[6]; // Increased size for Text and Images
+
+    private Map<Integer, String> titlesTI = Map.of(
+            0, "QText",
+            1, "QTextArea",
+            2, "QLabel",
+            3, "QTextField",
+            4, "QHyperlink",
+            5, "QImageView"
+    );
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -34,6 +49,10 @@ public class QFrameworkTutorialApp extends QApplication {
         this.primaryStage = primaryStage;
         //Fill out scenesBB array
         this.scenesBB = new QScene[]{createQButtonScene(), createQRadioButtonScene("QRadioButton"), createQCheckBoxScene(), createQComboBoxScene(), createQToggleGroupScene()};
+        // Fill out scenesTI array
+        this.scenesTI = new QScene[]{createQTextScene(), createQTextAreaScene(), createQLabelScene("QLabel"), createQTextFieldScene("QTextField"), createQHyperlinkScene("QHyperlink"), createQImageViewScene("QImageView")};
+
+
         QText homeTitle = new QText();
         homeTitle.setContent("Welcome to QFramework Tutorial App!");
         homeTitle.setSize(3, 3); // Set scale to 3 for both width and height
@@ -113,8 +132,11 @@ public class QFrameworkTutorialApp extends QApplication {
 
         // Final Scene
         QScene homePageScene = new QScene(homePagePane, 800, 600);
+
         //Call sceneSwitcher init function here
         initSSBB();
+        // Call sceneSwitcher init function for Text and Images section
+        initSSTI();
 
         handleTreeItemSelection(treeView);
         primaryStage.setTitle("QFramework Tutorial App");
@@ -140,6 +162,20 @@ public class QFrameworkTutorialApp extends QApplication {
 
         // Set visibility of pagination scene switcher
         paginationSSBB.setVisibility(true); // Or false based on your requirements
+    }
+    //Implementation of QPaginationSceneSwitcher based on example given by ChatGPT for Text and Images section
+    private void initSSTI(){
+        paginationSSTI.sceneSwitcher(
+                primaryStage,
+                scenesTI,
+                panesTI,
+                new QHBox(), // Example: You need to provide your menuQHBox
+                6, // Example: Assuming 6 pages for Text and Images
+                new QText(), // Example: You need to provide your title object
+                titlesTI
+        );
+
+        paginationSSTI.setVisibility(true); // Or false based on your requirements
     }
 
     private QQuiz createQuiz(){
@@ -295,6 +331,36 @@ public class QFrameworkTutorialApp extends QApplication {
                         paginationSSBB.getNode().setCurrentPage(4);
                         panesBB[4].setPosition("BOTTOM", paginationSSBB.getNode());
                         switchScene(scenesBB[4]);
+                        break;
+                    case "QText":
+                        paginationSSTI.getNode().setCurrentPage(0);
+                        panesTI[0].setPosition("BOTTOM", paginationSSTI.getNode());
+                        switchScene(scenesTI[0]);
+                        break;
+                    case "QTextArea":
+                        paginationSSTI.getNode().setCurrentPage(1);
+                        panesTI[1].setPosition("BOTTOM", paginationSSTI.getNode());
+                        switchScene(scenesTI[1]);
+                        break;
+                    case "QLabel":
+                        paginationSSTI.getNode().setCurrentPage(2);
+                        panesTI[2].setPosition("BOTTOM", paginationSSTI.getNode());
+                        switchScene(scenesTI[2]);
+                        break;
+                    case "QTextField":
+                        paginationSSTI.getNode().setCurrentPage(3);
+                        panesTI[3].setPosition("BOTTOM", paginationSSTI.getNode());
+                        switchScene(scenesTI[3]);
+                        break;
+                    case "QHyperlink":
+                        paginationSSTI.getNode().setCurrentPage(4);
+                        panesTI[4].setPosition("BOTTOM", paginationSSTI.getNode());
+                        switchScene(scenesTI[4]);
+                        break;
+                    case "QImageView":
+                        paginationSSTI.getNode().setCurrentPage(5);
+                        panesTI[5].setPosition("BOTTOM", paginationSSTI.getNode());
+                        switchScene(scenesTI[5]);
                         break;
                     default:
                         // Riešenie neznámeho výberu
@@ -811,6 +877,7 @@ public class QFrameworkTutorialApp extends QApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        functionalComponent.setDimensions(100,100);
 
         // Layout for the right side with the image, description, code example, and functional component
         QVBox rightLayout = new QVBox();

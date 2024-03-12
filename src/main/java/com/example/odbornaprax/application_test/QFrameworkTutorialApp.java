@@ -18,7 +18,7 @@ public class QFrameworkTutorialApp extends QApplication {
 
     private QPaginationSceneSwitcher paginationSSMenus = new QPaginationSceneSwitcher();
     private QScene[] scenesMenus;
-    private QBorderPane[] panesMenus = new QBorderPane[2];
+    private QBorderPane[] panesMenus = new QBorderPane[4];
 
     private Map<Integer, String> titlesBB = Map.of(
             0, "QButton",
@@ -66,7 +66,7 @@ public class QFrameworkTutorialApp extends QApplication {
         this.scenesTI = new QScene[]{createQTextScene(), createQTextAreaScene(), createQLabelScene("QLabel"), createQTextFieldScene("QTextField"), createQHyperlinkScene("QHyperlink"), createQImageViewScene("QImageView")};
 
         // Inicializácia scén pre Menu
-        scenesMenus = new QScene[]{createQMenuScene(), createQMenuBarScene()};
+        scenesMenus = new QScene[]{createQMenuScene(), createQMenuBarScene(),createQMenuButtonScene(),createQMenuItemScene()};
 
         QText homeTitle = new QText();
         homeTitle.setContent("Welcome to QFramework Tutorial App!");
@@ -203,7 +203,7 @@ public class QFrameworkTutorialApp extends QApplication {
                 scenesMenus,
                 panesMenus,
                 new QHBox(), // Example: You need to provide your menuQHBox
-                2, // Example: Assuming 2 pages
+                4, // Example: Assuming 2 pages
                 new QText(), // Example: You need to provide your title object
                 titlesMenu
         );
@@ -469,6 +469,16 @@ public class QFrameworkTutorialApp extends QApplication {
                         paginationSSMenus.getNode().setCurrentPage(1);
                         panesMenus[1].setPosition("BOTTOM", paginationSSMenus.getNode());
                         switchScene(scenesMenus[1]);
+                        break;
+                    case "QMenuButton":
+                        paginationSSMenus.getNode().setCurrentPage(2);
+                        panesMenus[2].setPosition("BOTTOM", paginationSSMenus.getNode());
+                        switchScene(scenesMenus[2]);
+                        break;
+                    case "QMenuItem":
+                        paginationSSMenus.getNode().setCurrentPage(3);
+                        panesMenus[3].setPosition("BOTTOM", paginationSSMenus.getNode());
+                        switchScene(scenesMenus[3]);
                         break;
                     case "QToggleGroup": // Pridané pre QToggleGroup
                         paginationSSBB.getNode().setCurrentPage(4);
@@ -1038,5 +1048,93 @@ public class QFrameworkTutorialApp extends QApplication {
         // Create the scene
         return new QScene(scenePane, 800, 600);
     }
+    // Vytvorenie metódy pre vytvorenie scény pre komponent "QMenuButton"
+    private QScene createQMenuButtonScene() {
+        // Text na vrchu a spodku scény
+        QText sceneTitle = new QText();
+        sceneTitle.setContent("QMenuButton Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Nastaví škálu na 2 pre šírku a výšku
 
+        // Popis komponentu na ľavej strane
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
+
+        // Obrázok komponentu (preddefinovaný priestor)
+        QImageView componentImage = new QImageView();
+        try {
+            // Tu sa načíta obrázok zo súboru "example-menuButton.jpg"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example_menu-button.png");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QMenuButton");
+
+        // Príklad kódu a funkčný komponent na pravej strane
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\nQMenuButton myButton = new QMenuButton();\nmyButton.setHeadline(\"Click me!\");\nmyButton.setAction(() -> myButton.setText(\"Button Clicked!\"));");
+
+        QMenuButton functionalComponent = new QMenuButton("MenButton");
+        QMenuItem item = new QMenuItem("item");
+        functionalComponent.addItem(item);
+        // Layout pre pravú stranu s obrázkom, popisom obrázku, príkladom kódu a funkčným komponentom
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage, sceneDefinition, componentDescription, codeExample, functionalComponent);
+
+        // Hlavný BorderPane pre scénu
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Popis komponentu na ľavej strane
+        scenePane.setPosition("RIGHT", rightLayout); // Pravá strana s obrázkom, popisom, kódom a komponentom
+
+        panesMenus[2] = scenePane;
+        // Vytvorenie scény
+        return new QScene(scenePane, 800, 600);
+    }
+    private QScene createQMenuItemScene() {
+        // Text na vrchu a spodku scény
+        QText sceneTitle = new QText();
+        sceneTitle.setContent("QMenuItem Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Nastaví škálu na 2 pre šírku a výšku
+
+        // Popis komponentu na ľavej strane
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vel libero non nisi eleifend finibus nec sit amet nisl.");
+
+        // Obrázok komponentu (preddefinovaný priestor)
+        QImageView componentImage = new QImageView();
+        try {
+            // Tu sa načíta obrázok zo súboru "example-menuItem.jpg"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example_menu-item.png");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QMenuItem");
+
+        // Príklad kódu a funkčný komponent na pravej strane
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\nQMenuItem myItem = new QMenuItem();\nmyItem.setHeadline(\"Click me!\");\nmyItem.setAction(() -> myItem.setText(\"Item Clicked!\"));");
+
+        QMenuButton functionalComponent = new QMenuButton("Items");
+        QMenuItem mb_item1 = new QMenuItem("Item 1");
+        QMenuItem mb_item2 = new QMenuItem("Item 2");
+        QMenuItem mb_item3 = new QMenuItem("Item 3");
+        functionalComponent.addItems(mb_item1, mb_item2, mb_item3);
+
+        // Layout pre pravú stranu s obrázkom, popisom obrázku, príkladom kódu a funkčným komponentom
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage,sceneDefinition, componentDescription, codeExample, functionalComponent);
+
+        // Hlavný BorderPane pre scénu
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Popis komponentu na ľavej strane
+        scenePane.setPosition("RIGHT", rightLayout); // Pravá strana s obrázkom, popisom, kódom a komponentom
+        panesMenus[3] = scenePane;
+        // Vytvorenie scény
+        return new QScene(scenePane, 800, 600);
+    }
 }

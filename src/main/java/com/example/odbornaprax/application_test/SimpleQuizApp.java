@@ -6,7 +6,7 @@ public class SimpleQuizApp extends QApplication {
 
     public static void main(String[] args) {
         // Launch the application
-        launch(SimpleQuizApp.class, args);
+        QApplication.launch(SimpleQuizApp.class, args);
     }
 
     @Override

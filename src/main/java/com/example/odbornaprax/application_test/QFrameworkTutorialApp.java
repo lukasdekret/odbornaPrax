@@ -50,6 +50,17 @@ public class QFrameworkTutorialApp extends QApplication {
             1, "QMenuBar",
             2, "QMenuButton",
             3, "QMenuItem"
+
+    );
+    // Inicializácia pre sekciu "Other"
+    private QPaginationSceneSwitcher paginationSSOT = new QPaginationSceneSwitcher();
+    private QScene[] scenesOT;
+    private QBorderPane[] panesOT = new QBorderPane[3]; // Predpokladám 3 scény: QProgressBar, QProgressIndicator, QPagination
+
+    private Map<Integer, String> titlesOT = Map.of(
+            0, "QProgressBar",
+            1, "QProgressIndicator",
+            2, "QPagination"
     );
 
     public static void main(String[] args) {
@@ -64,6 +75,9 @@ public class QFrameworkTutorialApp extends QApplication {
         this.scenesBB = new QScene[]{createQButtonScene(), createQRadioButtonScene("QRadioButton"), createQCheckBoxScene(), createQComboBoxScene(), createQToggleGroupScene()};
         // Fill out scenesTI array
         this.scenesTI = new QScene[]{createQTextScene(), createQTextAreaScene(), createQLabelScene("QLabel"), createQTextFieldScene("QTextField"), createQHyperlinkScene("QHyperlink"), createQImageViewScene("QImageView")};
+
+        this.scenesOT = new QScene[]{createQProgressBarScene(), createQProgressIndicatorScene(), createQPaginationScene()};
+
 
         // Inicializácia scén pre Menu
         scenesMenus = new QScene[]{createQMenuScene(), createQMenuBarScene(),createQMenuButtonScene(),createQMenuItemScene()};
@@ -152,7 +166,7 @@ public class QFrameworkTutorialApp extends QApplication {
         initSSBB();
         // Call sceneSwitcher init function for Text and Images section
         initSSTI();
-
+        initSSOT(); // Pre novú sekciu "Other"
         // Pridanie inicializácie Menu pagination do kódu
         initMenus();
 
@@ -210,6 +224,19 @@ public class QFrameworkTutorialApp extends QApplication {
 
         // Set visibility of pagination scene switcher
         paginationSSMenus.setVisibility(true); // Or false based on your requirements
+    }
+    private void initSSOT(){
+        paginationSSOT.sceneSwitcher(
+                primaryStage, // Predpokladám, že primaryStage je už definované
+                scenesOT,
+                panesOT,
+                new QHBox(), // Tento HBox by mal obsahovať navigačné prvky, ak je to potrebné
+                3, // Počet stránok odpovedá počtu scén
+                new QText(), // Titulok sekcie môže byť statický alebo dynamický
+                titlesOT
+        );
+
+        paginationSSOT.setVisibility(true); // Nastaví viditeľnosť, podľa potreby
     }
 
     private QQuiz createQuiz(){
@@ -514,6 +541,21 @@ public class QFrameworkTutorialApp extends QApplication {
                         paginationSSTI.getNode().setCurrentPage(5);
                         panesTI[5].setPosition("BOTTOM", paginationSSTI.getNode());
                         switchScene(scenesTI[5]);
+                        break;
+                    case "QProgressBar":
+                        paginationSSOT.getNode().setCurrentPage(0);
+                        panesOT[0].setPosition("BOTTOM", paginationSSOT.getNode());
+                        switchScene(scenesOT[0]);
+                        break;
+                    case "QProgressIndicator":
+                        paginationSSOT.getNode().setCurrentPage(1);
+                        panesOT[1].setPosition("BOTTOM", paginationSSOT.getNode());
+                        switchScene(scenesOT[1]);
+                        break;
+                    case "QPagination":
+                        paginationSSOT.getNode().setCurrentPage(2);
+                        panesOT[2].setPosition("BOTTOM", paginationSSOT.getNode());
+                        switchScene(scenesOT[2]);
                         break;
                     default:
                         // Riešenie neznámeho výberu
@@ -1137,4 +1179,148 @@ public class QFrameworkTutorialApp extends QApplication {
         // Vytvorenie scény
         return new QScene(scenePane, 800, 600);
     }
+    private QScene createQProgressBarScene() {
+        // Text na vrchu a spodku scény
+        QText sceneTitle = new QText();
+        sceneTitle.setContent("QProgressBar Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Nastaví škálu na 2 pre šírku a výšku
+
+        // Popis komponentu na ľavej strane
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
+
+        // Obrázok komponentu (preddefinovaný priestor)
+        QImageView componentImage = new QImageView();
+        try {
+            // Načítanie obrázka zo súboru "example-progressbar.jpg"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example-progressBar.png");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QProgressBar");
+
+        // Príklad kódu a funkčný komponent na pravej strane
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\nQProgressBar myProgressBar = new QProgressBar();\nmyProgressBar.setMaximum(100);\nmyProgressBar.setValue(50);");
+
+        QProgressBar functionalComponent = new QProgressBar();
+        functionalComponent.setProgressValue(75);
+
+
+        // Layout pre pravú stranu s obrázkom, popisom obrázku, príkladom kódu a funkčným komponentom
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage, sceneDefinition, componentDescription, codeExample, functionalComponent);
+
+
+        // Hlavný BorderPane pre scénu
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Popis komponentu na ľavej strane
+        scenePane.setPosition("RIGHT", rightLayout); // Pravá strana s obrázkom, popisom, kódom a komponentom
+        panesOT[0] = scenePane; // Pridanie scenePane do globálneho poľa
+        // Vytvorenie scény
+        return new QScene(scenePane, 800, 600);
+    }
+    private QScene createQProgressIndicatorScene() {
+        // Text na vrchu a spodku scény
+        QText sceneTitle = new QText();
+        sceneTitle.setContent("QProgressIndicator Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Nastaví škálu na 2 pre šírku a výšku
+
+        // Popis komponentu na ľavej strane
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
+
+        // Obrázok komponentu (preddefinovaný priestor)
+        QImageView componentImage = new QImageView();
+        try {
+            // Načítanie obrázka zo súboru "example-progressIndicator.png"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example-progressIndicator.png");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QProgressIndicator");
+
+        // Príklad kódu a funkčný komponent na pravej strane
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\nQProgressIndicator myIndicator = new QProgressIndicator();\nmyIndicator.startAnimation();");
+
+        QProgressIndicator functionalComponent = new QProgressIndicator();
+        functionalComponent.setProgressValue(75); // Spustenie animácie na ukážku
+
+        // Layout pre pravú stranu s obrázkom, popisom obrázku, príkladom kódu a funkčným komponentom
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage, sceneDefinition, componentDescription, codeExample, functionalComponent);
+
+
+        // Hlavný BorderPane pre scénu
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Popis komponentu na ľavej strane
+        scenePane.setPosition("RIGHT", rightLayout); // Pravá strana s obrázkom, popisom, kódom a komponentom
+        panesOT[1] = scenePane; // Pridanie scenePane do globálneho poľa
+        // Vytvorenie scény
+        return new QScene(scenePane, 800, 600);
+    }
+    private QScene createQPaginationScene() {
+        // Text na vrchu a spodku scény
+        QText sceneTitle = new QText();
+        sceneTitle.setContent("QPagination Component Description - Lorem Ipsum Text");
+        sceneTitle.setSize(2, 2); // Nastaví škálu na 2 pre šírku a výšku
+
+        // Popis komponentu na ľavej strane
+        QText componentDescription = new QText();
+        componentDescription.setContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
+
+        // Obrázok komponentu (preddefinovaný priestor)
+        QImageView componentImage = new QImageView();
+        try {
+            // Načítanie obrázka zo súboru "example-pagination.png"
+            FileInputStream imageStream = new FileInputStream("src/main/java/Pictures/example-pagination.png");
+            componentImage.setNewImage(imageStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        QText sceneDefinition = new QText();
+        sceneDefinition.setContent("Definition of QPagination");
+
+       // Príklad kódu a funkčný komponent na pravej strane
+        QText codeExample = new QText();
+        codeExample.setContent("Example Code:\n\nQPagination myPagination = new QPagination();\nmyPagination.setTotalPages(10);\nmyPagination.setCurrentPage(1);");
+
+        QPagination functionalComponent = new QPagination();
+        functionalComponent.setPageNumber(5);
+        functionalComponent.setCurrentPage(0);
+        functionalComponent.setMaxPageIndicatorValue(5);
+        functionalComponent.setContentFactory((index) -> {
+            QLabel pageLabel = new QLabel("Strana " + (index + 1));
+            QVBox paginationBox = new QVBox();
+            paginationBox.addComponents(pageLabel);
+            paginationBox.setPositionOfChildNodes("CENTER");
+            return paginationBox;
+        });
+
+        // Layout pre pravú stranu s obrázkom, popisom obrázku, príkladom kódu a funkčným komponentom
+        QVBox rightLayout = new QVBox();
+        rightLayout.addComponents(componentImage, sceneDefinition, componentDescription, codeExample, functionalComponent);
+
+
+        // Hlavný BorderPane pre scénu
+        QBorderPane scenePane = new QBorderPane();
+        scenePane.setPosition("TOP", sceneTitle);
+        scenePane.setPosition("LEFT", componentDescription); // Popis komponentu na ľavej strane
+        scenePane.setPosition("RIGHT", rightLayout); // Pravá strana s obrázkom, popisom, kódom a komponentom
+        panesOT[2] = scenePane; // Pridanie scenePane do globálneho poľa
+        // Vytvorenie scény
+        return new QScene(scenePane, 800, 600);
+    }
+
+
 }
